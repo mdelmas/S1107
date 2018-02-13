@@ -8,6 +8,7 @@ package s1107.iteration1;
 /**
  *
  * @author delmasmo
+ * test
  */
 public class S1107Iteration1 {
 
@@ -16,6 +17,7 @@ public class S1107Iteration1 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
     }
     
 }
