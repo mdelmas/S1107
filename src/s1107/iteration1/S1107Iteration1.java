@@ -8,8 +8,6 @@ package s1107.iteration1;
 /**
  *
  * @author delmasmo
- * test
- * test2
  */
 public class S1107Iteration1 {
 
@@ -17,7 +15,9 @@ public class S1107Iteration1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        Ouvrage ouvrage = new Ouvrage(123);
+        System.out.println(ouvrage.getIsbn());
         
     }
     
