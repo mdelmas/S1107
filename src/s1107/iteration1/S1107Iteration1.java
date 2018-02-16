@@ -5,6 +5,9 @@
  */
 package s1107.iteration1;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 /**
  *
  * @author delmasmo
@@ -16,6 +19,10 @@ public class S1107Iteration1 {
      */
     public static void main(String[] args) {
         
+        GregorianCalendar dateParution = new GregorianCalendar(2002, 9, 21);
+
+        Ouvrage ouvrage1 = new Ouvrage(1111, "Ouvrage 1", "Editeur 1", dateParution, "Auteur 1", Public.ADO);
+        ouvrage1.afficheOuvrage();
     }
     
 }

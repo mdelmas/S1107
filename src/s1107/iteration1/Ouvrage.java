@@ -5,6 +5,7 @@
  */
 package s1107.iteration1;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -94,10 +95,12 @@ public class Ouvrage {
     public void afficheOuvrage() {
         System.out.println("Ouvrage :");
         System.out.print("ISBN: " + getIsbn() + ", titre : " + getTitre());
-        System.out.print("nom auteur : " + getNomAuteur() + ", date parution : " + getDateParution());
+        System.out.print("nom auteur : " + getNomAuteur() + ", ");
+        GregorianCalendar d = getDateParution();
+        System.out.print("date parution : " + d.get(Calendar.DAY_OF_MONTH) + "." + d.get(Calendar.MONTH) + "." + d.get(Calendar.YEAR));
         System.out.println("nom éditeur : " + getNomEditeur() + ", public : " + getPublicVise());
     }
-    
+
     public void afficheExemplaires() {
         afficheOuvrage();
         for(Map.Entry<Integer, Exemplaire> entry : exemplaires.entrySet()) {
