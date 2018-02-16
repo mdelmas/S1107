@@ -18,12 +18,12 @@ public class Exemplaire {
     private Ouvrage ouvrage;
     
     Exemplaire(Ouvrage o, boolean empruntable, GregorianCalendar dateRecepEx){
-        
         this.setOuvrage(o);
         this.empruntable = empruntable;
         this.setDateRecepEx(o,dateRecepEx);
         numEx = o.getDerNumEx() + 1;
         o.setDerNumEx(numEx);
+        o.setExemplaire(numEx, this);
     }
     
     public void setOuvrage(Ouvrage o) {
@@ -31,7 +31,7 @@ public class Exemplaire {
     }
     
     public void setDateRecepEx(Ouvrage o, GregorianCalendar dateRecepEx){
-        if(EntreesSorties.ecrireDate(this.dateRecepEx).compareTo(EntreesSorties.ecrireDate(o.dateParution)) > 0 ){
+        if(EntreesSorties.ecrireDate(this.dateRecepEx).compareTo(EntreesSorties.ecrireDate(o.getDateParution())) > 0 ){
             System.out.println("Erreur, la date de réception doit être inférieure à la date de publication de publication");
         }
         else{

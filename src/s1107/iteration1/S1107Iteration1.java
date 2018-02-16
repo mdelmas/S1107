@@ -16,9 +16,6 @@ public class S1107Iteration1 {
      */
     public static void main(String[] args) {
         
-        Ouvrage ouvrage = new Ouvrage(123);
-        System.out.println(ouvrage.getIsbn());
-        
     }
     
 }

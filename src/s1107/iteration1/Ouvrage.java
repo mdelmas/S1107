@@ -6,6 +6,9 @@
 package s1107.iteration1;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -16,14 +19,20 @@ public class Ouvrage {
     private int isbn;
     private String titre;
     private String nomEditeur;
-    private Date dateParution;
+    private GregorianCalendar dateParution;
     private String nomAuteur;
-    private int derNumEx;
     private Public publicVise;
+    private int derNumEx = 0;
+    private HashMap<Integer, Exemplaire> exemplaires;
     
-    Ouvrage(int isbn, String titre, String nomEditeur, Date dateParution, String nomAuteur, String publicVise) {
+    Ouvrage(int isbn, String titre, String nomEditeur, GregorianCalendar dateParution, String nomAuteur, Public publicVise) {
         setIsbn(isbn);
-        
+        setTitre(titre);
+        setNomEditeur(nomEditeur);
+        setDateParution(dateParution);
+        setNomAuteur(nomAuteur);
+        setPublicVise(publicVise);
+        exemplaires = new HashMap<>();
     }
     
     public void setIsbn(int isbn) {
@@ -50,11 +59,11 @@ public class Ouvrage {
         return nomEditeur;
     }
     
-    public void setDateParution(Date dateParution) {
+    public void setDateParution(GregorianCalendar dateParution) {
         this.dateParution = dateParution;
     }
     
-    public Date getDateParution() {
+    public GregorianCalendar getDateParution() {
         return dateParution;
     }
     
@@ -66,5 +75,55 @@ public class Ouvrage {
         return nomAuteur;
     }
     
+    public void setPublicVise(Public publicVise) {
+        this.publicVise = publicVise;
+    }
     
+    public Public getPublicVise() {
+        return publicVise;
+    }
+    
+    public void setDerNumEx(int derNumEx) {
+        this.derNumEx = derNumEx;
+    }
+    
+    public int getDerNumEx() {
+        return derNumEx;
+    }
+     
+    public void afficheOuvrage() {
+        System.out.println("Ouvrage :");
+        System.out.print("ISBN: " + getIsbn() + ", titre : " + getTitre());
+        System.out.print("nom auteur : " + getNomAuteur() + ", date parution : " + getDateParution());
+        System.out.println("nom éditeur : " + getNomEditeur() + ", public : " + getPublicVise());
+    }
+    
+    public void afficheExemplaires() {
+        afficheOuvrage();
+        for(Map.Entry<Integer, Exemplaire> entry : exemplaires.entrySet()) {
+            Exemplaire exemplaire = entry.getValue();
+            exemplaire.affiche();
+        }
+    }
+    
+    public Exemplaire getExemplaire(int numEx) {
+        return exemplaires.get(numEx);
+    }
+    
+    public void setExemplaire(int numEx, Exemplaire e) {
+        exemplaires.put(numEx, e);
+    }
+    
+    public void ajouterExemplairesEmpruntables(GregorianCalendar dateRecepEx, int nbExEmpruntables) {
+        for (int i = 0; i < nbExEmpruntables; i++) {
+            Exemplaire nouveau = new Exemplaire(this, true, dateRecepEx);
+        }
+    }
+    
+    public void ajouterExemplairesNonEmpruntables(GregorianCalendar dateRecepEx, int nbExNonEmpruntables) {
+        for (int i = 0; i < nbExNonEmpruntables; i++) {
+            Exemplaire nouveau = new Exemplaire(this, false, dateRecepEx);
+        }
+    }
+            
 }
