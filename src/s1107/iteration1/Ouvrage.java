@@ -21,9 +21,9 @@ public class Ouvrage {
     private int derNumEx;
     private Public publicVise;
     
-    Ouvrage(int isbn, String titre, String nomEditeur, String dateParution, String nomAuteur, String publicVise) {
-        
+    Ouvrage(int isbn, String titre, String nomEditeur, Date dateParution, String nomAuteur, String publicVise) {
         setIsbn(isbn);
+        
     }
     
     public void setIsbn(int isbn) {
@@ -33,5 +33,38 @@ public class Ouvrage {
     public int getIsbn() {
         return isbn;
     }
-    // , String titre, String nomEditeur, String dateParution, String nomAuteur, String public
+    
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+    
+    public String getTitre() {
+        return titre;
+    }
+    
+    public void setNomEditeur(String nomEditeur) {
+        this.nomEditeur = nomEditeur;
+    }
+    
+    public String getNomEditeur() {
+        return nomEditeur;
+    }
+    
+    public void setDateParution(Date dateParution) {
+        this.dateParution = dateParution;
+    }
+    
+    public Date getDateParution() {
+        return dateParution;
+    }
+    
+    public void setNomAuteur(String nomAuteur) {
+        this.nomAuteur = nomAuteur;
+    }
+    
+    public String getNomAuteur() {
+        return nomAuteur;
+    }
+    
+    
 }
