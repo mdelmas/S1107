@@ -98,7 +98,7 @@ public class Ouvrage {
         System.out.print("nom auteur : " + getNomAuteur() + ", ");
         GregorianCalendar d = getDateParution();
         System.out.print("date parution : " + d.get(Calendar.DAY_OF_MONTH) + "." + d.get(Calendar.MONTH) + "." + d.get(Calendar.YEAR));
-        System.out.println("nom éditeur : " + getNomEditeur() + ", public : " + getPublicVise());
+        System.out.println(", nom éditeur : " + getNomEditeur() + ", public : " + getPublicVise());
     }
 
     public void afficheExemplaires() {

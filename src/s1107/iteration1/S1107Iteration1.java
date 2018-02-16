@@ -23,6 +23,13 @@ public class S1107Iteration1 {
 
         Ouvrage ouvrage1 = new Ouvrage(1111, "Ouvrage 1", "Editeur 1", dateParution, "Auteur 1", Public.ADO);
         ouvrage1.afficheOuvrage();
+        ouvrage1.afficheExemplaires();
+        
+        GregorianCalendar d = new GregorianCalendar(2017, 2, 16);
+        ouvrage1.ajouterExemplairesEmpruntables(d, 4);
+        ouvrage1.ajouterExemplairesNonEmpruntables(d, 3);
+        ouvrage1.afficheExemplaires();
+
     }
     
 }
