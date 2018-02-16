@@ -2,6 +2,8 @@ import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
+import s1107.iteration1.Ouvrage;
+import s1107.iteration1.Public;
 
 
 // Classe de gestion de la Bibliotheque
@@ -72,7 +74,7 @@ public class Bibliotheque implements Serializable
 					age=dateActuelle.get(GregorianCalendar.YEAR)-dateNaiss.get(GregorianCalendar.YEAR)-1;
 				}
 				if ((age<=3) | (age>=110)){
-					EntreesSorties.afficherMessage("Age incorrecte ("+age+"), veuillez recommencer.");
+					EntreesSorties.afficherMessage("Age incorrect ("+age+"), veuillez recommencer.");
 				}
 				else {
 					EntreesSorties.afficherMessage("Age du lecteur : " + age + " ans");
@@ -90,8 +92,35 @@ public class Bibliotheque implements Serializable
 		}
 		
 	}
+        
+        /*
+        La méthode nouvelOuvrage permet de créer un ouvrage, vérifie si l'ouvrage n'existe pas déjà (par l'isbn)
+        sinon on crée l'ouvrage, on l'ajoute au dictionnaire de la classe Bibliothèque et on affiche les informations
+        de l'objet créé.
+        */
+        
+        public void nouvelOuvrage() {
+            Integer numOuvrage = EntreesSorties.lireEntier("Entrez le numero d'ISBN :");
+            Ouvrage o = getOuvrage(numOuvrage);           
+
+            if (o == null) {
+                    String titre = EntreesSorties.lireChaine("Entrez le titre :");
+                    String nomEditeur = EntreesSorties.lireChaine("Entrez le nom de l'éditeur :");
+                    GregorianCalendar dateParution = EntreesSorties.lireDate("Entrez la date de naissance du lecteur :");
+                    String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur :");
+                    String publicVise = EntreesSorties.lireChaine("Entrez le nom de l'auteur :");
+                    GregorianCalendar dateActuelle = new GregorianCalendar();  
+
+                    o = new Ouvrage(numOuvrage, titre, nomEditeur, dateParution, nomAuteur, publicVise);
+                    _dicoOuvrage.put(numOuvrage,o);
+                    o.afficheOuvrage();
+            }
+        }
 	
-	
+        
+        
+        
+        
 	/*
 	 * La méthode consulterLecteur permet d'afficher l'ensemble des informations relatives à
 	 * un lecteur, par la saisie de son identifiant (numéro de lecteur).
