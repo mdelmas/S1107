@@ -21,7 +21,7 @@ public class S1107Iteration1 {
         
         GregorianCalendar dateParution = new GregorianCalendar(2002, 9, 21);
 
-        Ouvrage ouvrage1 = new Ouvrage(1111, "Ouvrage 1", "Editeur 1", dateParution, "Auteur 1", Public.ADO);
+        Ouvrage ouvrage1 = new Ouvrage(1111, "Ouvrage 1", "Editeur 1", dateParution, "Auteur 1", Public.ado);
         ouvrage1.afficheOuvrage();
         ouvrage1.afficheExemplaires();
         

@@ -1,9 +1,12 @@
+package s1107.iteration1;
+
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Scanner;
 import s1107.iteration1.Ouvrage;
-import s1107.iteration1.Public;
+import s1107.iteration1.Lecteur;
 
 
 // Classe de gestion de la Bibliotheque
@@ -18,6 +21,8 @@ public class Bibliotheque implements Serializable
 	// -----------------------------------------------
 	
 		private HashMap<Integer, Lecteur> _dicoLecteur;
+                private HashMap<Integer, Ouvrage> _dicoOuvrage;
+                private int derNumLecteur;
 		
 		/*
 		 * Le dictionnaire de lecteur permet à bibliotheque de 
@@ -31,6 +36,8 @@ public class Bibliotheque implements Serializable
 
 		public Bibliotheque() {
 			this.setLecteurs(new HashMap<Integer, Lecteur>());
+                        this.setOuvrages(new HashMap<Integer, Ouvrage>());
+                        derNumLecteur=0;
 		
 		}
 	
@@ -53,44 +60,47 @@ public class Bibliotheque implements Serializable
 		 */
 	public void nouveauLecteur()
 	{
-		Integer numLecteur = EntreesSorties.lireEntier("Entrez le numero de lecteur :");
-		
-		Lecteur L = unLecteur(numLecteur);
-		
-		if (L == null) 
-		{
-			String nom = EntreesSorties.lireChaine("Entrez le nom :");
-			String prenom = EntreesSorties.lireChaine("Entrez le prenom :");
-			Integer age;
-			GregorianCalendar dateNaiss, dateNaissComp;
-			GregorianCalendar dateActuelle = new GregorianCalendar();
-			do {
-				dateNaiss = EntreesSorties.lireDate("Entrez la date de naissance du lecteur :");
-				dateNaissComp = new GregorianCalendar(dateActuelle.get(GregorianCalendar.YEAR), dateNaiss.get(GregorianCalendar.MONTH), dateNaiss.get(GregorianCalendar.DATE));
-				if(dateNaissComp.before(dateActuelle)){
-					age=dateActuelle.get(GregorianCalendar.YEAR)-dateNaiss.get(GregorianCalendar.YEAR);
-				}
-				else{
-					age=dateActuelle.get(GregorianCalendar.YEAR)-dateNaiss.get(GregorianCalendar.YEAR)-1;
-				}
-				if ((age<=3) | (age>=110)){
-					EntreesSorties.afficherMessage("Age incorrect ("+age+"), veuillez recommencer.");
-				}
-				else {
-					EntreesSorties.afficherMessage("Age du lecteur : " + age + " ans");
-				}
-			} while ((age<=3) | (age>=110));
-			String adresse = EntreesSorties.lireChaine("Entrez l'adresse :");
-			String tel = EntreesSorties.lireChaine("Entrez le numero de telephone :");
-			EntreesSorties.afficherMessage("Fin de saisie");
-			
-			L = new Lecteur(nom, prenom, numLecteur, dateNaiss, adresse, tel);
-			lierLecteur(L, numLecteur);
-		}
-		else {
-			EntreesSorties.afficherMessage("Ce numero de lecteur existe deja.");
-		}
-		
+
+            String nom = EntreesSorties.lireChaine("Entrez le nom :");
+            String prenom = EntreesSorties.lireChaine("Entrez le prenom :");
+            Integer age;
+            GregorianCalendar dateNaiss, dateNaissComp;
+            GregorianCalendar dateActuelle = new GregorianCalendar();
+            do {
+                    dateNaiss = EntreesSorties.lireDate("Entrez la date de naissance du lecteur :");
+                    dateNaissComp = new GregorianCalendar(dateActuelle.get(GregorianCalendar.YEAR), dateNaiss.get(GregorianCalendar.MONTH), dateNaiss.get(GregorianCalendar.DATE));
+                    if(dateNaissComp.before(dateActuelle)){
+                            age=dateActuelle.get(GregorianCalendar.YEAR)-dateNaiss.get(GregorianCalendar.YEAR);
+                    }
+                    else{
+                            age=dateActuelle.get(GregorianCalendar.YEAR)-dateNaiss.get(GregorianCalendar.YEAR)-1;
+                    }
+                    if ((age<=3) | (age>=110)){
+                            EntreesSorties.afficherMessage("Age incorrect ("+age+"), veuillez recommencer.");
+                    }
+                    else {
+                            EntreesSorties.afficherMessage("Age du lecteur : " + age + " ans");
+                    }
+            } while ((age<=3) | (age>=110));
+            String adresse = EntreesSorties.lireChaine("Entrez l'adresse :");
+            String tel = EntreesSorties.lireChaine("Entrez le numero de telephone :");
+            EntreesSorties.afficherMessage("Fin de saisie");
+
+            Lecteur L = new Lecteur(nom, this.getDerNumLecteur()+1, prenom, dateNaiss, adresse, tel);
+            
+            boolean exist = false;
+            for (Iterator<Lecteur> itr = lesLecteurs(); itr.hasNext();){
+                if(L.equals(itr.next())){
+                    System.out.println("Ce lecteur existe déjà");
+                    exist = true;
+                    break;
+                }
+            }
+            if(exist == false){
+                this.setDerNumLecteur(derNumLecteur + 1);
+                lierLecteur(L,derNumLecteur);
+                L.afficherLecteur();
+            }
 	}
         
         /*
@@ -101,21 +111,70 @@ public class Bibliotheque implements Serializable
         
         public void nouvelOuvrage() {
             Integer numOuvrage = EntreesSorties.lireEntier("Entrez le numero d'ISBN :");
-            Ouvrage o = getOuvrage(numOuvrage);           
+            Ouvrage o = getOuvrage(numOuvrage);  
+            
 
             if (o == null) {
                     String titre = EntreesSorties.lireChaine("Entrez le titre :");
                     String nomEditeur = EntreesSorties.lireChaine("Entrez le nom de l'éditeur :");
                     GregorianCalendar dateParution = EntreesSorties.lireDate("Entrez la date de naissance du lecteur :");
                     String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur :");
-                    String publicVise = EntreesSorties.lireChaine("Entrez le nom de l'auteur :");
+                    //EntreesSorties.lireChaine("Entrez le public visé :");
+                    Scanner pub  = new Scanner(System.in);
+                    System.out.println("Entrez le public visé : enfant, ado ou adulte");
+                    String pubv = null;
+                    Public publicVise = null;
+                    
+                    while(publicVise == null){
+                        try { 
+                            pubv = pub.nextLine();
+                            switch (Public.valueOf(pubv.trim())){
+                                case enfant :
+                                    publicVise = Public.enfant;
+                                    break;
+                                case ado :
+                                    publicVise = Public.ado;
+                                    break;
+                                case adulte :
+                                    publicVise = Public.adulte;
+                                    break;
+                            }
+                        }
+                        catch (java.lang.IllegalArgumentException j){
+                            System.out.println("Erreur dans la saisie, rappel : enfant, ado ou adulte :");
+                        }
+                    }
+                    
                     GregorianCalendar dateActuelle = new GregorianCalendar();  
 
                     o = new Ouvrage(numOuvrage, titre, nomEditeur, dateParution, nomAuteur, publicVise);
                     _dicoOuvrage.put(numOuvrage,o);
                     o.afficheOuvrage();
             }
+            else {
+                EntreesSorties.afficherMessage("Cet ouvrage existe déjà.");
+            }
         }
+        
+	/*
+	 * La méthode consulterOuvrage permet d'afficher l'ensemble des informations relatives à
+	 * un ouvrage, par la saisie de son identifiant (isbn).
+	 * Si l'isbn n'est pas dans la base de données de bibliotheque un message d'erreur est
+	 * renvoyé a l'utilisateur.
+	 */
+	public void consulterOuvrage()
+	{
+		Integer numOuvrage = EntreesSorties.lireEntier("Entrez l'isbn de l'ouvrage : ");
+		
+		Ouvrage o = getOuvrage(numOuvrage);
+		
+		if (o!=null){
+			o.afficheOuvrage();
+		}
+		else {
+			EntreesSorties.afficherMessage("Aucun ouvrage n'est associe a ce numero.");
+		}
+	}
 	
         
         
@@ -131,7 +190,7 @@ public class Bibliotheque implements Serializable
 	{
 		Integer numLecteur = EntreesSorties.lireEntier("Entrez le numero du lecteur : ");
 		
-		Lecteur L = unLecteur(numLecteur);
+		Lecteur L = getLecteur(numLecteur);
 		
 		if (L!=null){
 			L.afficherLecteur();
@@ -139,8 +198,54 @@ public class Bibliotheque implements Serializable
 		else {
 			EntreesSorties.afficherMessage("Aucun lecteur n'est associe a ce numero.");
 		}
+                
 	}
+        
+        /*
+        La méthode NouvelExemplaire() crée des exemplaires d'un ouvrage, on rentre l'ouvrage concerné ainsi
+        que le nombre d'exemplaires à créer. Le numéro des exemplaires est incrémenté à partir du dernier 
+        numéro d'exemplaire connu pour l'ouvrage déterminé.
+        */
 	
+        public void nouvelExemplaire()
+        {
+            Integer numOuvrage = EntreesSorties.lireEntier("Entrez le numero d'ISBN :");
+            Ouvrage o = getOuvrage(numOuvrage);  
+            
+            if (o != null) {
+                    GregorianCalendar dateRecepEx = EntreesSorties.lireDate("Entrez la date de réception des exemplaires :");
+                    Integer nbExEmpruntables = EntreesSorties.lireEntier("Entrez le nombre d'exemplaires empruntables :");
+                    Integer nbExNonEmpruntables = EntreesSorties.lireEntier("Entrez le nombre d'exemplaires non-empruntables :");  
+
+                    while(nbExEmpruntables > 0){
+                        Exemplaire e = new Exemplaire(o,true,dateRecepEx);
+                        nbExEmpruntables = nbExEmpruntables - 1;
+                        e.affiche();
+                    }
+                    
+                    while(nbExNonEmpruntables > 0){
+                        Exemplaire e = new Exemplaire(o,false,dateRecepEx);
+                        nbExNonEmpruntables = nbExNonEmpruntables - 1;
+                        e.affiche();                        
+                    }
+            }
+            else {
+                EntreesSorties.afficherMessage("Cet ouvrage n'existe pas.");
+            }            
+        }
+        
+        public void consulterExemplairesOuvrage(){
+		Integer isbn = EntreesSorties.lireEntier("Entrez le numéro ISBN de l'ouvrage : ");
+		
+		Ouvrage o = getOuvrage(isbn);
+		
+		if (o!=null){
+			o.afficheExemplaires();
+		}
+		else {
+			EntreesSorties.afficherMessage("Aucun lecteur n'est associe a ce numero.");
+		}            
+        }
 // -----------------------------------------------
 	// Private
 // -----------------------------------------------
@@ -152,6 +257,10 @@ public class Bibliotheque implements Serializable
 	private void setLecteurs(HashMap<Integer, Lecteur> dicoLecteur) {
 		_dicoLecteur = dicoLecteur;
 	}
+        
+	private void setOuvrages(HashMap<Integer, Ouvrage> dicoOuvrage) {
+		_dicoOuvrage = dicoOuvrage;
+	}        
 
 	
 	
@@ -163,9 +272,18 @@ public class Bibliotheque implements Serializable
 	 * La méthode unLecteur permet de rechercher dans la base de donnée de bibliotheque un objet 
 	 * lecteur identifié par son numéro, et de renvoyer l'objet. (ou la donnée null s'il n'est pas trouvé)
 	 */
-	private Lecteur unLecteur(Integer numLecteur)
+	private Lecteur getLecteur(Integer numLecteur)
 	{
 		return _dicoLecteur.get(numLecteur);
+	}
+        
+        	/*
+	 * La méthode getOuvrage permet de rechercher dans la base de donnée de bibliotheque un objet 
+	 * ouvrage identifié par son isbn, et de renvoyer l'objet. (ou la donnée null s'il n'est pas trouvé)
+	 */
+	private Ouvrage getOuvrage(Integer isbn)
+	{
+		return _dicoOuvrage.get(isbn);
 	}
 	
 	/*
@@ -175,6 +293,10 @@ public class Bibliotheque implements Serializable
 	{
 		_dicoLecteur.put(numLecteur, L);
 	}
+        
+        private void lierOuvrage(Ouvrage o, Integer isbn){
+            _dicoOuvrage.put(isbn, o);
+        }
 	
 	
 	/*
@@ -182,6 +304,18 @@ public class Bibliotheque implements Serializable
 	 * pour eventuellement les relancer.
 	 */
 	private Iterator<Lecteur> lesLecteurs() {
-		return _dicoLecteur.values().iterator();
+            return _dicoLecteur.values().iterator();
 	}
+        
+        private Iterator<Ouvrage> lesOuvrages() {
+            return _dicoOuvrage.values().iterator();
+        }
+        
+        public void setDerNumLecteur(int v){
+            derNumLecteur = v;
+        }
+        
+        public int getDerNumLecteur(){
+            return derNumLecteur;
+        }
 }

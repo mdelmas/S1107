@@ -5,6 +5,7 @@
  */
 package s1107.iteration1;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -12,7 +13,10 @@ import java.util.GregorianCalendar;
  *
  * @author valentid
  */
-public class Exemplaire {
+public class Exemplaire implements Serializable {
+    
+    private static final long serialVersionUID = 290L;
+    
     private boolean empruntable;
     private GregorianCalendar dateRecepEx;
     private int numEx;

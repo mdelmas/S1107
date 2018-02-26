@@ -5,6 +5,7 @@
  */
 package s1107.iteration1;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -15,7 +16,9 @@ import java.util.Map;
  *
  * @author delmasmo
  */
-public class Ouvrage {
+public class Ouvrage implements Serializable{
+    
+    private static final long serialVersionUID = 456L;
     
     private int isbn;
     private String titre;
@@ -26,7 +29,7 @@ public class Ouvrage {
     private int derNumEx = 0;
     private HashMap<Integer, Exemplaire> exemplaires;
     
-    Ouvrage(int isbn, String titre, String nomEditeur, GregorianCalendar dateParution, String nomAuteur, Public publicVise) {
+    public Ouvrage(int isbn, String titre, String nomEditeur, GregorianCalendar dateParution, String nomAuteur, Public publicVise) {
         setIsbn(isbn);
         setTitre(titre);
         setNomEditeur(nomEditeur);

@@ -10,7 +10,18 @@ package s1107.iteration1;
  * @author delmasmo
  */
 public enum Public {
-    ENFANT,
-    ADO, 
-    ADULTE
+    enfant("Enfant"),
+    ado("Adolescent"), 
+    adulte("Adulte");
+    
+    private String nom="";
+
+
+    Public(String nom){
+        this.nom = nom;
+    }
+    
+    public String toString(){
+        return nom;
+    }
 }

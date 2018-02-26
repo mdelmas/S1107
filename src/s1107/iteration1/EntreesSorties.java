@@ -1,3 +1,5 @@
+package s1107.iteration1;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

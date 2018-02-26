@@ -1,3 +1,6 @@
+package s1107.iteration1;
+
+import s1107.iteration1.EntreesSorties;
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
@@ -27,11 +30,11 @@ public class Lecteur implements Serializable
 		//Constructeur
 	// -----------------------------------------------
 		
-		public Lecteur(String nom, String prenom, Integer numLecteur, GregorianCalendar dateNaiss, String adresse, String tel)
+		public Lecteur(String nom, int numLecteur, String prenom, GregorianCalendar dateNaiss, String adresse, String tel)
 		{
 			this.setNom(nom);
 			this.setPrenom(prenom);
-			this.setNumLecteur(numLecteur);
+                        this.setNumLecteur(numLecteur);
 			this.setDateNaiss(dateNaiss);
 			this.setAdresse(adresse);
 			this.setTel(tel);
@@ -77,7 +80,7 @@ public class Lecteur implements Serializable
 		 */
 		public void afficherLecteur()
 		{
-			System.out.println("Numero lecteur : " + this.getNumLecteur());
+			//System.out.println("Numero lecteur : " + this.getNumLecteur());
 			System.out.println("Nom et prenom du lecteur: " + this.getNom() + " " + this.getPrenom());
 			System.out.println("Age : " + this.calculAge() + " ans");
 			System.out.println("Adresse : " + this.getAdresse());
@@ -103,7 +106,16 @@ public class Lecteur implements Serializable
 			}
 			return age;
 		}
-		
+                
+                public boolean equals(Lecteur L){
+                    if(_nom.equals(L._nom) && _prenom.equals(L._prenom) && _dateNaiss.equals(L._dateNaiss) && _adresse.equals(L._adresse) && _tel.equals(L._tel)){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+
 	
 	
 // -----------------------------------------------

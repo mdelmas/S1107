@@ -1,3 +1,5 @@
+import s1107.iteration1.EntreesSorties;
+import s1107.iteration1.Bibliotheque;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
