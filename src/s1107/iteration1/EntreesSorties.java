@@ -16,7 +16,7 @@ import java.util.GregorianCalendar;
 public class EntreesSorties  {
 
 	// ************************************************************************************************************
-	// Constantes
+	// Constantes 
 	// ************************************************************************************************************
 
 	private static final long serialVersionUID = 1L;

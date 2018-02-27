@@ -7,7 +7,7 @@ package s1107.iteration1;
 
 /**
  *
- * @author delmasmo
+ * @author delmasmo 
  */
 public enum Public {
     enfant("Enfant"),

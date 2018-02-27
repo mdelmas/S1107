@@ -7,7 +7,7 @@ public class MenuBiblio {
 	private Bibliotheque _bibliotheque;
 	
 	public MenuBiblio (Bibliotheque bibliotheque) {
-	_bibliotheque = bibliotheque;
+	_bibliotheque = bibliotheque; 
 	}
 	
 	/*

@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.Scanner;
 import s1107.iteration1.Ouvrage;
 import s1107.iteration1.Lecteur;
+import s1107.iteration1.EntreesSorties;
 
 
 // Classe de gestion de la Bibliotheque
@@ -97,7 +98,7 @@ public class Bibliotheque implements Serializable
                 }
             }
             if(exist == false){
-                this.setDerNumLecteur(derNumLecteur + 1);
+                incDerNumLecteur();
                 lierLecteur(L,derNumLecteur);
                 L.afficherLecteur();
             }
@@ -148,7 +149,7 @@ public class Bibliotheque implements Serializable
                     GregorianCalendar dateActuelle = new GregorianCalendar();  
 
                     o = new Ouvrage(numOuvrage, titre, nomEditeur, dateParution, nomAuteur, publicVise);
-                    _dicoOuvrage.put(numOuvrage,o);
+                    lierOuvrage(o,numOuvrage);
                     o.afficheOuvrage();
             }
             else {
@@ -308,5 +309,9 @@ public class Bibliotheque implements Serializable
         
         public int getDerNumLecteur(){
             return derNumLecteur;
+        }
+        
+        public void incDerNumLecteur(){
+            derNumLecteur++;
         }
 }
