@@ -21,7 +21,7 @@ public class Bibliotheque implements Serializable
 	// -----------------------------------------------
 	
 		private HashMap<Integer, Lecteur> _dicoLecteur;
-                private HashMap<Integer, Ouvrage> _dicoOuvrage;
+                private HashMap<Long, Ouvrage> _dicoOuvrage;
                 private int derNumLecteur;
 		
 		/*
@@ -36,7 +36,7 @@ public class Bibliotheque implements Serializable
 
 		public Bibliotheque() {
 			this.setLecteurs(new HashMap<Integer, Lecteur>());
-                        this.setOuvrages(new HashMap<Integer, Ouvrage>());
+                        this.setOuvrages(new HashMap<Long, Ouvrage>());
                         derNumLecteur=0;
 		
 		}
@@ -110,14 +110,14 @@ public class Bibliotheque implements Serializable
         */
         
         public void nouvelOuvrage() {
-            Integer numOuvrage = EntreesSorties.lireEntier("Entrez le numero d'ISBN :");
+            long numOuvrage = EntreesSorties.lireLong("Entrez le numero d'ISBN :");
             Ouvrage o = getOuvrage(numOuvrage);  
             
 
             if (o == null) {
                     String titre = EntreesSorties.lireChaine("Entrez le titre :");
                     String nomEditeur = EntreesSorties.lireChaine("Entrez le nom de l'éditeur :");
-                    GregorianCalendar dateParution = EntreesSorties.lireDate("Entrez la date de naissance du lecteur :");
+                    GregorianCalendar dateParution = EntreesSorties.lireDate("Entrez la date de parution :");
                     String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur :");
                     //EntreesSorties.lireChaine("Entrez le public visé :");
                     Scanner pub  = new Scanner(System.in);
@@ -164,7 +164,7 @@ public class Bibliotheque implements Serializable
 	 */
 	public void consulterOuvrage()
 	{
-		Integer numOuvrage = EntreesSorties.lireEntier("Entrez l'isbn de l'ouvrage : ");
+		long numOuvrage = EntreesSorties.lireLong("Entrez l'isbn de l'ouvrage : ");
 		
 		Ouvrage o = getOuvrage(numOuvrage);
 		
@@ -209,25 +209,16 @@ public class Bibliotheque implements Serializable
 	
         public void nouvelExemplaire()
         {
-            Integer numOuvrage = EntreesSorties.lireEntier("Entrez le numero d'ISBN :");
+            long numOuvrage = EntreesSorties.lireLong("Entrez le numero d'ISBN :");
             Ouvrage o = getOuvrage(numOuvrage);  
             
             if (o != null) {
-                    GregorianCalendar dateRecepEx = EntreesSorties.lireDate("Entrez la date de réception des exemplaires :");
-                    Integer nbExEmpruntables = EntreesSorties.lireEntier("Entrez le nombre d'exemplaires empruntables :");
-                    Integer nbExNonEmpruntables = EntreesSorties.lireEntier("Entrez le nombre d'exemplaires non-empruntables :");  
+                GregorianCalendar dateRecepEx = EntreesSorties.lireDate("Entrez la date de réception des exemplaires :");
+                Integer nbExEmpruntables = EntreesSorties.lireEntier("Entrez le nombre d'exemplaires empruntables :");
+                Integer nbExNonEmpruntables = EntreesSorties.lireEntier("Entrez le nombre d'exemplaires non-empruntables :");  
 
-                    while(nbExEmpruntables > 0){
-                        Exemplaire e = new Exemplaire(o,true,dateRecepEx);
-                        nbExEmpruntables = nbExEmpruntables - 1;
-                        e.affiche();
-                    }
-                    
-                    while(nbExNonEmpruntables > 0){
-                        Exemplaire e = new Exemplaire(o,false,dateRecepEx);
-                        nbExNonEmpruntables = nbExNonEmpruntables - 1;
-                        e.affiche();                        
-                    }
+                o.ajouterExemplairesEmpruntables(dateRecepEx, nbExEmpruntables);
+                o.ajouterExemplairesNonEmpruntables(dateRecepEx, nbExNonEmpruntables);
             }
             else {
                 EntreesSorties.afficherMessage("Cet ouvrage n'existe pas.");
@@ -235,7 +226,7 @@ public class Bibliotheque implements Serializable
         }
         
         public void consulterExemplairesOuvrage(){
-		Integer isbn = EntreesSorties.lireEntier("Entrez le numéro ISBN de l'ouvrage : ");
+		Long isbn = EntreesSorties.lireLong("Entrez le numéro ISBN de l'ouvrage : ");
 		
 		Ouvrage o = getOuvrage(isbn);
 		
@@ -258,7 +249,7 @@ public class Bibliotheque implements Serializable
 		_dicoLecteur = dicoLecteur;
 	}
         
-	private void setOuvrages(HashMap<Integer, Ouvrage> dicoOuvrage) {
+	private void setOuvrages(HashMap<Long, Ouvrage> dicoOuvrage) {
 		_dicoOuvrage = dicoOuvrage;
 	}        
 
@@ -281,7 +272,7 @@ public class Bibliotheque implements Serializable
 	 * La méthode getOuvrage permet de rechercher dans la base de donnée de bibliotheque un objet 
 	 * ouvrage identifié par son isbn, et de renvoyer l'objet. (ou la donnée null s'il n'est pas trouvé)
 	 */
-	private Ouvrage getOuvrage(Integer isbn)
+	private Ouvrage getOuvrage(Long isbn)
 	{
 		return _dicoOuvrage.get(isbn);
 	}
@@ -294,7 +285,7 @@ public class Bibliotheque implements Serializable
 		_dicoLecteur.put(numLecteur, L);
 	}
         
-        private void lierOuvrage(Ouvrage o, Integer isbn){
+        private void lierOuvrage(Ouvrage o, Long isbn){
             _dicoOuvrage.put(isbn, o);
         }
 	

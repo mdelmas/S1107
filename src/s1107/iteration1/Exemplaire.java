@@ -22,13 +22,11 @@ public class Exemplaire implements Serializable {
     private int numEx;
     private Ouvrage ouvrage;
     
-    Exemplaire(Ouvrage o, boolean empruntable, GregorianCalendar dateRecepEx){
+    Exemplaire(Ouvrage o, boolean empruntable, GregorianCalendar dateRecepEx, int numEx){
         this.setOuvrage(o);
         this.empruntable = empruntable;
         this.setDateRecepEx(o,dateRecepEx);
-        numEx = o.getDerNumEx() + 1;
-        o.setDerNumEx(numEx);
-        o.setExemplaire(numEx, this);
+        this.numEx = numEx;
     }
     
     public void setOuvrage(Ouvrage o) {
@@ -36,22 +34,16 @@ public class Exemplaire implements Serializable {
     }
     
     public void setDateRecepEx(Ouvrage o, GregorianCalendar dateRecepEx){
-    //    if(EntreesSorties.ecrireDate(this.dateRecepEx).compareTo(EntreesSorties.ecrireDate(o.getDateParution())) > 0 ){
-    //        System.out.println("Erreur, la date de réception doit être inférieure à la date de publication de publication");
-    //    }
-    //    else{
             this.dateRecepEx = dateRecepEx;
-    //    }
     }
     
     public void affiche(){
-        System.out.print("Numéro d'exemplaire : " + numEx);
-        System.out.print(", date réception : " + dateRecepEx.get(Calendar.DAY_OF_MONTH) + "." + dateRecepEx.get(Calendar.MONTH) + "." + dateRecepEx.get(Calendar.YEAR));
+        System.out.print("Numéro d'exemplaire : " + numEx + ", ");
+        System.out.print("date réception : " + EntreesSorties.ecrireDate(dateRecepEx));
         if (empruntable)
             System.out.println(", empruntable");
         else
             System.out.println(", non empruntable");
-        //    System.out.println("Numéro d'exemplaire : " + numEx + ", Date de réception : " + EntreesSorties.ecrireDate(this.dateRecepEx));
     }
     
     

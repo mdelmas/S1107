@@ -145,8 +145,8 @@ public class EntreesSorties  {
 		        return 0;
 		}
 	} // Fin de lireEntier
-
-	/**
+	
+        /**
 	 * Affiche un libellé puis permet la saisie d'un entier. Si l'utilisateur saisit une valeur non-entière, affichage 
 	 * d'une erreur et demande d'une autre saisie. 
 	 * 
@@ -157,6 +157,47 @@ public class EntreesSorties  {
 	public static int lireEntier(String libelle)   {
 		EntreesSorties.afficherLibelle(libelle);
 		return lireEntier();
+	}  // Fin de lireEntier
+	/**
+	 * permet la saisie d'un entier. Si l'utilisateur saisit une valeur non-entière, affichage d'une erreur et demande 
+	 * d'une autre saisie. 
+	 * 
+	 * @return int : l'entier saisi.
+	 * 
+	 */
+        public static long lireLong()   {
+		boolean ok = false;
+		long valentiere = 0;
+		
+		try  {
+		   do {
+		        try  {
+		        	valentiere = Long.parseLong(entree.readLine());
+		        	ok = true;
+		        }
+		        catch (NumberFormatException e)
+		                {System.out.println("Non un entier. Recommencez.");}
+		   } while (!ok);
+		
+		   return  valentiere;
+		}
+		catch (IOException e)  {
+		        System.out.println(" ERREUR d'E/S : IO.LIRE_ENTIER");
+		        return 0;
+		}
+	} // Fin de lireLong
+
+	/**
+	 * Affiche un libellé puis permet la saisie d'un entier. Si l'utilisateur saisit une valeur non-entière, affichage 
+	 * d'une erreur et demande d'une autre saisie. 
+	 * 
+	 * @param libelle : libellé à afficher en début pour indiquer quelle saisie effectuer
+	 * @return int : l'entier saisi.
+	 * 
+	 */
+	public static long lireLong(String libelle)   {
+		EntreesSorties.afficherLibelle(libelle);
+		return lireLong();
 	}  // Fin de lireEntier
 
 	//	---------------------------------------------------------------------------------------------------------------------

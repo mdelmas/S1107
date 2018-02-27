@@ -20,7 +20,7 @@ public class Ouvrage implements Serializable{
     
     private static final long serialVersionUID = 456L;
     
-    private int isbn;
+    private long isbn;
     private String titre;
     private String nomEditeur;
     private GregorianCalendar dateParution;
@@ -29,7 +29,7 @@ public class Ouvrage implements Serializable{
     private int derNumEx = 0;
     private HashMap<Integer, Exemplaire> exemplaires;
     
-    public Ouvrage(int isbn, String titre, String nomEditeur, GregorianCalendar dateParution, String nomAuteur, Public publicVise) {
+    public Ouvrage(long isbn, String titre, String nomEditeur, GregorianCalendar dateParution, String nomAuteur, Public publicVise) {
         setIsbn(isbn);
         setTitre(titre);
         setNomEditeur(nomEditeur);
@@ -39,11 +39,11 @@ public class Ouvrage implements Serializable{
         exemplaires = new HashMap<>();
     }
     
-    public void setIsbn(int isbn) {
+    public void setIsbn(long isbn) {
         this.isbn = isbn;
     }
     
-    public int getIsbn() {
+    public long getIsbn() {
         return isbn;
     }
     
@@ -97,10 +97,9 @@ public class Ouvrage implements Serializable{
      
     public void afficheOuvrage() {
         System.out.println("Ouvrage :");
-        System.out.print("ISBN: " + getIsbn() + ", titre : " + getTitre());
+        System.out.print("ISBN: " + getIsbn() + ", titre : " + getTitre() + ", ");
         System.out.print("nom auteur : " + getNomAuteur() + ", ");
-        GregorianCalendar d = getDateParution();
-        System.out.print("date parution : " + d.get(Calendar.DAY_OF_MONTH) + "." + d.get(Calendar.MONTH) + "." + d.get(Calendar.YEAR));
+        System.out.print("date parution : " + EntreesSorties.ecrireDate(getDateParution()));
         System.out.println(", nom éditeur : " + getNomEditeur() + ", public : " + getPublicVise());
     }
 
@@ -122,13 +121,19 @@ public class Ouvrage implements Serializable{
     
     public void ajouterExemplairesEmpruntables(GregorianCalendar dateRecepEx, int nbExEmpruntables) {
         for (int i = 0; i < nbExEmpruntables; i++) {
-            Exemplaire nouveau = new Exemplaire(this, true, dateRecepEx);
+            derNumEx++;
+            Exemplaire nouveau = new Exemplaire(this, true, dateRecepEx, derNumEx);
+            setExemplaire(derNumEx, nouveau);
+            nouveau.affiche();
         }
     }
     
     public void ajouterExemplairesNonEmpruntables(GregorianCalendar dateRecepEx, int nbExNonEmpruntables) {
         for (int i = 0; i < nbExNonEmpruntables; i++) {
-            Exemplaire nouveau = new Exemplaire(this, false, dateRecepEx);
+            derNumEx++;
+            Exemplaire nouveau = new Exemplaire(this, false, dateRecepEx, derNumEx);
+            setExemplaire(derNumEx, nouveau);
+            nouveau.affiche();
         }
     }
             
