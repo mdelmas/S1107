@@ -62,13 +62,13 @@ public class Bibliotheque implements Serializable
 	public void nouveauLecteur()
 	{
 
-            String nom = EntreesSorties.lireChaine("Entrez le nom :");
-            String prenom = EntreesSorties.lireChaine("Entrez le prenom :");
+            String nom = EntreesSorties.lireChaine("Entrez le nom : ");
+            String prenom = EntreesSorties.lireChaine("Entrez le prenom : ");
             Integer age;
             GregorianCalendar dateNaiss, dateNaissComp;
             GregorianCalendar dateActuelle = new GregorianCalendar();
             do {
-                    dateNaiss = EntreesSorties.lireDate("Entrez la date de naissance du lecteur :");
+                    dateNaiss = EntreesSorties.lireDate("Entrez la date de naissance du lecteur (JJ/MM/AAAA): ");
                     dateNaissComp = new GregorianCalendar(dateActuelle.get(GregorianCalendar.YEAR), dateNaiss.get(GregorianCalendar.MONTH), dateNaiss.get(GregorianCalendar.DATE));
                     if(dateNaissComp.before(dateActuelle)){
                             age=dateActuelle.get(GregorianCalendar.YEAR)-dateNaiss.get(GregorianCalendar.YEAR);
@@ -84,7 +84,7 @@ public class Bibliotheque implements Serializable
                     }
             } while ((age<=3) | (age>=110));
             String adresse = EntreesSorties.lireChaine("Entrez l'adresse :");
-            String tel = EntreesSorties.lireChaine("Entrez le numero de telephone :");
+            String tel = EntreesSorties.lireChaine("Entrez le numero de telephone : ");
             EntreesSorties.afficherMessage("Fin de saisie");
 
             Lecteur L = new Lecteur(nom, this.getDerNumLecteur()+1, prenom, dateNaiss, adresse, tel);
@@ -111,16 +111,15 @@ public class Bibliotheque implements Serializable
         */
         
         public void nouvelOuvrage() {
-            long numOuvrage = EntreesSorties.lireLong("Entrez le numero d'ISBN :");
+            long numOuvrage = EntreesSorties.lireLong("Entrez le numero d'ISBN : ");
             Ouvrage o = getOuvrage(numOuvrage);  
             
 
             if (o == null) {
-                    String titre = EntreesSorties.lireChaine("Entrez le titre :");
-                    String nomEditeur = EntreesSorties.lireChaine("Entrez le nom de l'éditeur :");
-                    GregorianCalendar dateParution = EntreesSorties.lireDate("Entrez la date de parution :");
-                    String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur :");
-                    //EntreesSorties.lireChaine("Entrez le public visé :");
+                    String titre = EntreesSorties.lireChaine("Entrez le titre : ");
+                    String nomEditeur = EntreesSorties.lireChaine("Entrez le nom de l'éditeur : ");
+                    GregorianCalendar dateParution = EntreesSorties.lireDate("Entrez la date de parution (JJ/MM/AAAA) : ");
+                    String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur : ");
                     Scanner pub  = new Scanner(System.in);
                     System.out.println("Entrez le public visé : enfant, ado ou adulte");
                     String pubv = null;
@@ -210,13 +209,13 @@ public class Bibliotheque implements Serializable
 	
         public void nouvelExemplaire()
         {
-            long numOuvrage = EntreesSorties.lireLong("Entrez le numero d'ISBN :");
+            long numOuvrage = EntreesSorties.lireLong("Entrez le numero d'ISBN : ");
             Ouvrage o = getOuvrage(numOuvrage);  
             
             if (o != null) {
-                GregorianCalendar dateRecepEx = EntreesSorties.lireDate("Entrez la date de réception des exemplaires :");
-                Integer nbExEmpruntables = EntreesSorties.lireEntier("Entrez le nombre d'exemplaires empruntables :");
-                Integer nbExNonEmpruntables = EntreesSorties.lireEntier("Entrez le nombre d'exemplaires non-empruntables :");  
+                GregorianCalendar dateRecepEx = EntreesSorties.lireDate("Entrez la date de réception des exemplaires (JJ/MM/AAAA) : ");
+                Integer nbExEmpruntables = EntreesSorties.lireEntier("Entrez le nombre d'exemplaires empruntables : ");
+                Integer nbExNonEmpruntables = EntreesSorties.lireEntier("Entrez le nombre d'exemplaires non-empruntables : ");  
 
                 o.ajouterExemplairesEmpruntables(dateRecepEx, nbExEmpruntables);
                 o.ajouterExemplairesNonEmpruntables(dateRecepEx, nbExNonEmpruntables);
