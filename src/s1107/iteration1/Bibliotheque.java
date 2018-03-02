@@ -118,7 +118,14 @@ public class Bibliotheque implements Serializable
             if (o == null) {
                     String titre = EntreesSorties.lireChaine("Entrez le titre : ");
                     String nomEditeur = EntreesSorties.lireChaine("Entrez le nom de l'éditeur : ");
-                    GregorianCalendar dateParution = EntreesSorties.lireDate("Entrez la date de parution (JJ/MM/AAAA) : ");
+                    GregorianCalendar dateParution;
+                    GregorianCalendar dateActuelle = new GregorianCalendar();
+                    do{
+                        dateParution = EntreesSorties.lireDate("Entrez la date de parution (JJ/MM/AAAA) : ");
+                        if(dateParution.after(dateActuelle)){
+                            System.out.println("La date de parution saisie est postérieure à la date du jour");
+                        }
+                    }while (dateParution.after(dateActuelle));
                     String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur : ");
                     Scanner pub  = new Scanner(System.in);
                     System.out.println("Entrez le public visé : enfant, ado ou adulte");
@@ -145,7 +152,7 @@ public class Bibliotheque implements Serializable
                         }
                     }
                     
-                    GregorianCalendar dateActuelle = new GregorianCalendar();  
+                 
 
                     o = new Ouvrage(numOuvrage, titre, nomEditeur, dateParution, nomAuteur, publicVise);
                     lierOuvrage(o,numOuvrage);
@@ -213,7 +220,14 @@ public class Bibliotheque implements Serializable
             Ouvrage o = getOuvrage(numOuvrage);  
             
             if (o != null) {
-                GregorianCalendar dateRecepEx = EntreesSorties.lireDate("Entrez la date de réception des exemplaires (JJ/MM/AAAA) : ");
+                GregorianCalendar dateActuelle = new GregorianCalendar();
+                GregorianCalendar dateRecepEx;
+                do{
+                    dateRecepEx = EntreesSorties.lireDate("Entrez la date de réception des exemplaires (JJ/MM/AAAA) : ");
+                    if(dateRecepEx.after(dateActuelle)){
+                        System.out.println("La date de réception saisie est postérieure à la date du jour");
+                    }
+                }while (dateRecepEx.after(dateActuelle));
                 Integer nbExEmpruntables = EntreesSorties.lireEntier("Entrez le nombre d'exemplaires empruntables : ");
                 Integer nbExNonEmpruntables = EntreesSorties.lireEntier("Entrez le nombre d'exemplaires non-empruntables : ");  
 

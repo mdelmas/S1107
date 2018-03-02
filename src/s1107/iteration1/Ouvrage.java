@@ -94,10 +94,15 @@ public class Ouvrage implements Serializable{
     public int getDerNumEx() {
         return derNumEx;
     }
+    
+    public void afficheOuvrageLight() {
+        System.out.print("Ouvrage :");
+        System.out.print("ISBN: " + getIsbn() + ", titre : " + getTitre());
+    }
      
     public void afficheOuvrage() {
-        System.out.println("Ouvrage :");
-        System.out.print("ISBN: " + getIsbn() + ", titre : " + getTitre() + ", ");
+        this.afficheOuvrageLight();
+        System.out.print(", ");
         System.out.print("nom auteur : " + getNomAuteur() + ", ");
         System.out.print("date parution : " + EntreesSorties.ecrireDate(getDateParution()));
         System.out.println(", nom éditeur : " + getNomEditeur() + ", public : " + getPublicVise());
