@@ -85,6 +85,7 @@ public class Bibliotheque implements Serializable
             } while ((age<=3) | (age>=110));
             String adresse = EntreesSorties.lireChaine("Entrez l'adresse :");
             String tel = EntreesSorties.lireChaine("Entrez le numero de telephone : ");
+                      
             EntreesSorties.afficherMessage("Fin de saisie");
 
             Lecteur L = new Lecteur(nom, this.getDerNumLecteur()+1, prenom, dateNaiss, adresse, tel);
@@ -222,12 +223,17 @@ public class Bibliotheque implements Serializable
             if (o != null) {
                 GregorianCalendar dateActuelle = new GregorianCalendar();
                 GregorianCalendar dateRecepEx;
+                                
                 do{
                     dateRecepEx = EntreesSorties.lireDate("Entrez la date de réception des exemplaires (JJ/MM/AAAA) : ");
                     if(dateRecepEx.after(dateActuelle)){
                         System.out.println("La date de réception saisie est postérieure à la date du jour");
+                    }                  
+                    if(dateRecepEx.before(o.getDateParution())){
+                        System.out.println("La date de réception saisie est antérieure à la date de parution de l'ouvrage");
                     }
-                }while (dateRecepEx.after(dateActuelle));
+                }while (dateRecepEx.after(dateActuelle)||dateRecepEx.before(o.getDateParution()));
+                
                 Integer nbExEmpruntables = EntreesSorties.lireEntier("Entrez le nombre d'exemplaires empruntables : ");
                 Integer nbExNonEmpruntables = EntreesSorties.lireEntier("Entrez le nombre d'exemplaires non-empruntables : ");  
 
