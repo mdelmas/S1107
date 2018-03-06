@@ -81,6 +81,7 @@ public class Lecteur implements Serializable
 		public void afficherLecteur()
 		{
 			//System.out.println("Numero lecteur : " + this.getNumLecteur());
+                        System.out.println("Votre lecteur" +this.getNumLecteur()+" a bien été créé");
 			System.out.println("Nom et prenom du lecteur: " + this.getNom() + " " + this.getPrenom());
                         System.out.println("Age : " + this.calculAge() + " ans");
 			System.out.println("Adresse : " + this.getAdresse());

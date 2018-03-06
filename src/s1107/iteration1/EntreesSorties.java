@@ -262,6 +262,7 @@ public class EntreesSorties  {
 		int an = 0;
 		GregorianCalendar dateSaisie = null ;
 		String message = "";
+                
 		
 		do {
         	// On initialise ok à vrai. Toute erreur détectée le remettra à faux, ce qui
@@ -319,7 +320,8 @@ public class EntreesSorties  {
 		    	}
 		    }
 		} while (!ok);
-		
+                
+                
 		EntreesSorties.afficherMessage("Vous avez saisi : " + EntreesSorties.ecrireDate(dateSaisie));
 		
 		// Renvoi du résultat
