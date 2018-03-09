@@ -119,14 +119,7 @@ public class Bibliotheque implements Serializable
         */
         
         public void nouvelOuvrage() {
-            /*String tel;
-            String regexStr = "^[0-9]{10}$";
-                    do {
-                        tel = EntreesSorties.lireChaine("Entrez le numero de telephone : ");
-                        if (!tel.matches(regexStr)) 
-                            System.out.println("Numéro incorrect, veuillez recommencer.");
-                    } while (!tel.matches(regexStr));
-                                 */
+            
             long numOuvrage;
             do {
                 numOuvrage = EntreesSorties.lireLong("Entrez le numero d'ISBN : ");
