@@ -84,8 +84,15 @@ public class Bibliotheque implements Serializable
                     }
             } while ((age<=3) | (age>=110));
             String adresse = EntreesSorties.lireChaine("Entrez l'adresse :");
-            String tel = EntreesSorties.lireChaine("Entrez le numero de telephone : ");
-                      
+            
+            String tel;
+            String regexStr = "^[0-9]{10}$";
+            do {
+                tel = EntreesSorties.lireChaine("Entrez le numero de telephone : ");
+                if (!tel.matches(regexStr)) 
+                    System.out.println("Numéro incorrect, veuillez recommencer.");
+            } while (!tel.matches(regexStr));
+                                 
             EntreesSorties.afficherMessage("Fin de saisie");
 
             Lecteur L = new Lecteur(nom, this.getDerNumLecteur()+1, prenom, dateNaiss, adresse, tel);
