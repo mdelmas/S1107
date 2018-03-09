@@ -1,4 +1,5 @@
 # S1107
 
-- [ ] Changer affichage Ouvrage > sur plusieurs lignes
-- [ ] Check "validité" numéro téléphone
+- [ ] Changer affichage Ouvrage + lecteur > sur plusieurs lignes
+- [x] Check "validité" numéro téléphone
+- [x] Check "validité" numéro isbn
