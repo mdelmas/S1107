@@ -119,10 +119,23 @@ public class Bibliotheque implements Serializable
         */
         
         public void nouvelOuvrage() {
-            long numOuvrage = EntreesSorties.lireLong("Entrez le numero d'ISBN : ");
+            /*String tel;
+            String regexStr = "^[0-9]{10}$";
+                    do {
+                        tel = EntreesSorties.lireChaine("Entrez le numero de telephone : ");
+                        if (!tel.matches(regexStr)) 
+                            System.out.println("Numéro incorrect, veuillez recommencer.");
+                    } while (!tel.matches(regexStr));
+                                 */
+            long numOuvrage;
+            do {
+                numOuvrage = EntreesSorties.lireLong("Entrez le numero d'ISBN : ");
+                if (String.valueOf(numOuvrage).length() != 13)
+                    System.out.println("ISBN incorrect (différent de 13 chiffres), veuillez entrer un code à 13 chiffres.");
+            } while (String.valueOf(numOuvrage).length() != 13);
+            
             Ouvrage o = getOuvrage(numOuvrage);  
             
-
             if (o == null) {
                     String titre = EntreesSorties.lireChaine("Entrez le titre : ");
                     String nomEditeur = EntreesSorties.lireChaine("Entrez le nom de l'éditeur : ");
@@ -156,6 +169,9 @@ public class Bibliotheque implements Serializable
                     }
                     // OU
                     // Public publicVise = Public.values()[input-1];
+                    
+                    EntreesSorties.afficherMessage("Fin de saisie");
+
                     
                     o = new Ouvrage(numOuvrage, titre, nomEditeur, dateParution, nomAuteur, publicVise);
                     lierOuvrage(o,numOuvrage);
