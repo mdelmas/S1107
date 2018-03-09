@@ -121,40 +121,35 @@ public class Bibliotheque implements Serializable
                     String nomEditeur = EntreesSorties.lireChaine("Entrez le nom de l'éditeur : ");
                     GregorianCalendar dateParution;
                     GregorianCalendar dateActuelle = new GregorianCalendar();
-                    do{
+                    do {
                         dateParution = EntreesSorties.lireDate("Entrez la date de parution (JJ/MM/AAAA) : ");
-                        if(dateParution.after(dateActuelle)){
+                        if (dateParution.after(dateActuelle)) {
                             System.out.println("La date de parution saisie est postérieure à la date du jour");
                         }
-                    }while (dateParution.after(dateActuelle));
+                    } while (dateParution.after(dateActuelle));
                     String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur : ");
-                    Scanner pub  = new Scanner(System.in);
-                    System.out.println("Entrez le public visé : enfant, ado ou adulte");
-                    String pubv = null;
-                    Public publicVise = null;
                     
-                    while(publicVise == null){
-                        try { 
-                            pubv = pub.nextLine();
-                            switch (Public.valueOf(pubv.trim())){
-                                case enfant :
-                                    publicVise = Public.enfant;
-                                    break;
-                                case ado :
-                                    publicVise = Public.ado;
-                                    break;
-                                case adulte :
-                                    publicVise = Public.adulte;
-                                    break;
-                            }
-                        }
-                        catch (java.lang.IllegalArgumentException j){
-                            System.out.println("Erreur dans la saisie, rappel : enfant, ado ou adulte :");
-                        }
+                    Integer input;
+                    do {
+                        System.out.println("Entrez le public visé : enfant(1), ado(2) ou adulte(3)");
+                        input = EntreesSorties.lireEntier();
+                    } while (input < 1 || input > 3);
+                    
+                    Public publicVise;
+                    switch(input) {
+                        case 1 : 
+                            publicVise = Public.ENFANT; 
+                            break;
+                        case 2 : 
+                            publicVise = Public.ADO; 
+                            break;
+                        default : 
+                            publicVise = Public.ADULTE; 
+                            break;
                     }
+                    // OU
+                    // Public publicVise = Public.values()[input-1];
                     
-                 
-
                     o = new Ouvrage(numOuvrage, titre, nomEditeur, dateParution, nomAuteur, publicVise);
                     lierOuvrage(o,numOuvrage);
                     o.afficheOuvrage();

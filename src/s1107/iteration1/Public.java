@@ -10,9 +10,9 @@ package s1107.iteration1;
  * @author delmasmo 
  */
 public enum Public {
-    enfant("Enfant"),
-    ado("Adolescent"), 
-    adulte("Adulte");
+    ENFANT("Enfant"),
+    ADO("Adolescent"), 
+    ADULTE("Adulte");
     
     private String nom="";
 
