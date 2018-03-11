@@ -95,6 +95,10 @@ public class Ouvrage implements Serializable{
         return derNumEx;
     }
     
+    public void incDerNumEx(){
+        derNumEx = derNumEx + 1;
+    }
+    
     public void afficheOuvrageLight() {
         System.out.print("Ouvrage :");
         System.out.print("ISBN: " + getIsbn() + ", titre : " + getTitre());
@@ -109,7 +113,7 @@ public class Ouvrage implements Serializable{
     }
 
     public void afficheExemplaires() {
-        afficheOuvrage();
+        afficheOuvrageLight();
         for(Map.Entry<Integer, Exemplaire> entry : exemplaires.entrySet()) {
             Exemplaire exemplaire = entry.getValue();
             exemplaire.affiche();
@@ -126,7 +130,7 @@ public class Ouvrage implements Serializable{
     
     public void ajouterExemplairesEmpruntables(GregorianCalendar dateRecepEx, int nbExEmpruntables) {
         for (int i = 0; i < nbExEmpruntables; i++) {
-            derNumEx++;
+            incDerNumEx();
             Exemplaire nouveau = new Exemplaire(this, true, dateRecepEx, derNumEx);
             setExemplaire(derNumEx, nouveau);
             nouveau.affiche();
@@ -135,7 +139,7 @@ public class Ouvrage implements Serializable{
     
     public void ajouterExemplairesNonEmpruntables(GregorianCalendar dateRecepEx, int nbExNonEmpruntables) {
         for (int i = 0; i < nbExNonEmpruntables; i++) {
-            derNumEx++;
+            incDerNumEx();
             Exemplaire nouveau = new Exemplaire(this, false, dateRecepEx, derNumEx);
             setExemplaire(derNumEx, nouveau);
             nouveau.affiche();

@@ -168,7 +168,7 @@ public class Bibliotheque implements Serializable
                     
                     o = new Ouvrage(numOuvrage, titre, nomEditeur, dateParution, nomAuteur, publicVise);
                     lierOuvrage(o,numOuvrage);
-                    o.afficheOuvrage();
+                    o.afficheOuvrageLight();
             }
             else {
                 EntreesSorties.afficherMessage("Cet ouvrage existe déjà.");
@@ -257,9 +257,9 @@ public class Bibliotheque implements Serializable
         }
         
         public void consulterExemplairesOuvrage(){
-		Long isbn = EntreesSorties.lireLong("Entrez le numéro ISBN de l'ouvrage : ");
+		Long numOuvrage = EntreesSorties.lireLong("Entrez le numéro ISBN de l'ouvrage : ");
 		
-		Ouvrage o = getOuvrage(isbn);
+		Ouvrage o = getOuvrage(numOuvrage);
 		
 		if (o!=null){
 			o.afficheExemplaires();
