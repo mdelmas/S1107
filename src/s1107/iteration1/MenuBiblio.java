@@ -23,6 +23,7 @@ public void menuPrincipal() {
 		EntreesSorties.afficherMessage("| Menu Lecteur : 1                                       |");
 		EntreesSorties.afficherMessage("| Menu Ouvrage : 2                                       |");
 		EntreesSorties.afficherMessage("| Menu Exemplaire : 3                                    |");
+		EntreesSorties.afficherMessage("| Menu Emprunt : 4                                       |");
 		EntreesSorties.afficherMessage("| Quitter : 0                                            |");
 		EntreesSorties.afficherMessage(" ========================================================");
 		menu = EntreesSorties.lireEntier();
@@ -40,6 +41,10 @@ public void menuPrincipal() {
 
                                 case 3 : {
                                         this.menuExemplaire();
+                                        break;
+                                }
+                                case 4 : {
+                                        this.menuEmprunt();
                                         break;
                                 }
 				default : {
@@ -136,6 +141,29 @@ public void menuExemplaire() {
 				}
 				case 2 : {
 					_bibliotheque.consulterExemplairesOuvrage();
+					break;
+				}
+				default : {
+					break;
+				}
+			}
+	} while (menuLect != 0);	
+}
+	
+
+public void menuEmprunt() {
+	Integer menuLect;
+	do {
+		EntreesSorties.afficherMessage(" ========================================================");
+		EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
+		EntreesSorties.afficherMessage("| Emprunter exemplaire : 1                               |");
+		EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
+		EntreesSorties.afficherMessage(" ========================================================");
+		menuLect = EntreesSorties.lireEntier();
+			
+			switch (menuLect){
+				case 1 : {
+					_bibliotheque.emprunterExemplaire();
 					break;
 				}
 				default : {
