@@ -59,7 +59,9 @@ public class Emprunt {
         return dateRetour;
     }
     
-    test
+    public void supprimerEmprunt() {
+    
+    }
     //////
     // AFFCHAGE NON FINAL
     

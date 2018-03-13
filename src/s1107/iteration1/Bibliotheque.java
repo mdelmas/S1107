@@ -273,6 +273,17 @@ public class Bibliotheque implements Serializable
             
         }
         
+        public void rendreExemplaire() {
+            long numOuvrage = EntreesSorties.lireLong("Entrez le numero d'ISBN : ");
+            Ouvrage o = getOuvrage(numOuvrage);
+            int numEx = EntreesSorties.lireEntier("Entrez le numero d'exemplaire de l'ouvrage : ");
+            Exemplaire ex = o.getExemplaire(numEx);
+            
+            if(ex!= null){
+                
+            }
+            
+        }
 // -----------------------------------------------
 	// Private
 // -----------------------------------------------
@@ -312,7 +323,7 @@ public class Bibliotheque implements Serializable
 	{
 		return _dicoOuvrage.get(isbn);
 	}
-	
+        
 	/*
 	 * La méthode lierLecteur permet d'ajouter un lecteur a la base de donnée de bibliotheque.
 	 */
@@ -349,4 +360,4 @@ public class Bibliotheque implements Serializable
         public void incDerNumLecteur(){
             derNumLecteur++;
         }
-}
+        }
