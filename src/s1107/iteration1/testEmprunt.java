@@ -31,8 +31,8 @@ public class testEmprunt {
         GregorianCalendar dateEmprunt = new GregorianCalendar();
         Emprunt emprunt = new Emprunt(lecteur, exemplaire, dateEmprunt);
         emprunt.affiche();
-        
-        
+
+        System.out.println("test");
         // TODO code application logic here
         /*GregorianCalendar date = new GregorianCalendar();
         System.out.println(date.get(Calendar.DAY_OF_MONTH) + "/" + (date.get(Calendar.MONTH)+1) + "/" + date.get(Calendar.YEAR));
