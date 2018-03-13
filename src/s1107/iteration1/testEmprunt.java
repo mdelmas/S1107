@@ -21,16 +21,26 @@ public class testEmprunt {
         
         GregorianCalendar dateNaiss = new GregorianCalendar(1993, 05, 07);
         Lecteur lecteur = new Lecteur("DELMAS", 1, "Morgane", dateNaiss, "Grenoble", "0612345678");
+        System.out.println("AGE: " + lecteur.calculAge());
         
         GregorianCalendar dateParution = new GregorianCalendar(2015, 10, 1);
         Ouvrage ouvrage = new Ouvrage(1234567891234L, "Les fiancés de l'hiver", "Gallimard", dateParution, "Dabos", Public.ADO);
 
         GregorianCalendar dateRecepEx = new GregorianCalendar(2017, 9, 4);
-        Exemplaire exemplaire = new Exemplaire(ouvrage, true, dateRecepEx, 1);
+        Exemplaire e1 = new Exemplaire(ouvrage, true, dateRecepEx, 1);
+        Exemplaire e2 = new Exemplaire(ouvrage, true, dateRecepEx, 2);        
+        Exemplaire e3 = new Exemplaire(ouvrage, false, dateRecepEx, 3);
 
         GregorianCalendar dateEmprunt = new GregorianCalendar();
-        Emprunt emprunt = new Emprunt(lecteur, exemplaire, dateEmprunt);
+        Emprunt emprunt = new Emprunt(lecteur, e1, dateEmprunt);
         emprunt.affiche();
+        
+        System.out.println("Exemplaire 1 dispo: " + e1.exemplaireDisponible());
+        System.out.println("Exemplaire 2 dispo: " + e2.exemplaireDisponible());
+        System.out.println("Exemplaire 3 dispo: " + e3.exemplaireDisponible());
+        
+        Public p = Public.ADO;
+        System.out.println("AGE LIMITE ADO: " + p.getAgeLimite());
         
         
         // TODO code application logic here

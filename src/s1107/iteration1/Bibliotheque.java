@@ -269,7 +269,37 @@ public class Bibliotheque implements Serializable
 		}            
         }
         
+        public boolean verifPublic(Lecteur lecteur, Ouvrage ouvrage) {
+            if (lecteur.calculAge() > ouvrage.getPublicVise().getAgeLimite())
+                return true;
+            return false;
+        }
+        
         public void emprunterExemplaire() {
+	
+            Integer numLecteur = EntreesSorties.lireEntier("Entrez le numero du lecteur : ");
+            Lecteur L = getLecteur(numLecteur);
+            
+            if (L != null) {
+                if (L.lecteurSature() == false) {
+                    Long numOuvrage = EntreesSorties.lireLong("Entrez le numéro ISBN de l'ouvrage : ");
+                    Integer numEx = EntreesSorties.lireEntier("Entrez le numéro de l'exemplaire : ");
+                    
+                    Ouvrage o = getOuvrage(numOuvrage);
+                    if (o != null) {
+                        if (verifPublic(L, o)) {
+                            Exemplaire ex = o.getExemplaire(numEx);
+                            if (ex != null) {
+                                
+                            }
+                        }
+                    }
+                } else {
+                    EntreesSorties.afficherMessage("Le lecteur ne peut plus emprunter de livre (lecteur saturé).");
+                }
+            } else {
+		EntreesSorties.afficherMessage("Aucun lecteur n'est associe a ce numero.");
+            }
             
         }
         
