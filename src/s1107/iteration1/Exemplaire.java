@@ -61,6 +61,12 @@ public class Exemplaire implements Serializable {
         setEmprunt(emprunt);
     } 
     
+    public void afficherExemplaireLight() {
+        Ouvrage o = getOuvrage();
+        o.afficheOuvrageLight();
+        System.out.println("   N° d'exemplaire: " + getNumEx());
+    }
+    
     //////
     // RAJOUT POUR L'AFFICHAGE D'EMPRUNT - PEUT ETRE PAS A GARDER
     

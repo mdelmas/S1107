@@ -22,11 +22,11 @@ public class Emprunt {
     
     Emprunt(Lecteur lecteur, Exemplaire exemplaire, GregorianCalendar dateEmprunt) {
         setLecteur(lecteur);
+        lecteur.affecterEmprunt(this);
         setExemplaire(exemplaire);
+        exemplaire.affecterEmprunt(this);
         setDateEmprunt(dateEmprunt);
         dateRetour = new GregorianCalendar(dateEmprunt.get(GregorianCalendar.YEAR), dateEmprunt.get(GregorianCalendar.MONTH), dateEmprunt.get(GregorianCalendar.DATE) + DUREE_EMPRUNT);
-        lecteur.affecterEmprunt(this);
-        exemplaire.affecterEmprunt(this);
     }
     
     private void setLecteur(Lecteur lecteur) {
@@ -63,9 +63,9 @@ public class Emprunt {
     
     public void afficherEmprunt() {
         Exemplaire ex = getExemplaire();
-        Ouvrage o = ex.getOuvrage();
-        ex.affiche();
-        
+        ex.afficherExemplaireLight();
+        System.out.print("   Date emprunt: " + EntreesSorties.ecrireDate(getDateEmprunt()));
+        System.out.println(", date retour: " + EntreesSorties.ecrireDate(getDateRetour()));
     }
 
     //////

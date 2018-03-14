@@ -34,6 +34,12 @@ public class testEmprunt {
         GregorianCalendar dateEmprunt = new GregorianCalendar();
         Emprunt emprunt = new Emprunt(lecteur, e1, dateEmprunt);
         emprunt.affiche();
+        lecteur.afficherEmprunts();
+        
+        Emprunt emprunt2 = new Emprunt(lecteur, e2, dateEmprunt);
+        lecteur.afficherEmprunts();
+        Emprunt emprunt3 = new Emprunt(lecteur, e3, dateEmprunt);
+        lecteur.afficherEmprunts();
         
         System.out.println("Exemplaire 1 dispo: " + e1.exemplaireDisponible());
         System.out.println("Exemplaire 2 dispo: " + e2.exemplaireDisponible());
