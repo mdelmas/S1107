@@ -281,12 +281,13 @@ public class Bibliotheque implements Serializable
         /*
         Parcours la liste des emprunts en cours et affiche ceux datant d'il y a plus de 15 jours
         */
-        public void relancerLecteur() {
-            GregorianCalendar dateJour = new GregorianCalendar();
+        public void relancerLecteur(GregorianCalendar dateJour) {
+            //GregorianCalendar dateJour = new GregorianCalendar();
             Emprunt em;
             for(Iterator<Emprunt> it= _emprunts.iterator();it.hasNext();){
                 em = it.next();
                 em.relanceEmprunt(dateJour);
+                
             }
             
         }

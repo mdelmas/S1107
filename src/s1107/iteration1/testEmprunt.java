@@ -45,6 +45,8 @@ public class testEmprunt {
         
         
         Bibliotheque b = new Bibliotheque();
+        b.relancerLecteur(dateJour);
+        
         
         
         
