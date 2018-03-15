@@ -134,7 +134,7 @@ public class Lecteur implements Serializable
                     getEmprunts().add(emprunt);
                 }
                 
-                public void afficherEmprunts() {
+                public void afficherEmpruntsLecteur() {
                     HashSet<Emprunt> emprunts = getEmprunts();
                     System.out.print("Lecteur n°" + getNumLecteur());
                     System.out.println(", " + getNom() + " " + getPrenom());

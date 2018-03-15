@@ -18,11 +18,17 @@ public class Emprunt implements Serializable
   
     private static final long serialVersionUID = 48L;
 
+    
+    // attributs
+    
     private Lecteur lecteur;
     private Exemplaire exemplaire;
     private GregorianCalendar dateEmprunt;
     private GregorianCalendar dateRetour;
     final int DUREE_EMPRUNT = 8;
+    
+    
+    // constructeur
     
     Emprunt(Lecteur lecteur, Exemplaire exemplaire, GregorianCalendar dateEmprunt) {
         setLecteur(lecteur);
@@ -71,19 +77,5 @@ public class Emprunt implements Serializable
         System.out.print("   Date emprunt: " + EntreesSorties.ecrireDate(getDateEmprunt()));
         System.out.println(", date retour: " + EntreesSorties.ecrireDate(getDateRetour()));
     }
-
-    //////
-    // AFFCHAGE NON FINAL
-    
-    public void affiche() {
-        System.out.println("Emprunt: ");
-        System.out.println("Lecteur: " + lecteur.getNom() + " " + lecteur.getPrenom());
-        Ouvrage o = exemplaire.getOuvrage();
-        System.out.println("Exemplaire: " + o.getTitre() + " - " + o.getIsbn() + ", ex n°" + exemplaire.getNumEx());
-        System.out.print("Date emprunt: " + EntreesSorties.ecrireDate(getDateEmprunt()));
-        System.out.println(", date retour: " + EntreesSorties.ecrireDate(getDateRetour()));
-    }
-
-    ////////
     
 }
