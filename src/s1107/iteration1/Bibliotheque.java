@@ -246,7 +246,7 @@ public class Bibliotheque implements Serializable
                     if(dateRecepEx.before(o.getDateParution())){
                         System.out.println("La date de réception saisie est antérieure à la date de parution de l'ouvrage");
                     }
-                }while (dateRecepEx.after(dateActuelle)||dateRecepEx.before(o.getDateParution()));
+                } while (dateRecepEx.after(dateActuelle)||dateRecepEx.before(o.getDateParution()));
                 
                 Integer nbExEmpruntables = EntreesSorties.lireEntier("Entrez le nombre d'exemplaires empruntables : ");
                 Integer nbExNonEmpruntables = EntreesSorties.lireEntier("Entrez le nombre d'exemplaires non-empruntables : ");  
@@ -274,15 +274,69 @@ public class Bibliotheque implements Serializable
 		}            
         }
         
+        public boolean verifPublic(Lecteur lecteur, Ouvrage ouvrage) {
+            if (lecteur.calculAge() > ouvrage.getPublicVise().getAgeLimite())
+                return true;
+            return false;
+        }
+        
         public void emprunterExemplaire() {
+            Integer numLecteur = EntreesSorties.lireEntier("Entrez le numero du lecteur : ");
+            Lecteur L = getLecteur(numLecteur);
             
+            if (L != null) {
+                if (L.lecteurSature() == false) {
+                    Long numOuvrage = EntreesSorties.lireLong("Entrez le numéro ISBN de l'ouvrage : ");
+                    Integer numEx = EntreesSorties.lireEntier("Entrez le numéro de l'exemplaire : ");
+                    
+                    Ouvrage o = getOuvrage(numOuvrage);
+                    if (o != null) {
+                        if (verifPublic(L, o)) {
+                            Exemplaire ex = o.getExemplaire(numEx);
+                            if (ex != null) {
+                                if (ex.exemplaireDisponible() == true) {
+                                    GregorianCalendar dateEmprunt = new GregorianCalendar();
+                                    Emprunt em = new Emprunt(L, ex, dateEmprunt);
+                                    _emprunts.add(em);
+                                    EntreesSorties.afficherMessage("Emprunt créé:");
+                                    em.afficherEmprunt();
+                                } else {
+                                    EntreesSorties.afficherMessage("Exemplaire non disponible à l'emprunt.");
+                                }
+                            } else {
+                                EntreesSorties.afficherMessage("Exemplaire n'existe pas.");
+                            }
+                        } else {
+                            EntreesSorties.afficherMessage("Public pas ok pour le lecteur.");
+                        }
+                    } else {
+			EntreesSorties.afficherMessage("Aucun ouvrage n'est associe a ce numero.");
+                    }
+                } else {
+                    EntreesSorties.afficherMessage("Le lecteur ne peut plus emprunter de livre (lecteur saturé).");
+                }
+            } else {
+		EntreesSorties.afficherMessage("Aucun lecteur n'est associe a ce numero.");
+            }   
+        }
+        
+        public void consulterEmpruntsLecteur() {
+            Integer numLecteur = EntreesSorties.lireEntier("Entrez le numero du lecteur : ");
+            Lecteur L = getLecteur(numLecteur);
+            
+            if (L != null) {
+                L.afficherEmprunts();
+            } else {
+		EntreesSorties.afficherMessage("Aucun lecteur n'est associe à ce numero.");
+            }            
         }
         
         /*
         Parcours la liste des emprunts en cours et affiche ceux datant d'il y a plus de 15 jours
         */
-        public void relancerLecteur(GregorianCalendar dateJour) {
-            //GregorianCalendar dateJour = new GregorianCalendar();
+        public void relancerLecteur() {
+            GregorianCalendar dateJour = new GregorianCalendar();
+            dateJour.add(GregorianCalendar.DAY_OF_MONTH, 14);
             Emprunt em;
             for(Iterator<Emprunt> it= _emprunts.iterator();it.hasNext();){
                 em = it.next();
