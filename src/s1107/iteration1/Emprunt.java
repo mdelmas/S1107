@@ -58,6 +58,34 @@ public class Emprunt {
     public GregorianCalendar getDateRetour() {
         return dateRetour;
     }
+    
+    /*
+    Contrôle si l'emprunt en cours date de 15 jours ou plus, renvoie vrai si oui
+    */
+    private boolean aRelancer(GregorianCalendar dateJour){
+        GregorianCalendar dateRelance = getDateEmprunt();
+        dateRelance.add(GregorianCalendar.DAY_OF_MONTH, 15);
+        return dateRelance.before(dateJour) || dateRelance.equals(dateJour);
+    }
+    
+    //Contrôle si une relance est à effectuer et lance l'affichage des informations de l'emprunt
+    public void relanceEmprunt(GregorianCalendar dateJour){
+        boolean verif = aRelancer(dateJour);
+        if(verif==true){
+            Lecteur L = getLecteur();
+            Exemplaire ex = getExemplaire();
+            L.afficherLecteurRelance();
+            ex.infosRelance();
+            afficheDateEmprunt();
+        }
+    }
+    
+    //Affiche la date de l'emprunt
+    private void afficheDateEmprunt(){
+        System.out.println(", date d'emprunt : " + EntreesSorties.ecrireDate(getDateEmprunt()));
+        System.out.println("-----------------------------------");
+        
+    }
 
     //////
     // AFFCHAGE NON FINAL

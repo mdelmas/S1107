@@ -27,10 +27,32 @@ public class testEmprunt {
 
         GregorianCalendar dateRecepEx = new GregorianCalendar(2017, 9, 4);
         Exemplaire exemplaire = new Exemplaire(ouvrage, true, dateRecepEx, 1);
+        Exemplaire ex1 = new Exemplaire(ouvrage, true, dateRecepEx, 2);
+        Exemplaire ex2 = new Exemplaire(ouvrage, true, dateRecepEx, 3);
 
         GregorianCalendar dateEmprunt = new GregorianCalendar();
+        GregorianCalendar dateJour = new GregorianCalendar();
+        dateJour.add(GregorianCalendar.DAY_OF_MONTH, 14);
         Emprunt emprunt = new Emprunt(lecteur, exemplaire, dateEmprunt);
         emprunt.affiche();
+        //emprunt.relanceEmprunt(dateJour);
+        GregorianCalendar dateEmprunt2 = new GregorianCalendar();
+        dateEmprunt2.add(GregorianCalendar.DAY_OF_MONTH, 300);
+        Emprunt em1 = new Emprunt(lecteur, ex1, dateEmprunt2);
+        GregorianCalendar dateEmprunt3 = new GregorianCalendar();
+        dateEmprunt3.add(GregorianCalendar.DAY_OF_MONTH, -60);
+        Emprunt em2 = new Emprunt(lecteur, ex2, dateEmprunt3);
+        
+        
+        Bibliotheque b = new Bibliotheque();
+        b.setEmprunts(emprunt);
+        b.setEmprunts(em1);
+        b.setEmprunts(em2);
+        
+        
+        b.relancerLecteur(dateJour);
+        
+        
         
         
         // TODO code application logic here

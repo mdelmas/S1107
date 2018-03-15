@@ -37,6 +37,22 @@ public class Exemplaire implements Serializable {
             this.dateRecepEx = dateRecepEx;
     }
     
+    /*
+    Affiche le numéro d'exemplaire pour la relance
+    */
+    public void afficheRelance(){
+        System.out.print(", numéro exemplaire : "+ getNumEx());
+    }
+    
+    /*
+    Affiche les informations nécessaires à la relance
+    */
+    public void infosRelance(){
+        Ouvrage o = getOuvrage();
+        o.afficheOuvrageLight();
+        afficheRelance();
+    }
+    
     public void affiche(){
         System.out.print("Numéro d'exemplaire : " + numEx + ", ");
         System.out.print("date réception : " + EntreesSorties.ecrireDate(dateRecepEx));
