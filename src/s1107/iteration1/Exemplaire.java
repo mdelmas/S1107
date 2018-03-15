@@ -57,6 +57,10 @@ public class Exemplaire implements Serializable {
         return numEx;
     }
     
+    public Emprunt getEmprunt() {
+        return dateRetour;
+    }
+    
     //////
     
 }

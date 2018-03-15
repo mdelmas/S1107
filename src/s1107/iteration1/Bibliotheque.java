@@ -280,6 +280,13 @@ public class Bibliotheque implements Serializable
             Exemplaire ex = o.getExemplaire(numEx);
             
             if(ex!= null){
+                 Emprunt em = ex.getEmprunt();
+                 if(em!= null)
+                 {
+                    //em.affiche(); // je propose que l'on affiche l'emprunt avant de procéder aux suppressions
+                     
+                 }
+                 
                 
             }
             
