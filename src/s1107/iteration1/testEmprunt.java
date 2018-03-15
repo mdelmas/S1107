@@ -45,12 +45,6 @@ public class testEmprunt {
         
         
         Bibliotheque b = new Bibliotheque();
-        b.setEmprunts(emprunt);
-        b.setEmprunts(em1);
-        b.setEmprunts(em2);
-        
-        
-        b.relancerLecteur(dateJour);
         
         
         

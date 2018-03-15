@@ -5,6 +5,7 @@
  */
 package s1107.iteration1;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -12,7 +13,9 @@ import java.util.GregorianCalendar;
  *
  * @author delmasmo
  */
-public class Emprunt {
+public class Emprunt implements Serializable{
+    
+    private static final long serialVersionUID = 3000L;
     
     private Lecteur lecteur;
     private Exemplaire exemplaire;
