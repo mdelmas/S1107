@@ -184,18 +184,13 @@ public class Lecteur implements Serializable
 		private void setTel(String tel) {
 			this._tel = tel;
 		}
-		
-                
-                public HashSet<Emprunt> getEmprunts() {
-                        return emprunts;
+		                              
+                public void supprimerEmprunt(Emprunt em) {
+                        unSetEmprunt(em);
                 }
                 
-                public void supprimerEmprunt(Emprunt emprunts) {
-                        emprunts = null;
-                }
-                
-                /*public void unSetEmprunt(Emprunt em) {
+                public void unSetEmprunt(Emprunt em) {
                        emprunts.remove(em);
-                }*/   
+                }  
 
 }

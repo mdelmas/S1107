@@ -72,8 +72,11 @@ public class Emprunt implements Serializable
     }
     
     public void supprimerEmprunt() {
-       dateEmprunt = null;
-       dateRetour = null;
+        Lecteur L = getLecteur();
+        L.supprimerEmprunt(this);
+        unSetLecteur();
+        unSetExemplaire();
+        
     }
     
     public void unSetLecteur() {

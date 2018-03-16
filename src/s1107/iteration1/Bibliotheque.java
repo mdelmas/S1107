@@ -351,31 +351,26 @@ public class Bibliotheque implements Serializable
         }
         
         public void rendreExemplaire() {
+            
             long numOuvrage = EntreesSorties.lireLong("Entrez le numero d'ISBN : ");
             Ouvrage o = getOuvrage(numOuvrage);
+            if (o ==null){
+                System.out.print("Aucun ouvrage n'est associé à ce numéro d'ISBN");
+                return;
+            }
+           
             int numEx = EntreesSorties.lireEntier("Entrez le numero d'exemplaire de l'ouvrage : ");
             Exemplaire ex = o.getExemplaire(numEx);
+            Emprunt em = ex.getEmprunt();
             
             if(ex!= null){
-                Emprunt em = ex.getEmprunt();
-                //ex.supprimerEmprunt(ex);       //a inverser ds le diagramme de séquences
-                if(em!= null)
-                {
-                    //em.affiche(); // je propose que l'on affiche l'emprunt avant de procéder aux suppressions
-                    em.supprimerEmprunt();
-                    Lecteur L = em.getLecteur();
-                    L.supprimerEmprunt(em);
-                    //L.unSetEmprunt(em);
-                    em.unSetLecteur();
-                    em.unSetExemplaire();
-                    //ex.unSetEmprunt(em);
-                    System.out.print("Exemplaire disponible");
-                }
-                if(em== null)
-                    System.out.print("Cet exemplaire n'a pas été emprunté");
+                                                      
+                ex.supprimerEmprunt();       //a inverser ds le diagramme de séquences
+                unSetEmprunt(em);
+                //em.affiche(); // je propose que l'on affiche l'emprunt avant de procéder aux suppressions
+                System.out.print("Exemplaire disponible");
             }
-                 
-            if(ex == null)
+            else
             {
                 System.out.print("Cet exemplaire n'existe pas");
             }
@@ -401,8 +396,12 @@ public class Bibliotheque implements Serializable
         private void setEmprunts(HashSet<Emprunt> emprunts){
                 _emprunts = emprunts;
         }
-
-	
+        
+        public void unSetEmprunt(Emprunt em) {
+                _emprunts.remove(em);
+        }
+        
+        
 	
 	// -----------------------------------------------
 		// Mï¿½thodes

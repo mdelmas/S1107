@@ -97,13 +97,23 @@ public class Exemplaire implements Serializable {
        return emprunt;
     }
     
-    public void supprimerEmprunt(Exemplaire exemplaire) {
-       emprunt = null ;
+    public void supprimerEmprunt() {
+       Emprunt em = getEmprunt();
+       if(em != null)
+       {
+           em.supprimerEmprunt();
+           unSetEmprunt();
+       }
+       else
+       {
+           System.out.print("Cet exemplaire n'a pas été emprunté");
+       }
+             
     }
     
-    /*public void unSetEmprunt(Emprunt emprunt) {
-       exemplaire.delete(emprunt);
-    }*/ 
+    public void unSetEmprunt() {
+       emprunt = null;
+    } 
     //////
     
 }
