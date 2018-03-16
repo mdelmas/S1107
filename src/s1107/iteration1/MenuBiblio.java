@@ -170,7 +170,9 @@ public void menuEmprunt() {
 				}
 				case 2 : {
 					_bibliotheque.consulterEmpruntsLecteur();
-                                case 2 : {
+                                        break;
+                                }
+                                case 3 : {
 					_bibliotheque.rendreExemplaire();
 					break;
 				}
