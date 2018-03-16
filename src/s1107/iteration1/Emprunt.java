@@ -18,16 +18,22 @@ public class Emprunt implements Serializable
   
     private static final long serialVersionUID = 48L;
 
+    
+    // attributs
+    
     private Lecteur lecteur;
     private Exemplaire exemplaire;
     private GregorianCalendar dateEmprunt;
     private GregorianCalendar dateRetour;
     final int DUREE_EMPRUNT = 8;
     
+    
+    // constructeur
+    
     Emprunt(Lecteur lecteur, Exemplaire exemplaire, GregorianCalendar dateEmprunt) {
         setLecteur(lecteur);
-        lecteur.affecterEmprunt(this);
         setExemplaire(exemplaire);
+        lecteur.affecterEmprunt(this);
         exemplaire.affecterEmprunt(this);
         setDateEmprunt(dateEmprunt);
         dateRetour = new GregorianCalendar(dateEmprunt.get(GregorianCalendar.YEAR), dateEmprunt.get(GregorianCalendar.MONTH), dateEmprunt.get(GregorianCalendar.DATE) + DUREE_EMPRUNT);
@@ -69,7 +75,7 @@ public class Emprunt implements Serializable
         Exemplaire ex = getExemplaire();
         ex.afficherExemplaireLight();
         System.out.print("   Date emprunt: " + EntreesSorties.ecrireDate(getDateEmprunt()));
-        System.out.println(", date retour: " + EntreesSorties.ecrireDate(getDateRetour()));
+        System.out.println(", date retour: " + EntreesSorties.ecrireDate(getDateRetour()) + "\n");
     }
         /*
     Contrôle si l'emprunt en cours date de 15 jours ou plus, renvoie vrai si oui
@@ -88,8 +94,7 @@ public class Emprunt implements Serializable
             Lecteur L = getLecteur();
             Exemplaire ex = getExemplaire();
             L.afficherLecteurRelance();
-            ex.infosRelance();
-            afficheDateEmprunt();
+            afficherEmprunt();
             relancesAFaire = true;
         }
         if(relancesAFaire == false){

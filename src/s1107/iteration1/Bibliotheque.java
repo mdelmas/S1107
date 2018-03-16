@@ -64,14 +64,13 @@ public class Bibliotheque implements Serializable
 		 */
 	public void nouveauLecteur()
 	{
-
             String nom = EntreesSorties.lireChaine("Entrez le nom : ");
             String prenom = EntreesSorties.lireChaine("Entrez le prenom : ");
             Integer age;
             GregorianCalendar dateNaiss, dateNaissComp;
             GregorianCalendar dateActuelle = new GregorianCalendar();
             do {
-                    dateNaiss = EntreesSorties.lireDate("Entrez la date de naissance du lecteur (JJ/MM/AAAA): ");
+                    dateNaiss = EntreesSorties.lireDate("Entrez la date de naissance du lecteur (JJ/MM/AAAA) : ");
                     dateNaissComp = new GregorianCalendar(dateActuelle.get(GregorianCalendar.YEAR), dateNaiss.get(GregorianCalendar.MONTH), dateNaiss.get(GregorianCalendar.DATE));
                     if(dateNaissComp.before(dateActuelle)){
                             age=dateActuelle.get(GregorianCalendar.YEAR)-dateNaiss.get(GregorianCalendar.YEAR);
@@ -86,7 +85,7 @@ public class Bibliotheque implements Serializable
                             EntreesSorties.afficherMessage("Age du lecteur : " + age + " ans");
                     }
             } while ((age<=3) | (age>=110));
-            String adresse = EntreesSorties.lireChaine("Entrez l'adresse :");
+            String adresse = EntreesSorties.lireChaine("Entrez l'adresse : ");
             
             String tel;
             String regexStr = "^[0-9]{10}$";
@@ -96,21 +95,22 @@ public class Bibliotheque implements Serializable
                     System.out.println("Numéro incorrect, veuillez recommencer.");
             } while (!tel.matches(regexStr));
                                  
-            EntreesSorties.afficherMessage("Fin de saisie");
+            EntreesSorties.afficherMessage("Fin de saisie.");
 
             Lecteur L = new Lecteur(nom, this.getDerNumLecteur()+1, prenom, dateNaiss, adresse, tel);
             
             boolean exist = false;
             for (Iterator<Lecteur> itr = lesLecteurs(); itr.hasNext();){
                 if(L.equals(itr.next())){
-                    System.out.println("Ce lecteur existe déjà");
+                    System.out.println("Ce lecteur existe déjà.");
                     exist = true;
                     break;
                 }
             }
             if(exist == false){
                 incDerNumLecteur();
-                lierLecteur(L,derNumLecteur);
+                lierLecteur(L, derNumLecteur);
+                System.out.println("Le lecteur n°" + derNumLecteur + " a bien été créé.");
                 L.afficherLecteur();
             }
 	}
@@ -140,14 +140,14 @@ public class Bibliotheque implements Serializable
                     do {
                         dateParution = EntreesSorties.lireDate("Entrez la date de parution (JJ/MM/AAAA) : ");
                         if (dateParution.after(dateActuelle)) {
-                            System.out.println("La date de parution saisie est postérieure à la date du jour");
+                            System.out.println("La date de parution saisie est postérieure à la date du jour.");
                         }
                     } while (dateParution.after(dateActuelle));
                     String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur : ");
                     
                     Integer input;
                     do {
-                        System.out.println("Entrez le public visé : enfant(1), ado(2) ou adulte(3)");
+                        System.out.print("Entrez le code du public visé (enfant : 1, ado : 2 ou adulte : 3 : ");
                         input = EntreesSorties.lireEntier();
                     } while (input < 1 || input > 3);
                     
@@ -274,50 +274,55 @@ public class Bibliotheque implements Serializable
 		}            
         }
         
+        
         public boolean verifPublic(Lecteur lecteur, Ouvrage ouvrage) {
-            if (lecteur.calculAge() > ouvrage.getPublicVise().getAgeLimite())
+            if (lecteur.calculAge() > ouvrage.getPublicVise().getAgeMinimum())
                 return true;
             return false;
         }
+        
         
         public void emprunterExemplaire() {
             Integer numLecteur = EntreesSorties.lireEntier("Entrez le numero du lecteur : ");
             Lecteur L = getLecteur(numLecteur);
             
-            if (L != null) {
-                if (L.lecteurSature() == false) {
-                    Long numOuvrage = EntreesSorties.lireLong("Entrez le numéro ISBN de l'ouvrage : ");
-                    Integer numEx = EntreesSorties.lireEntier("Entrez le numéro de l'exemplaire : ");
-                    
-                    Ouvrage o = getOuvrage(numOuvrage);
-                    if (o != null) {
-                        if (verifPublic(L, o)) {
-                            Exemplaire ex = o.getExemplaire(numEx);
-                            if (ex != null) {
-                                if (ex.exemplaireDisponible() == true) {
-                                    GregorianCalendar dateEmprunt = new GregorianCalendar();
-                                    Emprunt em = new Emprunt(L, ex, dateEmprunt);
-                                    lierEmprunt(em);
-                                    EntreesSorties.afficherMessage("Emprunt créé:");
-                                    em.afficherEmprunt();
-                                } else {
-                                    EntreesSorties.afficherMessage("Exemplaire non disponible à l'emprunt.");
-                                }
-                            } else {
-                                EntreesSorties.afficherMessage("Exemplaire n'existe pas.");
-                            }
-                        } else {
-                            EntreesSorties.afficherMessage("Public pas ok pour le lecteur.");
-                        }
-                    } else {
-			EntreesSorties.afficherMessage("Aucun ouvrage n'est associe a ce numero.");
-                    }
-                } else {
-                    EntreesSorties.afficherMessage("Le lecteur ne peut plus emprunter de livre (lecteur saturé).");
-                }
-            } else {
+            if (L == null) {
 		EntreesSorties.afficherMessage("Aucun lecteur n'est associe a ce numero.");
-            }   
+                return ;
+            } else if (L.lecteurSature() != false) {
+                EntreesSorties.afficherMessage("Le lecteur ne peut plus emprunter de livre (lecteur saturé).");
+                return ;
+            }
+            
+            Long numOuvrage = EntreesSorties.lireLong("Entrez le numéro ISBN de l'ouvrage : ");
+                    
+            Ouvrage o = getOuvrage(numOuvrage);
+            if (o == null) {
+		EntreesSorties.afficherMessage("Aucun ouvrage n'est associe a ce numero.");
+                return ;
+            } else if (verifPublic(L, o) == false) {
+                EntreesSorties.afficherMessage("Public pas ok pour le lecteur.");
+                return ;
+            }
+            
+            Integer numEx = EntreesSorties.lireEntier("Entrez le numéro de l'exemplaire : ");
+
+            Exemplaire ex = o.getExemplaire(numEx);
+            if (ex == null) {
+                EntreesSorties.afficherMessage("Exemplaire n'existe pas.");
+                return ;
+            }
+            
+            if (ex.exemplaireDisponible() == true) {
+                GregorianCalendar dateEmprunt = new GregorianCalendar();
+                Emprunt em = new Emprunt(L, ex, dateEmprunt);
+                setEmprunt(em);
+                EntreesSorties.afficherMessage("Emprunt créé:");
+                em.afficherEmprunt();
+            } else {
+                EntreesSorties.afficherMessage("Exemplaire non disponible à l'emprunt.");
+            }
+                 
         }
         
         public void consulterEmpruntsLecteur() {
@@ -325,7 +330,7 @@ public class Bibliotheque implements Serializable
             Lecteur L = getLecteur(numLecteur);
             
             if (L != null) {
-                L.afficherEmprunts();
+                L.afficherEmpruntsLecteur();
             } else {
 		EntreesSorties.afficherMessage("Aucun lecteur n'est associe à ce numero.");
             }            
@@ -336,7 +341,6 @@ public class Bibliotheque implements Serializable
         */
         public void relancerLecteur() {
             GregorianCalendar dateJour = new GregorianCalendar();
-            dateJour.add(GregorianCalendar.DAY_OF_MONTH, 14);
             Emprunt em;
             for(Iterator<Emprunt> it= _emprunts.iterator();it.hasNext();){
                 em = it.next();
@@ -390,6 +394,10 @@ public class Bibliotheque implements Serializable
 		return _dicoOuvrage.get(isbn);
 	}
 	
+        public void affecterEmprunt(Emprunt em) {
+            setEmprunt(em);
+        }
+        
 	/*
 	 * La méthode lierLecteur permet d'ajouter un lecteur a la base de donnée de bibliotheque.
 	 */
@@ -402,7 +410,7 @@ public class Bibliotheque implements Serializable
             _dicoOuvrage.put(isbn, o);
         }
         
-        private void lierEmprunt(Emprunt em){
+        private void setEmprunt(Emprunt em){
             _emprunts.add(em);
         }
 	
