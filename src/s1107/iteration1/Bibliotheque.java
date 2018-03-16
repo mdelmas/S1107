@@ -3,6 +3,7 @@ package s1107.iteration1;
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
 import s1107.iteration1.Ouvrage;
@@ -23,6 +24,7 @@ public class Bibliotheque implements Serializable
 	
 		private HashMap<Integer, Lecteur> _dicoLecteur;
                 private HashMap<Long, Ouvrage> _dicoOuvrage;
+                private HashSet<Emprunt> _emprunts;
                 private int derNumLecteur;
 		
 		/*
@@ -38,6 +40,7 @@ public class Bibliotheque implements Serializable
 		public Bibliotheque() {
 			this.setLecteurs(new HashMap<Integer, Lecteur>());
                         this.setOuvrages(new HashMap<Long, Ouvrage>());
+                        this.setEmprunts(new HashSet<Emprunt>());
                         derNumLecteur=0;
 		
 		}
@@ -255,8 +258,9 @@ public class Bibliotheque implements Serializable
                 EntreesSorties.afficherMessage("Cet ouvrage n'existe pas.");
             }            
         }
-        
-        
+        /*
+        Affiche pour un ouvrage donné les exemplaires qui lui ont été attribués
+        */
         public void consulterExemplairesOuvrage(){
 		Long numOuvrage = EntreesSorties.lireLong("Entrez le numéro ISBN de l'ouvrage : ");
 		
@@ -331,6 +335,21 @@ public class Bibliotheque implements Serializable
             }            
         }
         
+        /*
+        Parcours la liste des emprunts en cours et affiche ceux datant d'il y a plus de 15 jours
+        */
+        public void relancerLecteur() {
+            GregorianCalendar dateJour = new GregorianCalendar();
+            dateJour.add(GregorianCalendar.DAY_OF_MONTH, 14);
+            Emprunt em;
+            for(Iterator<Emprunt> it= _emprunts.iterator();it.hasNext();){
+                em = it.next();
+                em.relanceEmprunt(dateJour);
+                
+            }
+            
+        }
+        
 // -----------------------------------------------
 	// Private
 // -----------------------------------------------
@@ -346,6 +365,10 @@ public class Bibliotheque implements Serializable
 	private void setOuvrages(HashMap<Long, Ouvrage> dicoOuvrage) {
 		_dicoOuvrage = dicoOuvrage;
 	}        
+        
+        private void setEmprunts(HashSet<Emprunt> emprunts){
+                _emprunts = emprunts;
+        }
 
 	
 	

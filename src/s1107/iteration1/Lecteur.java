@@ -82,10 +82,19 @@ public class Lecteur implements Serializable
 			// Methodes
 		// -----------------------------------------------
 		
+                /*
+                Affiche uniquement les informations nécessaire à la relance
+                */
+		public void afficherLecteurRelance(){
+                    System.out.println("Nom et prénom du lecteur : " + this.getNom() + " " + this.getPrenom());
+                    System.out.println("Adresse : " + this.getAdresse());
+                    System.out.println("Telephone : " + this.getTel());
+                }
+                
 		/*
 		 * La methode afficherLecteur affiche l'ensemble des informations relatives à un lecteur.
-		 */
-		public void afficherLecteur()
+		 */                
+                public void afficherLecteur()
 		{
                         System.out.println("Lecteur : ");
 			System.out.println("Nom : " + this.getNom() + ", prénom : " + this.getPrenom());
