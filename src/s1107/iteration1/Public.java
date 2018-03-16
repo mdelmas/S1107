@@ -15,19 +15,19 @@ public enum Public {
     ADULTE("Adulte", 16);
     
     private String nom="";
-    private Integer ageLimite;
+    private Integer ageMinimum;
 
-    Public(String nom, Integer ageLimite){
+    Public(String nom, Integer ageMinimum){
         this.nom = nom;
-        this.ageLimite = ageLimite;
+        this.ageMinimum = ageMinimum;
     }
     
     public String toString(){
         return nom;
     }
     
-    public Integer getAgeLimite() {
-        return ageLimite;
+    public Integer getAgeMinimum() {
+        return ageMinimum;
     }
     
 }

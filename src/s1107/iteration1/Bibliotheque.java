@@ -61,14 +61,13 @@ public class Bibliotheque implements Serializable
 		 */
 	public void nouveauLecteur()
 	{
-
             String nom = EntreesSorties.lireChaine("Entrez le nom : ");
             String prenom = EntreesSorties.lireChaine("Entrez le prenom : ");
             Integer age;
             GregorianCalendar dateNaiss, dateNaissComp;
             GregorianCalendar dateActuelle = new GregorianCalendar();
             do {
-                    dateNaiss = EntreesSorties.lireDate("Entrez la date de naissance du lecteur (JJ/MM/AAAA): ");
+                    dateNaiss = EntreesSorties.lireDate("Entrez la date de naissance du lecteur (JJ/MM/AAAA) : ");
                     dateNaissComp = new GregorianCalendar(dateActuelle.get(GregorianCalendar.YEAR), dateNaiss.get(GregorianCalendar.MONTH), dateNaiss.get(GregorianCalendar.DATE));
                     if(dateNaissComp.before(dateActuelle)){
                             age=dateActuelle.get(GregorianCalendar.YEAR)-dateNaiss.get(GregorianCalendar.YEAR);
@@ -83,7 +82,7 @@ public class Bibliotheque implements Serializable
                             EntreesSorties.afficherMessage("Age du lecteur : " + age + " ans");
                     }
             } while ((age<=3) | (age>=110));
-            String adresse = EntreesSorties.lireChaine("Entrez l'adresse :");
+            String adresse = EntreesSorties.lireChaine("Entrez l'adresse : ");
             
             String tel;
             String regexStr = "^[0-9]{10}$";
@@ -93,21 +92,22 @@ public class Bibliotheque implements Serializable
                     System.out.println("Numéro incorrect, veuillez recommencer.");
             } while (!tel.matches(regexStr));
                                  
-            EntreesSorties.afficherMessage("Fin de saisie");
+            EntreesSorties.afficherMessage("Fin de saisie.");
 
             Lecteur L = new Lecteur(nom, this.getDerNumLecteur()+1, prenom, dateNaiss, adresse, tel);
             
             boolean exist = false;
             for (Iterator<Lecteur> itr = lesLecteurs(); itr.hasNext();){
                 if(L.equals(itr.next())){
-                    System.out.println("Ce lecteur existe déjà");
+                    System.out.println("Ce lecteur existe déjà.");
                     exist = true;
                     break;
                 }
             }
             if(exist == false){
                 incDerNumLecteur();
-                lierLecteur(L,derNumLecteur);
+                lierLecteur(L, derNumLecteur);
+                System.out.println("Le lecteur n°" + derNumLecteur + " a bien été créé.");
                 L.afficherLecteur();
             }
 	}
@@ -137,14 +137,14 @@ public class Bibliotheque implements Serializable
                     do {
                         dateParution = EntreesSorties.lireDate("Entrez la date de parution (JJ/MM/AAAA) : ");
                         if (dateParution.after(dateActuelle)) {
-                            System.out.println("La date de parution saisie est postérieure à la date du jour");
+                            System.out.println("La date de parution saisie est postérieure à la date du jour.");
                         }
                     } while (dateParution.after(dateActuelle));
                     String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur : ");
                     
                     Integer input;
                     do {
-                        System.out.println("Entrez le public visé : enfant(1), ado(2) ou adulte(3)");
+                        System.out.print("Entrez le code du public visé (enfant : 1, ado : 2 ou adulte : 3 : ");
                         input = EntreesSorties.lireEntier();
                     } while (input < 1 || input > 3);
                     
@@ -272,7 +272,7 @@ public class Bibliotheque implements Serializable
         
         
         public boolean verifPublic(Lecteur lecteur, Ouvrage ouvrage) {
-            if (lecteur.calculAge() > ouvrage.getPublicVise().getAgeLimite())
+            if (lecteur.calculAge() > ouvrage.getPublicVise().getAgeMinimum())
                 return true;
             return false;
         }

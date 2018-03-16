@@ -100,16 +100,15 @@ public class Ouvrage implements Serializable{
     }
     
     public void afficheOuvrageLight() {
-        System.out.print("Ouvrage :");
+        System.out.println("Ouvrage :");
         System.out.println("ISBN: " + getIsbn() + ", titre : " + getTitre());
     }
      
     public void afficheOuvrage() {
         this.afficheOuvrageLight();
-        System.out.print(", ");
         System.out.print("nom auteur : " + getNomAuteur() + ", ");
-        System.out.print("date parution : " + EntreesSorties.ecrireDate(getDateParution()));
-        System.out.println(", nom éditeur : " + getNomEditeur() + ", public : " + getPublicVise());
+        System.out.println("date parution : " + EntreesSorties.ecrireDate(getDateParution()));
+        System.out.println("nom éditeur : " + getNomEditeur() + ", public : " + getPublicVise());
     }
 
     public void afficheExemplaires() {
