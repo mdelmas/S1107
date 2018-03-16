@@ -297,7 +297,7 @@ public class Bibliotheque implements Serializable
                                 if (ex.exemplaireDisponible() == true) {
                                     GregorianCalendar dateEmprunt = new GregorianCalendar();
                                     Emprunt em = new Emprunt(L, ex, dateEmprunt);
-                                    _emprunts.add(em);
+                                    lierEmprunt(em);
                                     EntreesSorties.afficherMessage("Emprunt créé:");
                                     em.afficherEmprunt();
                                 } else {
@@ -400,6 +400,10 @@ public class Bibliotheque implements Serializable
         
         private void lierOuvrage(Ouvrage o, Long isbn){
             _dicoOuvrage.put(isbn, o);
+        }
+        
+        private void lierEmprunt(Emprunt em){
+            _emprunts.add(em);
         }
 	
 	
