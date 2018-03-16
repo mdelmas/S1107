@@ -41,6 +41,21 @@ public class Exemplaire implements Serializable {
     public void setEmprunt(Emprunt emprunt) {
         this.emprunt = emprunt;
     }
+    /*
+    Affiche le numéro d'exemplaire pour la relance
+    */
+    public void afficheRelance(){
+        System.out.print(", numéro exemplaire : "+ getNumEx());
+    }
+    
+    /*
+    Affiche les informations nécessaires à la relance
+    */
+    public void infosRelance(){
+        Ouvrage o = getOuvrage();
+        o.afficheOuvrageLight();
+        afficheRelance();
+    }
     
     public void affiche(){
         System.out.print("Numéro d'exemplaire : " + numEx + ", ");
