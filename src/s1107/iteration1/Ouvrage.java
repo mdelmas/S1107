@@ -101,7 +101,7 @@ public class Ouvrage implements Serializable{
     
     public void afficheOuvrageLight() {
         System.out.print("Ouvrage :");
-        System.out.print("ISBN: " + getIsbn() + ", titre : " + getTitre());
+        System.out.println("ISBN: " + getIsbn() + ", titre : " + getTitre());
     }
      
     public void afficheOuvrage() {

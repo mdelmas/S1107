@@ -10,18 +10,24 @@ package s1107.iteration1;
  * @author delmasmo 
  */
 public enum Public {
-    ENFANT("Enfant"),
-    ADO("Adolescent"), 
-    ADULTE("Adulte");
+    ENFANT("Enfant", 0),
+    ADO("Adolescent", 10), 
+    ADULTE("Adulte", 16);
     
     private String nom="";
+    private Integer ageLimite;
 
-
-    Public(String nom){
+    Public(String nom, Integer ageLimite){
         this.nom = nom;
+        this.ageLimite = ageLimite;
     }
     
     public String toString(){
         return nom;
     }
+    
+    public Integer getAgeLimite() {
+        return ageLimite;
+    }
+    
 }

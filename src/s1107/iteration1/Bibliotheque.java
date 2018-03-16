@@ -243,7 +243,7 @@ public class Bibliotheque implements Serializable
                     if(dateRecepEx.before(o.getDateParution())){
                         System.out.println("La date de réception saisie est antérieure à la date de parution de l'ouvrage");
                     }
-                }while (dateRecepEx.after(dateActuelle)||dateRecepEx.before(o.getDateParution()));
+                } while (dateRecepEx.after(dateActuelle)||dateRecepEx.before(o.getDateParution()));
                 
                 Integer nbExEmpruntables = EntreesSorties.lireEntier("Entrez le nombre d'exemplaires empruntables : ");
                 Integer nbExNonEmpruntables = EntreesSorties.lireEntier("Entrez le nombre d'exemplaires non-empruntables : ");  
@@ -255,6 +255,7 @@ public class Bibliotheque implements Serializable
                 EntreesSorties.afficherMessage("Cet ouvrage n'existe pas.");
             }            
         }
+        
         
         public void consulterExemplairesOuvrage(){
 		Long numOuvrage = EntreesSorties.lireLong("Entrez le numéro ISBN de l'ouvrage : ");
@@ -269,8 +270,65 @@ public class Bibliotheque implements Serializable
 		}            
         }
         
+        
+        public boolean verifPublic(Lecteur lecteur, Ouvrage ouvrage) {
+            if (lecteur.calculAge() > ouvrage.getPublicVise().getAgeLimite())
+                return true;
+            return false;
+        }
+        
+        
         public void emprunterExemplaire() {
+            Integer numLecteur = EntreesSorties.lireEntier("Entrez le numero du lecteur : ");
+            Lecteur L = getLecteur(numLecteur);
             
+            if (L == null) {
+		EntreesSorties.afficherMessage("Aucun lecteur n'est associe a ce numero.");
+                return ;
+            } else if (L.lecteurSature() != false) {
+                EntreesSorties.afficherMessage("Le lecteur ne peut plus emprunter de livre (lecteur saturé).");
+                return ;
+            }
+            
+            Long numOuvrage = EntreesSorties.lireLong("Entrez le numéro ISBN de l'ouvrage : ");
+                    
+            Ouvrage o = getOuvrage(numOuvrage);
+            if (o == null) {
+		EntreesSorties.afficherMessage("Aucun ouvrage n'est associe a ce numero.");
+                return ;
+            } else if (verifPublic(L, o) == false) {
+                EntreesSorties.afficherMessage("Public pas ok pour le lecteur.");
+                return ;
+            }
+            
+            Integer numEx = EntreesSorties.lireEntier("Entrez le numéro de l'exemplaire : ");
+
+            Exemplaire ex = o.getExemplaire(numEx);
+            if (ex == null) {
+                EntreesSorties.afficherMessage("Exemplaire n'existe pas.");
+                return ;
+            }
+            
+            if (ex.exemplaireDisponible() == true) {
+                GregorianCalendar dateEmprunt = new GregorianCalendar();
+                Emprunt em = new Emprunt(L, ex, dateEmprunt);
+                EntreesSorties.afficherMessage("Emprun créé:");
+                em.afficherEmprunt();
+            } else {
+                EntreesSorties.afficherMessage("Exemplaire non disponible à l'emprunt.");
+            }
+                 
+        }
+        
+        public void consulterEmpruntsLecteur() {
+            Integer numLecteur = EntreesSorties.lireEntier("Entrez le numero du lecteur : ");
+            Lecteur L = getLecteur(numLecteur);
+            
+            if (L != null) {
+                L.afficherEmpruntsLecteur();
+            } else {
+		EntreesSorties.afficherMessage("Aucun lecteur n'est associe à ce numero.");
+            }            
         }
         
         public void rendreExemplaire() {

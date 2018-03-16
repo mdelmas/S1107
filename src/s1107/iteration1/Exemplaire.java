@@ -26,7 +26,7 @@ public class Exemplaire implements Serializable {
     Exemplaire(Ouvrage o, boolean empruntable, GregorianCalendar dateRecepEx, int numEx) {
         this.setOuvrage(o);
         this.empruntable = empruntable;
-        this.setDateRecepEx(o,dateRecepEx);
+        this.setDateRecepEx(dateRecepEx);
         this.numEx = numEx;
     }
     
@@ -34,8 +34,12 @@ public class Exemplaire implements Serializable {
         ouvrage = o;
     }
     
-    public void setDateRecepEx(Ouvrage o, GregorianCalendar dateRecepEx){
+    public void setDateRecepEx(GregorianCalendar dateRecepEx){
             this.dateRecepEx = dateRecepEx;
+    }
+    
+    public void setEmprunt(Emprunt emprunt) {
+        this.emprunt = emprunt;
     }
     
     public void affiche(){
@@ -47,6 +51,22 @@ public class Exemplaire implements Serializable {
             System.out.println(", non empruntable");
     }
         
+    public boolean exemplaireDisponible() {
+        if (empruntable == true && emprunt == null)
+            return true;
+        return false;
+    }
+    
+    public void affecterEmprunt(Emprunt emprunt) {
+        setEmprunt(emprunt);
+    } 
+    
+    public void afficherExemplaireLight() {
+        Ouvrage o = getOuvrage();
+        o.afficheOuvrageLight();
+        System.out.println("   N° d'exemplaire: " + getNumEx());
+    }
+    
     //////
     // RAJOUT POUR L'AFFICHAGE D'EMPRUNT - PEUT ETRE PAS A GARDER
     

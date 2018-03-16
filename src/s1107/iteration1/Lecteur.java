@@ -26,6 +26,7 @@ public class Lecteur implements Serializable
                 private HashSet<Emprunt> emprunts;
 	
 	
+	
 	// -----------------------------------------------
 		//Constructeur
 	// -----------------------------------------------
@@ -38,6 +39,7 @@ public class Lecteur implements Serializable
 			this.setDateNaiss(dateNaiss);
 			this.setAdresse(adresse);
 			this.setTel(tel);
+                        emprunts = new HashSet<>();
 		}
 		
 // -----------------------------------------------
@@ -71,6 +73,11 @@ public class Lecteur implements Serializable
 		public String getTel() {
 			return _tel;
 		}
+                
+                public HashSet<Emprunt> getEmprunts() {
+                    return emprunts;
+                }
+                
 		// -----------------------------------------------
 			// Methodes
 		// -----------------------------------------------
@@ -117,6 +124,26 @@ public class Lecteur implements Serializable
                     }
                 }
 
+                public boolean lecteurSature() {
+                    if (emprunts.size() == 5)
+                        return true;
+                    return false;
+                }
+                
+                public void affecterEmprunt(Emprunt emprunt) {
+                    getEmprunts().add(emprunt);
+                }
+                
+                public void afficherEmpruntsLecteur() {
+                    HashSet<Emprunt> emprunts = getEmprunts();
+                    System.out.print("Lecteur n°" + getNumLecteur());
+                    System.out.println(", " + getNom() + " " + getPrenom());
+                    System.out.println(emprunts.size() + " emprunts en cours");
+                    for (Emprunt emprunt: emprunts) {
+                        System.out.print(" - ");
+                        emprunt.afficherEmprunt();
+                    }
+                }
 	
 	
 // -----------------------------------------------

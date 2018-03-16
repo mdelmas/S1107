@@ -5,6 +5,7 @@
  */
 package s1107.iteration1;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -12,7 +13,13 @@ import java.util.GregorianCalendar;
  *
  * @author delmasmo
  */
-public class Emprunt {
+public class Emprunt implements Serializable
+{
+  
+    private static final long serialVersionUID = 48L;
+
+    
+    // attributs
     
     private Lecteur lecteur;
     private Exemplaire exemplaire;
@@ -20,9 +27,14 @@ public class Emprunt {
     private GregorianCalendar dateRetour;
     final int DUREE_EMPRUNT = 8;
     
+    
+    // constructeur
+    
     Emprunt(Lecteur lecteur, Exemplaire exemplaire, GregorianCalendar dateEmprunt) {
         setLecteur(lecteur);
+        lecteur.affecterEmprunt(this);
         setExemplaire(exemplaire);
+        exemplaire.affecterEmprunt(this);
         setDateEmprunt(dateEmprunt);
         dateRetour = new GregorianCalendar(dateEmprunt.get(GregorianCalendar.YEAR), dateEmprunt.get(GregorianCalendar.MONTH), dateEmprunt.get(GregorianCalendar.DATE) + DUREE_EMPRUNT);
     }
@@ -75,15 +87,11 @@ public class Emprunt {
     //////
     // AFFCHAGE NON FINAL
     
-    public void affiche() {
-        System.out.println("Emprunt: ");
-        System.out.println("Lecteur: " + lecteur.getNom() + " " + lecteur.getPrenom());
-        Ouvrage o = exemplaire.getOuvrage();
-        System.out.println("Exemplaire: " + o.getTitre() + " - " + o.getIsbn() + ", ex n°" + exemplaire.getNumEx());
-        System.out.print("Date emprunt: " + EntreesSorties.ecrireDate(getDateEmprunt()));
+    public void afficherEmprunt() {
+        Exemplaire ex = getExemplaire();
+        ex.afficherExemplaireLight();
+        System.out.print("   Date emprunt: " + EntreesSorties.ecrireDate(getDateEmprunt()));
         System.out.println(", date retour: " + EntreesSorties.ecrireDate(getDateRetour()));
     }
-
-    ////////
     
 }
