@@ -157,13 +157,18 @@ public void menuEmprunt() {
 		EntreesSorties.afficherMessage(" ========================================================");
 		EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
 		EntreesSorties.afficherMessage("| Emprunter exemplaire : 1                               |");
-		EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
+		EntreesSorties.afficherMessage("| Rendre exemplaire : 2                               |");
+                EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
 		EntreesSorties.afficherMessage(" ========================================================");
 		menuLect = EntreesSorties.lireEntier();
 			
 			switch (menuLect){
 				case 1 : {
 					_bibliotheque.emprunterExemplaire();
+					break;
+				}
+                                case 2 : {
+					_bibliotheque.rendreExemplaire();
 					break;
 				}
 				default : {

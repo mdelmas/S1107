@@ -21,6 +21,7 @@ public class Exemplaire implements Serializable {
     private GregorianCalendar dateRecepEx;
     private int numEx;
     private Ouvrage ouvrage;
+    private Emprunt emprunt;
     
     Exemplaire(Ouvrage o, boolean empruntable, GregorianCalendar dateRecepEx, int numEx) {
         this.setOuvrage(o);
@@ -58,9 +59,16 @@ public class Exemplaire implements Serializable {
     }
     
     public Emprunt getEmprunt() {
-        return dateRetour;
+       return emprunt;
     }
     
+    public void supprimerEmprunt(Exemplaire exemplaire) {
+       emprunt = null ;
+    }
+    
+    /*public void unSetEmprunt(Emprunt emprunt) {
+       exemplaire.delete(emprunt);
+    }*/ 
     //////
     
 }

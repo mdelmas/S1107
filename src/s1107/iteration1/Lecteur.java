@@ -23,7 +23,7 @@ public class Lecteur implements Serializable
 		private GregorianCalendar _dateNaiss;
 		private String _adresse;
 		private String _tel;
-	
+                private HashSet<Emprunt> emprunts;
 	
 	
 	// -----------------------------------------------
@@ -151,5 +151,17 @@ public class Lecteur implements Serializable
 			this._tel = tel;
 		}
 		
-		
+                
+                public HashSet<Emprunt> getEmprunts() {
+                        return emprunts;
+                }
+                
+                public void supprimerEmprunt(Emprunt emprunts) {
+                        emprunts = null;
+                }
+                
+                /*public void unSetEmprunt(Emprunt em) {
+                       emprunts.remove(em);
+                }*/   
+
 }

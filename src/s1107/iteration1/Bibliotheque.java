@@ -8,7 +8,7 @@ import java.util.Scanner;
 import s1107.iteration1.Ouvrage;
 import s1107.iteration1.Lecteur;
 import s1107.iteration1.EntreesSorties;
-
+import s1107.iteration1.Emprunt;
 
 // Classe de gestion de la Bibliotheque
 
@@ -280,17 +280,31 @@ public class Bibliotheque implements Serializable
             Exemplaire ex = o.getExemplaire(numEx);
             
             if(ex!= null){
-                 Emprunt em = ex.getEmprunt();
-                 if(em!= null)
-                 {
+                Emprunt em = ex.getEmprunt();
+                //ex.supprimerEmprunt(ex);       //a inverser ds le diagramme de séquences
+                if(em!= null)
+                {
                     //em.affiche(); // je propose que l'on affiche l'emprunt avant de procéder aux suppressions
-                     
-                 }
-                 
-                
+                    em.supprimerEmprunt();
+                    Lecteur L = em.getLecteur();
+                    L.supprimerEmprunt(em);
+                    //L.unSetEmprunt(em);
+                    em.unSetLecteur();
+                    em.unSetExemplaire();
+                    //ex.unSetEmprunt(em);
+                    System.out.print("Exemplaire disponible");
+                }
+                if(em== null)
+                    System.out.print("Cet exemplaire n'a pas été emprunté");
             }
-            
+                 
+            if(ex == null)
+            {
+                System.out.print("Cet exemplaire n'existe pas");
+            }
+                
         }
+       
 // -----------------------------------------------
 	// Private
 // -----------------------------------------------
@@ -367,4 +381,4 @@ public class Bibliotheque implements Serializable
         public void incDerNumLecteur(){
             derNumLecteur++;
         }
-        }
+}

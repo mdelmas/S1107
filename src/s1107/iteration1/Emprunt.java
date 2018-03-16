@@ -60,8 +60,18 @@ public class Emprunt {
     }
     
     public void supprimerEmprunt() {
-    
+       dateEmprunt = null;
+       dateRetour = null;
     }
+    
+    public void unSetLecteur() {
+       lecteur = null;
+    }
+    
+    public void unSetExemplaire() {
+       exemplaire = null;
+    }
+    
     //////
     // AFFCHAGE NON FINAL
     
