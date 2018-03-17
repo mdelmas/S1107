@@ -147,7 +147,7 @@ public class Bibliotheque implements Serializable
                     
                     Integer input;
                     do {
-                        System.out.print("Entrez le code du public visé (enfant : 1, ado : 2 ou adulte : 3 : ");
+                        System.out.print("Entrez le code du public visé (enfant : 1, ado : 2 ou adulte : 3 ) : ");
                         input = EntreesSorties.lireEntier();
                     } while (input < 1 || input > 3);
                     
@@ -316,6 +316,7 @@ public class Bibliotheque implements Serializable
             if (ex.exemplaireDisponible() == true) {
                 GregorianCalendar dateEmprunt = new GregorianCalendar();
                 Emprunt em = new Emprunt(L, ex, dateEmprunt);
+                _emprunts.add(em);
                 EntreesSorties.afficherMessage("Emprun créé:");
                 em.afficherEmprunt();
             } else {
@@ -366,7 +367,7 @@ public class Bibliotheque implements Serializable
             if(ex!= null){
                                                       
                 ex.supprimerEmprunt();       //a inverser ds le diagramme de séquences
-                unSetEmprunt(em);
+                unSetEmprunt(em); // crash : nullpointerexception dans unsetemprunt
                 //em.affiche(); // je propose que l'on affiche l'emprunt avant de procéder aux suppressions
                 System.out.print("Exemplaire disponible");
             }

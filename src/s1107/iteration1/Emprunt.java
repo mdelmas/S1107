@@ -76,7 +76,6 @@ public class Emprunt implements Serializable
         L.supprimerEmprunt(this);
         unSetLecteur();
         unSetExemplaire();
-        
     }
     
     public void unSetLecteur() {

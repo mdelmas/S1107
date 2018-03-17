@@ -7,6 +7,8 @@ package s1107.iteration1;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  *
@@ -19,7 +21,9 @@ public class testEmprunt {
      */
     public static void main(String[] args) {
         
-        GregorianCalendar dateNaiss = new GregorianCalendar(1993, 05, 07);
+        
+        
+      /*  GregorianCalendar dateNaiss = new GregorianCalendar(1993, 05, 07);
         Lecteur lecteur = new Lecteur("DELMAS", 1, "Morgane", dateNaiss, "Grenoble", "0612345678");
         
         GregorianCalendar dateParution = new GregorianCalendar(2015, 10, 1);
@@ -32,7 +36,7 @@ public class testEmprunt {
         Emprunt emprunt = new Emprunt(lecteur, exemplaire, dateEmprunt);
         emprunt.affiche();
 
-        System.out.println("test");
+        System.out.println("test");*/
         // TODO code application logic here
         /*GregorianCalendar date = new GregorianCalendar();
         System.out.println(date.get(Calendar.DAY_OF_MONTH) + "/" + (date.get(Calendar.MONTH)+1) + "/" + date.get(Calendar.YEAR));
@@ -49,4 +53,5 @@ public class testEmprunt {
 		return cal.getTime();
 	}
 	*/
+    
 }
