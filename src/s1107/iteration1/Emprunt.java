@@ -39,6 +39,8 @@ public class Emprunt implements Serializable
         dateRetour = new GregorianCalendar(dateEmprunt.get(GregorianCalendar.YEAR), dateEmprunt.get(GregorianCalendar.MONTH), dateEmprunt.get(GregorianCalendar.DATE) + DUREE_EMPRUNT);
     }
     
+    // Getters / Setters
+    
     private void setLecteur(Lecteur lecteur) {
         this.lecteur = lecteur;
     }
@@ -71,6 +73,12 @@ public class Emprunt implements Serializable
         return dateRetour;
     }
     
+    //Méthodes
+    
+    /**
+    Cherche le Lecteur associé à l'emprunt et supprime le lien à l'Emprunt
+    supprime les liens avec le Lecteur et l'Exemplaire
+    */
     public void supprimerEmprunt() {
         Lecteur L = getLecteur();
         L.supprimerEmprunt(this);
@@ -78,16 +86,24 @@ public class Emprunt implements Serializable
         unSetExemplaire();
     }
     
+    /**
+     * Retire le lien avec le lecteur
+     */
+    
     public void unSetLecteur() {
        lecteur = null;
     }
     
+    /**
+     * Retire le lien avec l'exemplaire
+     */
     public void unSetExemplaire() {
        exemplaire = null;
     }
     
-    //////
-    // AFFCHAGE NON FINAL
+    /**
+     * AFFICHAGE NON FINAL
+     */
     
     public void afficherEmprunt() {
         Exemplaire ex = getExemplaire();
@@ -95,7 +111,7 @@ public class Emprunt implements Serializable
         System.out.print("   Date emprunt: " + EntreesSorties.ecrireDate(getDateEmprunt()));
         System.out.println(", date retour: " + EntreesSorties.ecrireDate(getDateRetour()));
     }
-        /*
+    /**
     Contrôle si l'emprunt en cours date de 15 jours ou plus, renvoie vrai si oui
     */
     private boolean aRelancer(GregorianCalendar dateJour){
@@ -103,17 +119,17 @@ public class Emprunt implements Serializable
         dateRelance.add(GregorianCalendar.DAY_OF_MONTH, 15);
         return dateRelance.before(dateJour) || dateRelance.equals(dateJour);
     }
-    
-    //Contrôle si une relance est à effectuer et lance l'affichage des informations de l'emprunt
+    /**
+     * Contrôle si une relance est à effectuer et lance l'affichage des informations de l'emprunt
+     */
     public void relanceEmprunt(GregorianCalendar dateJour){
         boolean verif = aRelancer(dateJour);
         boolean relancesAFaire = false;
         if(verif==true){
             Lecteur L = getLecteur();
             Exemplaire ex = getExemplaire();
-            L.afficherLecteurRelance();
-            ex.infosRelance();
-            afficheDateEmprunt();
+            L.afficherLecteur();
+            afficherEmprunt();
             relancesAFaire = true;
         }
         if(relancesAFaire == false){
@@ -121,16 +137,18 @@ public class Emprunt implements Serializable
         }
     }
     
-    //Affiche la date de l'emprunt
+    /**
+     * Affiche la date de l'emprunt
+     */
     private void afficheDateEmprunt(){
         System.out.println(", date d'emprunt : " + EntreesSorties.ecrireDate(getDateEmprunt()));
         System.out.println("-----------------------------------");
         
     }
 
-    //////
-    // AFFCHAGE NON FINAL
-    
+    /**
+     * AFFCHAGE NON FINAL
+     */
     public void affiche() {
         System.out.println("Emprunt: ");
         System.out.println("Lecteur: " + lecteur.getNom() + " " + lecteur.getPrenom());
@@ -140,6 +158,5 @@ public class Emprunt implements Serializable
         System.out.println(", date retour: " + EntreesSorties.ecrireDate(getDateRetour()));
     }
 
-    ////////
     
 }

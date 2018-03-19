@@ -82,7 +82,7 @@ public class Lecteur implements Serializable
 			// Methodes
 		// -----------------------------------------------
 		
-                /*
+                /**
                 Affiche uniquement les informations nécessaire à la relance
                 */
 		public void afficherLecteurRelance(){
@@ -91,7 +91,7 @@ public class Lecteur implements Serializable
                     System.out.println("Telephone : " + this.getTel());
                 }
                 
-		/*
+		/**
 		 * La methode afficherLecteur affiche l'ensemble des informations relatives à un lecteur.
 		 */                
                 public void afficherLecteur()
@@ -104,7 +104,7 @@ public class Lecteur implements Serializable
 		}
 		
 		
-		/*
+		/**
 		 * la methode calculAge permet de determiner l'age des lecteurs grace a leur date de naissance
 		 * et la date actuelle. De cette façon, il n'y a pas de mise a jour a faire sur l'age des lecteurs.
 		 */
@@ -122,6 +122,11 @@ public class Lecteur implements Serializable
 			return age;
 		}
                 
+                /**
+                 * La méthode equals permet de vérifier si un lecteur existe déjà lors de sa création
+                 * @param L
+                 * @return 
+                 */
                 public boolean equals(Lecteur L){
                     if(_nom.equals(L._nom) && _prenom.equals(L._prenom) && _dateNaiss.equals(L._dateNaiss) && _adresse.equals(L._adresse) && _tel.equals(L._tel)){
                         return true;
@@ -130,17 +135,28 @@ public class Lecteur implements Serializable
                         return false;
                     }
                 }
-
+                
+                /**
+                 * Vérifie si le lecteur a déjà emprunté 5 exemplaires, renvoie vrai si oui
+                 * @return 
+                 */
                 public boolean lecteurSature() {
                     if (emprunts.size() == 5)
                         return true;
                     return false;
                 }
                 
+                /**
+                 * affecte un emprunt au Lecteur
+                 * @param emprunt 
+                 */
                 public void affecterEmprunt(Emprunt emprunt) {
                     getEmprunts().add(emprunt);
                 }
                 
+                /**
+                 * Affiche les informations des emprunts en cours du lecteur
+                 */
                 public void afficherEmpruntsLecteur() {
                     HashSet<Emprunt> emprunts = getEmprunts();
                     System.out.print("Lecteur n°" + getNumLecteur());

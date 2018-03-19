@@ -39,6 +39,8 @@ public class Ouvrage implements Serializable{
         exemplaires = new HashMap<>();
     }
     
+    // Getters & Setters
+    
     public void setIsbn(long isbn) {
         this.isbn = isbn;
     }
@@ -95,22 +97,34 @@ public class Ouvrage implements Serializable{
         return derNumEx;
     }
     
+    /**
+     * Incrémente le dernier numéro d'exemplaire de la Classe
+     */
     public void incDerNumEx(){
         derNumEx = derNumEx + 1;
     }
     
+    /**
+     * Affiche les informations de l'ouvrage, version réduite
+     */
     public void afficheOuvrageLight() {
         System.out.println("Ouvrage :");
         System.out.println("ISBN: " + getIsbn() + ", titre : " + getTitre());
     }
-     
+    
+    /**
+     * Affiche les informations complètes de l'ouvrage
+     */
     public void afficheOuvrage() {
         this.afficheOuvrageLight();
         System.out.print("nom auteur : " + getNomAuteur() + ", ");
         System.out.println("date parution : " + EntreesSorties.ecrireDate(getDateParution()));
         System.out.println("nom éditeur : " + getNomEditeur() + ", public : " + getPublicVise());
     }
-
+    
+    /**
+     * Affiche tous les exemplaires rattachés à l'ouvrage
+     */
     public void afficheExemplaires() {
         afficheOuvrageLight();
         for(Map.Entry<Integer, Exemplaire> entry : exemplaires.entrySet()) {
@@ -119,14 +133,25 @@ public class Ouvrage implements Serializable{
         }
     }
     
+    /**
+     * Retourne l'ensemble des exemplaires rattachés à l'ouvrage
+     */
     public Exemplaire getExemplaire(int numEx) {
         return exemplaires.get(numEx);
     }
     
+    /**
+     * Rattache un exemplaire donné à l'ouvrage
+     */
     public void setExemplaire(int numEx, Exemplaire e) {
         exemplaires.put(numEx, e);
     }
     
+    /**
+     * Crée un exemplaire empruntable, le rattache à l'ouvrage, incrémente le dernier numéro d'exemplaire
+     * @param dateRecepEx
+     * @param nbExEmpruntables 
+     */
     public void ajouterExemplairesEmpruntables(GregorianCalendar dateRecepEx, int nbExEmpruntables) {
         for (int i = 0; i < nbExEmpruntables; i++) {
             incDerNumEx();
@@ -136,6 +161,11 @@ public class Ouvrage implements Serializable{
         }
     }
     
+    /**
+     * Crée un exemplaire non-empruntable, le rattache à l'ouvrage, incrémente le dernier numéro d'exemplaire
+     * @param dateRecepEx
+     * @param nbExNonEmpruntables 
+     */
     public void ajouterExemplairesNonEmpruntables(GregorianCalendar dateRecepEx, int nbExNonEmpruntables) {
         for (int i = 0; i < nbExNonEmpruntables; i++) {
             incDerNumEx();

@@ -30,6 +30,8 @@ public class Exemplaire implements Serializable {
         this.numEx = numEx;
     }
     
+    //Getters & setters
+    
     public void setOuvrage(Ouvrage o) {
         ouvrage = o;
     }
@@ -41,14 +43,14 @@ public class Exemplaire implements Serializable {
     public void setEmprunt(Emprunt emprunt) {
         this.emprunt = emprunt;
     }
-    /*
+    /**
     Affiche le numéro d'exemplaire pour la relance
     */
     public void afficheRelance(){
         System.out.print(", numéro exemplaire : "+ getNumEx());
     }
     
-    /*
+    /**
     Affiche les informations nécessaires à la relance
     */
     public void infosRelance(){
@@ -57,6 +59,9 @@ public class Exemplaire implements Serializable {
         afficheRelance();
     }
     
+    /**
+     * Affiche les informations de l'exemplaire
+     */
     public void affiche(){
         System.out.print("Numéro d'exemplaire : " + numEx + ", ");
         System.out.print("date réception : " + EntreesSorties.ecrireDate(dateRecepEx));
@@ -66,6 +71,11 @@ public class Exemplaire implements Serializable {
             System.out.println(", non empruntable");
     }
         
+    /**
+     * Vérifie si l'exemplaire est empruntable et s'il n'a pas été emprunté, 
+     * retourne vrai si les 2 sont vrais, faux sinon
+     * @return 
+     */
     public boolean exemplaireDisponible() {
         if (empruntable == true && emprunt == null)
             return true;
@@ -76,6 +86,9 @@ public class Exemplaire implements Serializable {
         setEmprunt(emprunt);
     } 
     
+    /**
+     * Affiche les informations de l'exemplaire, affichage réduit
+     */
     public void afficherExemplaireLight() {
         Ouvrage o = getOuvrage();
         o.afficheOuvrageLight();
@@ -97,6 +110,10 @@ public class Exemplaire implements Serializable {
        return emprunt;
     }
     
+    /**
+     * Retrouve l'Emprunt associé à l'Exemplaire, lui demande de supprimer le lien avec l'emprunt
+     * supprime le lien entre l'exemplaire et l'emprunt
+     */
     public void supprimerEmprunt() {
        Emprunt em = getEmprunt();
        if(em != null)
