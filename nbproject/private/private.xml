@@ -2,14 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
-            <file>file:/users/info/etu-as/delmasmo/NetBeansProjects/S1107/src/s1107/iteration1/Public.java</file>
-            <file>file:/users/info/etu-as/delmasmo/NetBeansProjects/S1107/src/s1107/iteration1/Emprunt.java</file>
-            <file>file:/users/info/etu-as/delmasmo/NetBeansProjects/S1107/src/s1107/iteration1/Ouvrage.java</file>
-            <file>file:/users/info/etu-as/delmasmo/NetBeansProjects/S1107/src/s1107/iteration1/Main.java</file>
-            <file>file:/users/info/etu-as/delmasmo/NetBeansProjects/S1107/src/s1107/iteration1/MenuBiblio.java</file>
-            <file>file:/users/info/etu-as/delmasmo/NetBeansProjects/S1107/src/s1107/iteration1/Bibliotheque.java</file>
-            <file>file:/users/info/etu-as/delmasmo/NetBeansProjects/S1107/src/s1107/iteration1/Lecteur.java</file>
-            <file>file:/users/info/etu-as/delmasmo/NetBeansProjects/S1107/src/s1107/iteration1/Exemplaire.java</file>
-            <file>file:/users/info/etu-as/delmasmo/NetBeansProjects/S1107/src/s1107/iteration1/testEmprunt.java</file>
+        <group>
+            <file>file:/users/info/etu-as/valentid/NetBeansProjects/S1107/src/s1107/iteration1/Emprunt.java</file>
+            <file>file:/users/info/etu-as/valentid/NetBeansProjects/S1107/src/s1107/iteration1/Lecteur.java</file>
+            <file>file:/users/info/etu-as/valentid/NetBeansProjects/S1107/src/s1107/iteration1/Bibliotheque.java</file>
+            <file>file:/users/info/etu-as/valentid/NetBeansProjects/S1107/src/s1107/iteration1/Exemplaire.java</file>
         </group>
+    </open-files>
+</project-private>

@@ -9,7 +9,7 @@ import java.util.Scanner;
 import s1107.iteration1.Ouvrage;
 import s1107.iteration1.Lecteur;
 import s1107.iteration1.EntreesSorties;
-
+import s1107.iteration1.Emprunt;
 
 // Classe de gestion de la Bibliotheque
 
@@ -147,7 +147,11 @@ public class Bibliotheque implements Serializable
                     
                     Integer input;
                     do {
+<<<<<<< HEAD
                         System.out.print("Entrez le code du public visé (enfant : 1, ado : 2 ou adulte : 3 : ");
+=======
+                        System.out.print("Entrez le code du public visé (enfant : 1, ado : 2 ou adulte : 3 ) : ");
+>>>>>>> 0251990e77fc8f327dac68770f52882a417eb502
                         input = EntreesSorties.lireEntier();
                     } while (input < 1 || input > 3);
                     
@@ -316,8 +320,13 @@ public class Bibliotheque implements Serializable
             if (ex.exemplaireDisponible() == true) {
                 GregorianCalendar dateEmprunt = new GregorianCalendar();
                 Emprunt em = new Emprunt(L, ex, dateEmprunt);
+<<<<<<< HEAD
                 setEmprunt(em);
                 EntreesSorties.afficherMessage("Emprunt créé:");
+=======
+                _emprunts.add(em);
+                EntreesSorties.afficherMessage("Emprun créé:");
+>>>>>>> 0251990e77fc8f327dac68770f52882a417eb502
                 em.afficherEmprunt();
             } else {
                 EntreesSorties.afficherMessage("Exemplaire non disponible à l'emprunt.");
@@ -350,6 +359,33 @@ public class Bibliotheque implements Serializable
             
         }
         
+        public void rendreExemplaire() {
+            
+            long numOuvrage = EntreesSorties.lireLong("Entrez le numero d'ISBN : ");
+            Ouvrage o = getOuvrage(numOuvrage);
+            if (o ==null){
+                System.out.print("Aucun ouvrage n'est associé à ce numéro d'ISBN");
+                return;
+            }
+           
+            int numEx = EntreesSorties.lireEntier("Entrez le numero d'exemplaire de l'ouvrage : ");
+            Exemplaire ex = o.getExemplaire(numEx);
+            Emprunt em = ex.getEmprunt();
+            
+            if(ex!= null){
+                                                      
+                ex.supprimerEmprunt();       //a inverser ds le diagramme de séquences
+                unSetEmprunt(em); // crash : nullpointerexception dans unsetemprunt
+                //em.affiche(); // je propose que l'on affiche l'emprunt avant de procéder aux suppressions
+                System.out.print("Exemplaire disponible");
+            }
+            else
+            {
+                System.out.print("Cet exemplaire n'existe pas");
+            }
+                
+        }
+       
 // -----------------------------------------------
 	// Private
 // -----------------------------------------------
@@ -369,8 +405,12 @@ public class Bibliotheque implements Serializable
         private void setEmprunts(HashSet<Emprunt> emprunts){
                 _emprunts = emprunts;
         }
-
-	
+        
+        public void unSetEmprunt(Emprunt em) {
+                _emprunts.remove(em);
+        }
+        
+        
 	
 	// -----------------------------------------------
 		// Mï¿½thodes
@@ -393,10 +433,13 @@ public class Bibliotheque implements Serializable
 	{
 		return _dicoOuvrage.get(isbn);
 	}
+<<<<<<< HEAD
 	
         public void affecterEmprunt(Emprunt em) {
             setEmprunt(em);
         }
+=======
+>>>>>>> 0251990e77fc8f327dac68770f52882a417eb502
         
 	/*
 	 * La méthode lierLecteur permet d'ajouter un lecteur a la base de donnée de bibliotheque.

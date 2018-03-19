@@ -71,6 +71,24 @@ public class Emprunt implements Serializable
         return dateRetour;
     }
     
+    public void supprimerEmprunt() {
+        Lecteur L = getLecteur();
+        L.supprimerEmprunt(this);
+        unSetLecteur();
+        unSetExemplaire();
+    }
+    
+    public void unSetLecteur() {
+       lecteur = null;
+    }
+    
+    public void unSetExemplaire() {
+       exemplaire = null;
+    }
+    
+    //////
+    // AFFCHAGE NON FINAL
+    
     public void afficherEmprunt() {
         Exemplaire ex = getExemplaire();
         ex.afficherExemplaireLight();

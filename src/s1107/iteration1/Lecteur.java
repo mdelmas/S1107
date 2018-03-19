@@ -142,6 +142,10 @@ public class Lecteur implements Serializable
                 }
                 
                 public void afficherEmpruntsLecteur() {
+<<<<<<< HEAD
+=======
+                    HashSet<Emprunt> emprunts = getEmprunts();
+>>>>>>> 0251990e77fc8f327dac68770f52882a417eb502
                     System.out.print("Lecteur n°" + getNumLecteur());
                     System.out.println(", " + getNom() + " " + getPrenom());
                     System.out.println(emprunts.size() + " emprunts en cours");
@@ -184,6 +188,13 @@ public class Lecteur implements Serializable
 		private void setTel(String tel) {
 			this._tel = tel;
 		}
-		
-		
+		                              
+                public void supprimerEmprunt(Emprunt em) {
+                        unSetEmprunt(em);
+                }
+                
+                public void unSetEmprunt(Emprunt em) {
+                       emprunts.remove(em);
+                }  
+
 }
