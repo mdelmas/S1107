@@ -142,9 +142,9 @@ public class Lecteur implements Serializable
                 }
                 
                 public void afficherEmpruntsLecteur() {
-                    HashSet<Emprunt> emprunts = getEmprunts();
                     System.out.print("Lecteur n°" + getNumLecteur());
                     System.out.println(", " + getNom() + " " + getPrenom());
+                    HashSet<Emprunt> emprunts = getEmprunts();
                     System.out.println(emprunts.size() + " emprunts en cours");
                     for (Emprunt emprunt: emprunts) {
                         System.out.print(" - ");

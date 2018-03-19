@@ -92,7 +92,7 @@ public class Bibliotheque implements Serializable
             do {
                 tel = EntreesSorties.lireChaine("Entrez le numero de telephone : ");
                 if (!tel.matches(regexStr)) 
-                    System.out.println("Numéro incorrect, veuillez recommencer.");
+                    EntreesSorties.afficherMessage("Numéro incorrect, veuillez recommencer.");
             } while (!tel.matches(regexStr));
                                  
             EntreesSorties.afficherMessage("Fin de saisie.");
@@ -102,7 +102,7 @@ public class Bibliotheque implements Serializable
             boolean exist = false;
             for (Iterator<Lecteur> itr = lesLecteurs(); itr.hasNext();){
                 if(L.equals(itr.next())){
-                    System.out.println("Ce lecteur existe déjà.");
+                    EntreesSorties.afficherMessage("Ce lecteur existe déjà.");
                     exist = true;
                     break;
                 }
@@ -110,7 +110,7 @@ public class Bibliotheque implements Serializable
             if(exist == false){
                 incDerNumLecteur();
                 lierLecteur(L, derNumLecteur);
-                System.out.println("Le lecteur n°" + derNumLecteur + " a bien été créé.");
+                EntreesSorties.afficherMessage("Le lecteur n°" + derNumLecteur + " a bien été créé.");
                 L.afficherLecteur();
             }
 	}
@@ -127,7 +127,7 @@ public class Bibliotheque implements Serializable
             do {
                 numOuvrage = EntreesSorties.lireLong("Entrez le numero d'ISBN : ");
                 if (String.valueOf(numOuvrage).length() != 13)
-                    System.out.println("ISBN incorrect (différent de 13 chiffres), veuillez entrer un code à 13 chiffres.");
+                    EntreesSorties.afficherMessage("ISBN incorrect (différent de 13 chiffres), veuillez entrer un code à 13 chiffres.");
             } while (String.valueOf(numOuvrage).length() != 13);
             
             Ouvrage o = getOuvrage(numOuvrage);  
@@ -140,15 +140,14 @@ public class Bibliotheque implements Serializable
                     do {
                         dateParution = EntreesSorties.lireDate("Entrez la date de parution (JJ/MM/AAAA) : ");
                         if (dateParution.after(dateActuelle)) {
-                            System.out.println("La date de parution saisie est postérieure à la date du jour.");
+                            EntreesSorties.afficherMessage("La date de parution saisie est postérieure à la date du jour.");
                         }
                     } while (dateParution.after(dateActuelle));
                     String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur : ");
                     
                     Integer input;
                     do {
-                        System.out.print("Entrez le code du public visé (enfant : 1, ado : 2 ou adulte : 3 ) : ");
-                        input = EntreesSorties.lireEntier();
+                        input = EntreesSorties.lireEntier("Entrez le code du public visé (enfant : 1, ado : 2 ou adulte : 3 ) : ");
                     } while (input < 1 || input > 3);
                     
                     Public publicVise;
@@ -241,10 +240,10 @@ public class Bibliotheque implements Serializable
                 do{
                     dateRecepEx = EntreesSorties.lireDate("Entrez la date de réception des exemplaires (JJ/MM/AAAA) : ");
                     if(dateRecepEx.after(dateActuelle)){
-                        System.out.println("La date de réception saisie est postérieure à la date du jour");
+                        EntreesSorties.afficherMessage("La date de réception saisie est postérieure à la date du jour");
                     }                  
                     if(dateRecepEx.before(o.getDateParution())){
-                        System.out.println("La date de réception saisie est antérieure à la date de parution de l'ouvrage");
+                        EntreesSorties.afficherMessage("La date de réception saisie est antérieure à la date de parution de l'ouvrage");
                     }
                 } while (dateRecepEx.after(dateActuelle)||dateRecepEx.before(o.getDateParution()));
                 
@@ -295,7 +294,6 @@ public class Bibliotheque implements Serializable
             }
             
             Long numOuvrage = EntreesSorties.lireLong("Entrez le numéro ISBN de l'ouvrage : ");
-                    
             Ouvrage o = getOuvrage(numOuvrage);
             if (o == null) {
 		EntreesSorties.afficherMessage("Aucun ouvrage n'est associe a ce numero.");
@@ -306,7 +304,6 @@ public class Bibliotheque implements Serializable
             }
             
             Integer numEx = EntreesSorties.lireEntier("Entrez le numéro de l'exemplaire : ");
-
             Exemplaire ex = o.getExemplaire(numEx);
             if (ex == null) {
                 EntreesSorties.afficherMessage("Exemplaire n'existe pas.");
@@ -316,8 +313,8 @@ public class Bibliotheque implements Serializable
             if (ex.exemplaireDisponible() == true) {
                 GregorianCalendar dateEmprunt = new GregorianCalendar();
                 Emprunt em = new Emprunt(L, ex, dateEmprunt);
-                _emprunts.add(em);
-                EntreesSorties.afficherMessage("Emprun créé:");
+                setEmprunt(em);
+                EntreesSorties.afficherMessage("Emprunt créé:");
                 em.afficherEmprunt();
             } else {
                 EntreesSorties.afficherMessage("Exemplaire non disponible à l'emprunt.");
@@ -356,7 +353,7 @@ public class Bibliotheque implements Serializable
             long numOuvrage = EntreesSorties.lireLong("Entrez le numero d'ISBN : ");
             Ouvrage o = getOuvrage(numOuvrage);
             if (o ==null){
-                System.out.print("Aucun ouvrage n'est associé à ce numéro d'ISBN");
+                EntreesSorties.afficherMessage("Aucun ouvrage n'est associé à ce numéro d'ISBN");
                 return;
             }
            
@@ -367,13 +364,13 @@ public class Bibliotheque implements Serializable
             if(ex!= null){
                                                       
                 ex.supprimerEmprunt();       //a inverser ds le diagramme de séquences
-                unSetEmprunt(em); // crash : nullpointerexception dans unsetemprunt
+                unSetEmprunt(em); 
                 //em.affiche(); // je propose que l'on affiche l'emprunt avant de procéder aux suppressions
-                System.out.print("Exemplaire disponible");
+                EntreesSorties.afficherMessage("Exemplaire disponible");
             }
             else
             {
-                System.out.print("Cet exemplaire n'existe pas");
+                EntreesSorties.afficherMessage("Cet exemplaire n'existe pas");
             }
                 
         }
@@ -436,6 +433,10 @@ public class Bibliotheque implements Serializable
         
         private void lierOuvrage(Ouvrage o, Long isbn){
             _dicoOuvrage.put(isbn, o);
+        }
+        
+        private void setEmprunt(Emprunt em) {
+            _emprunts.add(em);
         }
 	
 	
