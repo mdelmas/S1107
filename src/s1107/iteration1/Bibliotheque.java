@@ -369,7 +369,8 @@ public class Bibliotheque implements Serializable
                 ex.supprimerEmprunt();       //a inverser ds le diagramme de séquences
                 unSetEmprunt(em); // crash : nullpointerexception dans unsetemprunt
                 //em.affiche(); // je propose que l'on affiche l'emprunt avant de procéder aux suppressions
-                System.out.print("Exemplaire disponible");
+                System.out.print("Exemplaire suivant est disponible : ");
+                ex.afficherExemplaireLight();
             }
             else
             {
