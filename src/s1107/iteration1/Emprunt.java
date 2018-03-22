@@ -15,21 +15,19 @@ import java.util.GregorianCalendar;
  */
 public class Emprunt implements Serializable
 {
-  
+
     private static final long serialVersionUID = 48L;
 
-    
+
     // attributs
-    
     private Lecteur lecteur;
     private Exemplaire exemplaire;
     private GregorianCalendar dateEmprunt;
     private GregorianCalendar dateRetour;
     final int DUREE_EMPRUNT = 8;
-    
-    
+
+
     // constructeur
-    
     Emprunt(Lecteur lecteur, Exemplaire exemplaire, GregorianCalendar dateEmprunt) {
         setLecteur(lecteur);
         setExemplaire(exemplaire);
@@ -38,43 +36,42 @@ public class Emprunt implements Serializable
         setDateEmprunt(dateEmprunt);
         dateRetour = new GregorianCalendar(dateEmprunt.get(GregorianCalendar.YEAR), dateEmprunt.get(GregorianCalendar.MONTH), dateEmprunt.get(GregorianCalendar.DATE) + DUREE_EMPRUNT);
     }
-    
+
     // Getters / Setters
-    
     private void setLecteur(Lecteur lecteur) {
         this.lecteur = lecteur;
     }
-    
+
     public Lecteur getLecteur() {
         return lecteur;
     }
-    
+
     private void setExemplaire(Exemplaire exemplaire) {
         this.exemplaire = exemplaire;
     }
-    
+
     public Exemplaire getExemplaire() {
         return exemplaire;
     }
-    
+
     private void setDateEmprunt(GregorianCalendar dateEmprunt) {
         this.dateEmprunt = dateEmprunt;
     }
-    
+
     public GregorianCalendar getDateEmprunt() {
         return dateEmprunt;
     }
-    
+
     private void setDateRetour(GregorianCalendar dateRetour) {
         this.dateRetour = dateRetour;
     }
-    
+
     public GregorianCalendar getDateRetour() {
         return dateRetour;
     }
-    
+
     //Méthodes
-    
+
     /**
     Cherche le Lecteur associé à l'emprunt et supprime le lien à l'Emprunt
     supprime les liens avec le Lecteur et l'Exemplaire
@@ -85,26 +82,26 @@ public class Emprunt implements Serializable
         unSetLecteur();
         unSetExemplaire();
     }
-    
+
     /**
      * Retire le lien avec le lecteur
      */
-    
+
     public void unSetLecteur() {
        lecteur = null;
     }
-    
+
     /**
      * Retire le lien avec l'exemplaire
      */
     public void unSetExemplaire() {
        exemplaire = null;
     }
-    
+
     /**
      * AFFICHAGE NON FINAL
      */
-    
+
     public void afficherEmprunt() {
         Exemplaire ex = getExemplaire();
         ex.afficherExemplaireLight();
@@ -136,14 +133,14 @@ public class Emprunt implements Serializable
             EntreesSorties.afficherMessage("Aucune relance à effectuer");
         }
     }
-    
+
     /**
      * Affiche la date de l'emprunt
      */
     private void afficheDateEmprunt(){
         EntreesSorties.afficherMessage(", date d'emprunt : " + EntreesSorties.ecrireDate(getDateEmprunt()));
         EntreesSorties.afficherMessage("-----------------------------------");
-        
+
     }
 
     /**
@@ -158,5 +155,5 @@ public class Emprunt implements Serializable
         System.out.println(", date retour: " + EntreesSorties.ecrireDate(getDateRetour()));
     }
 
-    
+
 }
