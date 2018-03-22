@@ -1,155 +1,3 @@
-package s1107.iteration1;
-
-import java.io.Serializable;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Scanner;
-import s1107.iteration1.Ouvrage;
-import s1107.iteration1.Lecteur;
-import s1107.iteration1.EntreesSorties;
-import s1107.iteration1.Emprunt;
-
-// Classe de gestion de la Bibliotheque
-
-public class Bibliotheque implements Serializable
-{
-
-	private static final long serialVersionUID = 262L;
-
-	// -----------------------------------------------
-		//Attributs
-	// -----------------------------------------------
-
-		private HashMap<Integer, Lecteur> _dicoLecteur;
-                private HashMap<Long, Ouvrage> _dicoOuvrage;
-                private HashSet<Emprunt> _emprunts;
-                private int derNumLecteur;
-
-		/*
-		 * Le dictionnaire de lecteur permet à bibliotheque de
-		 * garantir l'unicité de ces derniers, et facilitent les recherches et créations.
-		 */
-
-	// -----------------------------------------------
-		//Constructeur
-	// -----------------------------------------------
-
-
-		public Bibliotheque() {
-			this.setLecteurs(new HashMap<Integer, Lecteur>());
-                        this.setOuvrages(new HashMap<Long, Ouvrage>());
-                        this.setEmprunts(new HashSet<Emprunt>());
-                        derNumLecteur=0;
-
-		}
-
-// -----------------------------------------------
-	// Public
-// -----------------------------------------------
-
-		// -----------------------------------------------
-			// Methodes
-		// -----------------------------------------------
-
-		/*
-		 * La méthode nouveauLecteur permet de créé un lecteur en demandant la saisie de son numéro
-		 * nom, prénom, date de naissance, adresse et numéro de téléphone.
-		 * L'age doit être compris entre 3 et 110 ans
-		 * Le lecteur est identifié par son numéro, si celui ci existe déjà dans le dictionnaire
-		 * de bibliothèque, un message d'erreur est affiché.
-		 * Une fois le nouveau lecteur créé, il est ajouté au dictionnaire de lecteur
-		 * afin de garantir la cohérence des données.
-		 */
-	public void nouveauLecteur()
-	{
-            String nom = EntreesSorties.lireChaine("Entrez le nom : ");
-            String prenom = EntreesSorties.lireChaine("Entrez le prenom : ");
-            Integer age;
-            GregorianCalendar dateNaiss, dateNaissComp;
-            GregorianCalendar dateActuelle = new GregorianCalendar();
-            do {
-                    dateNaiss = EntreesSorties.lireDate("Entrez la date de naissance du lecteur (JJ/MM/AAAA) : ");
-                    dateNaissComp = new GregorianCalendar(dateActuelle.get(GregorianCalendar.YEAR), dateNaiss.get(GregorianCalendar.MONTH), dateNaiss.get(GregorianCalendar.DATE));
-                    if(dateNaissComp.before(dateActuelle)){
-                            age=dateActuelle.get(GregorianCalendar.YEAR)-dateNaiss.get(GregorianCalendar.YEAR);
-                    }
-                    else{
-                            age=dateActuelle.get(GregorianCalendar.YEAR)-dateNaiss.get(GregorianCalendar.YEAR)-1;
-                    }
-                    if ((age<=3) | (age>=110)){
-                            EntreesSorties.afficherMessage("Age incorrect ("+age+"), veuillez recommencer.");
-                    }
-                    else {
-                            EntreesSorties.afficherMessage("Age du lecteur : " + age + " ans");
-                    }
-            } while ((age<=3) | (age>=110));
-            String adresse = EntreesSorties.lireChaine("Entrez l'adresse : ");
-
-            String tel;
-            String regexStr = "^[0-9]{10}$";
-            do {
-                tel = EntreesSorties.lireChaine("Entrez le numero de telephone : ");
-                if (!tel.matches(regexStr))
-                    EntreesSorties.afficherMessage("Numéro incorrect, veuillez recommencer.");
-            } while (!tel.matches(regexStr));
-
-            EntreesSorties.afficherMessage("Fin de saisie.");
-
-            Lecteur L = new Lecteur(nom, this.getDerNumLecteur()+1, prenom, dateNaiss, adresse, tel);
-
-            boolean exist = false;
-            for (Iterator<Lecteur> itr = lesLecteurs(); itr.hasNext();){
-                if(L.equals(itr.next())){
-                    EntreesSorties.afficherMessage("Ce lecteur existe déjà.");
-                    exist = true;
-                    break;
-                }
-            }
-            if(exist == false){
-                incDerNumLecteur();
-                lierLecteur(L, derNumLecteur);
-                EntreesSorties.afficherMessage("Le lecteur n°" + derNumLecteur + " a bien été créé.");
-                L.afficherLecteur();
-            }
-	}
-
-        /*
-        La méthode nouvelOuvrage permet de créer un ouvrage, vérifie si l'ouvrage n'existe pas déjà (par l'isbn)
-        sinon on crée l'ouvrage, on l'ajoute au dictionnaire de la classe Bibliothèque et on affiche les informations
-        de l'objet créé.
-        */
-
-        public void nouvelOuvrage() {
-
-            long numOuvrage;
-            do {
-                numOuvrage = EntreesSorties.lireLong("Entrez le numero d'ISBN : ");
-                if (String.valueOf(numOuvrage).length() != 13)
-                    EntreesSorties.afficherMessage("ISBN incorrect (différent de 13 chiffres), veuillez entrer un code à 13 chiffres.");
-            } while (String.valueOf(numOuvrage).length() != 13);
-
-            Ouvrage o = getOuvrage(numOuvrage);
-
-            if (o == null) {
-                    String titre = EntreesSorties.lireChaine("Entrez le titre : ");
-                    String nomEditeur = EntreesSorties.lireChaine("Entrez le nom de l'éditeur : ");
-                    GregorianCalendar dateParution;
-                    GregorianCalendar dateActuelle = new GregorianCalendar();
-                    do {
-                        dateParution = EntreesSorties.lireDate("Entrez la date de parution (JJ/MM/AAAA) : ");
-                        if (dateParution.after(dateActuelle)) {
-                            EntreesSorties.afficherMessage("La date de parution saisie est postérieure à la date du jour.");
-                        }
-                    } while (dateParution.after(dateActuelle));
-                    String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur : ");
-
-                    Integer input;
-                    do {
-                        input = EntreesSorties.lireEntier("Entrez le code du public visé (enfant : 1, ado : 2 ou adulte : 3 ) : ");
-                        input = EntreesSorties.lireEntier();
->>>>>>> fusion
                     } while (input < 1 || input > 3);
 
                     Public publicVise;
@@ -317,8 +165,6 @@ public class Bibliotheque implements Serializable
                 Emprunt em = new Emprunt(L, ex, dateEmprunt);
                 setEmprunt(em);
                 EntreesSorties.afficherMessage("Emprunt créé:");
->>>>>>> fusion
-                em.afficherEmprunt();
             } else {
                 EntreesSorties.afficherMessage("Exemplaire non disponible à l'emprunt.");
             }
@@ -368,8 +214,8 @@ public class Bibliotheque implements Serializable
                 ex.supprimerEmprunt();       //a inverser ds le diagramme de séquences
                 unSetEmprunt(em);
                 //em.affiche(); // je propose que l'on affiche l'emprunt avant de procéder aux suppressions
-                EntreesSorties.afficherMessage("Exemplaire disponible");
-            }
+                System.out.print("Exemplaire suivant est disponible : ");
+                ex.afficherExemplaireLight();
             else
             {
                 EntreesSorties.afficherMessage("Cet exemplaire n'existe pas");
