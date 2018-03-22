@@ -94,7 +94,8 @@ public class Emprunt implements Serializable
         ex.afficherExemplaireLight();
         EntreesSorties.afficherMessage("   Date emprunt: " + EntreesSorties.ecrireDate(getDateEmprunt()) + ", date retour: " + EntreesSorties.ecrireDate(getDateRetour()));
     }
-        /*
+    
+    /**
     Contrôle si l'emprunt en cours date de 15 jours ou plus, renvoie vrai si oui
     */
     private boolean aRelancer(GregorianCalendar dateJour){
@@ -120,7 +121,7 @@ public class Emprunt implements Serializable
         }
     }
     
-    //Affiche la date de l'emprunt
+    // Affiche la date de l'emprunt
     private void afficheDateEmprunt(){
         EntreesSorties.afficherMessage(", date d'emprunt : " + EntreesSorties.ecrireDate(getDateEmprunt()));
         EntreesSorties.afficherMessage("-----------------------------------");
