@@ -108,8 +108,7 @@ public class Emprunt implements Serializable
     public void afficherEmprunt() {
         Exemplaire ex = getExemplaire();
         ex.afficherExemplaireLight();
-        System.out.print("   Date emprunt: " + EntreesSorties.ecrireDate(getDateEmprunt()));
-        System.out.println(", date retour: " + EntreesSorties.ecrireDate(getDateRetour()));
+        EntreesSorties.afficherMessage("   Date emprunt: " + EntreesSorties.ecrireDate(getDateEmprunt()) + ", date retour: " + EntreesSorties.ecrireDate(getDateRetour()));
     }
     /**
     Contrôle si l'emprunt en cours date de 15 jours ou plus, renvoie vrai si oui
@@ -133,7 +132,7 @@ public class Emprunt implements Serializable
             relancesAFaire = true;
         }
         if(relancesAFaire == false){
-            System.out.println("Aucune relance à effectuer");
+            EntreesSorties.afficherMessage("Aucune relance à effectuer");
         }
     }
     
@@ -141,8 +140,8 @@ public class Emprunt implements Serializable
      * Affiche la date de l'emprunt
      */
     private void afficheDateEmprunt(){
-        System.out.println(", date d'emprunt : " + EntreesSorties.ecrireDate(getDateEmprunt()));
-        System.out.println("-----------------------------------");
+        EntreesSorties.afficherMessage(", date d'emprunt : " + EntreesSorties.ecrireDate(getDateEmprunt()));
+        EntreesSorties.afficherMessage("-----------------------------------");
         
     }
 

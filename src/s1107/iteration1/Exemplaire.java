@@ -63,12 +63,11 @@ public class Exemplaire implements Serializable {
      * Affiche les informations de l'exemplaire
      */
     public void affiche(){
-        System.out.print("Numéro d'exemplaire : " + numEx + ", ");
-        System.out.print("date réception : " + EntreesSorties.ecrireDate(dateRecepEx));
+        EntreesSorties.afficherMessage("Numéro d'exemplaire : " + numEx + ", date réception : " + EntreesSorties.ecrireDate(dateRecepEx));
         if (empruntable)
-            System.out.println(", empruntable");
+            EntreesSorties.afficherMessage("Empruntable");
         else
-            System.out.println(", non empruntable");
+            EntreesSorties.afficherMessage("Non empruntable");
     }
         
     /**
@@ -92,7 +91,7 @@ public class Exemplaire implements Serializable {
     public void afficherExemplaireLight() {
         Ouvrage o = getOuvrage();
         o.afficheOuvrageLight();
-        System.out.println("   N° d'exemplaire: " + getNumEx());
+        EntreesSorties.afficherMessage("   N° d'exemplaire: " + getNumEx());
     }
     
     //////
@@ -116,21 +115,16 @@ public class Exemplaire implements Serializable {
      */
     public void supprimerEmprunt() {
        Emprunt em = getEmprunt();
-       if(em != null)
-       {
+       if(em != null) {
            em.supprimerEmprunt();
            unSetEmprunt();
+       } else {
+           EntreesSorties.afficherMessage("Cet exemplaire n'a pas été emprunté");
        }
-       else
-       {
-           System.out.print("Cet exemplaire n'a pas été emprunté");
-       }
-             
     }
     
     public void unSetEmprunt() {
        emprunt = null;
     } 
-    //////
     
 }

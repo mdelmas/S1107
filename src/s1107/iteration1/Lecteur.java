@@ -158,9 +158,9 @@ public class Lecteur implements Serializable
                  * Affiche les informations des emprunts en cours du lecteur
                  */
                 public void afficherEmpruntsLecteur() {
-                    HashSet<Emprunt> emprunts = getEmprunts();
                     System.out.print("Lecteur n°" + getNumLecteur());
                     System.out.println(", " + getNom() + " " + getPrenom());
+                    HashSet<Emprunt> emprunts = getEmprunts();
                     System.out.println(emprunts.size() + " emprunts en cours");
                     for (Emprunt emprunt: emprunts) {
                         System.out.print(" - ");
