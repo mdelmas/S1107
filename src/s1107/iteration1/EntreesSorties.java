@@ -461,7 +461,11 @@ public class EntreesSorties  {
 	 * @param message message à afficher.
 	 */
 	public static void afficherMessage(String message) {
-		System.out.println(message);		
+		System.out.println(message);
 	}
 	
+        public static void afficherMessageCouleur(String message, Color color) {
+            System.out.println(color + message + Color.RESET);		
+	}
+
 } // Fin de classe IO

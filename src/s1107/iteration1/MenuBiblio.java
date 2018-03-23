@@ -1,56 +1,57 @@
+package s1107.iteration1;
 
 import s1107.iteration1.EntreesSorties;
 import s1107.iteration1.Bibliotheque;
 
 
-public class MenuBiblio {
-	private Bibliotheque _bibliotheque;
+public class MenuBiblio 
+{
+    private Bibliotheque _bibliotheque;
 	
-	public MenuBiblio (Bibliotheque bibliotheque) {
-	_bibliotheque = bibliotheque; 
-	}
+    public MenuBiblio (Bibliotheque bibliotheque) 
+    {
+        _bibliotheque = bibliotheque; 
+    }
 	
 	/*
 	 * menuPrincipal permet à l'utilisateur de selectionner un type de sous menu (Lecteur, Ouvrage ou Exemplaire) 
 	 * où il effectuera par la suite l'action désirée. Si l'utilisateur a fini d'utiliuser le programme, il choisit l'option Quitter.
 	*/
-public void menuPrincipal() {
+    public void menuPrincipal() {
 	Integer menu;
 	do {
-		EntreesSorties.afficherMessage(" ========================================================");
-		EntreesSorties.afficherMessage("|                   Menu Principal                       |");
-		EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
-		EntreesSorties.afficherMessage("| Menu Lecteur : 1                                       |");
-		EntreesSorties.afficherMessage("| Menu Ouvrage : 2                                       |");
-		EntreesSorties.afficherMessage("| Menu Exemplaire : 3                                    |");
-		EntreesSorties.afficherMessage("| Menu Emprunt : 4                                       |");
-		EntreesSorties.afficherMessage("| Quitter : 0                                            |");
-		EntreesSorties.afficherMessage(" ========================================================");
-		menu = EntreesSorties.lireEntier();
+            EntreesSorties.afficherMessageCouleur("\n ========================================================", Color.GRAY);
+            EntreesSorties.afficherMessageCouleur("|                   Menu Principal                       |", Color.GRAY);
+            EntreesSorties.afficherMessageCouleur("| Saisissez un numero correspondant :                    |", Color.GRAY);
+            EntreesSorties.afficherMessageCouleur("| Menu Lecteur : 1                                       |", Color.GRAY);
+            EntreesSorties.afficherMessageCouleur("| Menu Ouvrage : 2                                       |", Color.GRAY);
+            EntreesSorties.afficherMessageCouleur("| Menu Exemplaire : 3                                    |", Color.GRAY);
+            EntreesSorties.afficherMessageCouleur("| Menu Emprunt : 4                                       |", Color.GRAY);
+            EntreesSorties.afficherMessageCouleur("| Quitter : 0                                            |", Color.GRAY);
+            EntreesSorties.afficherMessageCouleur(" ========================================================", Color.GRAY);
+            menu = EntreesSorties.lireEntier();
 			
-			switch (menu){
-				case 1 : {
-					this.menuLecteur();
-					break;
-				}
-                                
-                                case 2 : {
-                                        this.menuOuvrage();
-                                        break;
-                                }
-
-                                case 3 : {
-                                        this.menuExemplaire();
-                                        break;
-                                }
-                                case 4 : {
-                                        this.menuEmprunt();
-                                        break;
-                                }
-				default : {
-					break;
-				}
-			}
+            switch (menu) {
+		case 1 : {
+                    this.menuLecteur();
+                    break;
+		}
+                case 2 : {
+                    this.menuOuvrage();
+                    break;
+                }
+                case 3 : {
+                    this.menuExemplaire();
+                    break;
+                }
+                case 4 : {
+                    this.menuEmprunt();
+                    break;
+                }
+		default : {
+                    break;
+		}
+            }
 	} while (menu != 0);	
 }
 
@@ -62,12 +63,12 @@ public void menuPrincipal() {
 public void menuLecteur() {
 	Integer menuLect;
 	do {
-		EntreesSorties.afficherMessage(" ========================================================");
-		EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
-		EntreesSorties.afficherMessage("| Nouveau Lecteur : 1                                    |");
-		EntreesSorties.afficherMessage("| Consulter Lecteur : 2                                  |");
-		EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
-		EntreesSorties.afficherMessage(" ========================================================");
+		EntreesSorties.afficherMessageCouleur("\n ========================================================", Color.GRAY);
+		EntreesSorties.afficherMessageCouleur("| Saisissez un numero correspondant :                    |", Color.GRAY);
+		EntreesSorties.afficherMessageCouleur("| Nouveau Lecteur : 1                                    |", Color.GRAY);
+		EntreesSorties.afficherMessageCouleur("| Consulter Lecteur : 2                                  |", Color.GRAY);
+		EntreesSorties.afficherMessageCouleur("| Retour Menu Principal : 0                              |", Color.GRAY);
+		EntreesSorties.afficherMessageCouleur(" ========================================================", Color.GRAY);
 		menuLect = EntreesSorties.lireEntier();
 			
 			switch (menuLect){
@@ -94,12 +95,12 @@ public void menuLecteur() {
 public void menuOuvrage() {
 	Integer menuLect;
 	do {
-		EntreesSorties.afficherMessage(" ========================================================");
-		EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
-		EntreesSorties.afficherMessage("| Nouvel Ouvrage : 1                                     |");
-		EntreesSorties.afficherMessage("| Consulter Ouvrage : 2                                  |");
-		EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
-		EntreesSorties.afficherMessage(" ========================================================");
+		EntreesSorties.afficherMessageCouleur("\n ========================================================", Color.GRAY);
+		EntreesSorties.afficherMessageCouleur("| Saisissez un numero correspondant :                    |", Color.GRAY);
+		EntreesSorties.afficherMessageCouleur("| Nouvel Ouvrage : 1                                     |", Color.GRAY);
+		EntreesSorties.afficherMessageCouleur("| Consulter Ouvrage : 2                                  |", Color.GRAY);
+		EntreesSorties.afficherMessageCouleur("| Retour Menu Principal : 0                              |", Color.GRAY);
+		EntreesSorties.afficherMessageCouleur(" ========================================================", Color.GRAY);
 		menuLect = EntreesSorties.lireEntier();
 			
 			switch (menuLect){
@@ -126,14 +127,13 @@ public void menuOuvrage() {
 public void menuExemplaire() {
 	Integer menuLect;
 	do {
-		EntreesSorties.afficherMessage(" ========================================================");
-		EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
-		EntreesSorties.afficherMessage("| Nouveaux Exemplaires : 1                               |");
-		EntreesSorties.afficherMessage("| Consulter Exemplaires : 2                              |");
-		EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
-		EntreesSorties.afficherMessage(" ========================================================");
+		EntreesSorties.afficherMessageCouleur("\n ========================================================", Color.GRAY);
+		EntreesSorties.afficherMessageCouleur("| Saisissez un numero correspondant :                    |", Color.GRAY);
+		EntreesSorties.afficherMessageCouleur("| Nouveaux Exemplaires : 1                               |", Color.GRAY);
+		EntreesSorties.afficherMessageCouleur("| Consulter Exemplaires : 2                              |", Color.GRAY);
+		EntreesSorties.afficherMessageCouleur("| Retour Menu Principal : 0                              |", Color.GRAY);
+		EntreesSorties.afficherMessageCouleur(" ========================================================", Color.GRAY);
 		menuLect = EntreesSorties.lireEntier();
-			
 			switch (menuLect){
 				case 1 : {
 					_bibliotheque.nouvelExemplaire();
@@ -154,14 +154,14 @@ public void menuExemplaire() {
 public void menuEmprunt() {
 	Integer menuLect;
 	do {
-		EntreesSorties.afficherMessage(" ========================================================");
-		EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
-		EntreesSorties.afficherMessage("| Emprunter exemplaire : 1                               |");
-		EntreesSorties.afficherMessage("| Consulter emprunts lecteur : 2                         |");
-                EntreesSorties.afficherMessage("| Rendre exemplaire : 3                                  |");
-                EntreesSorties.afficherMessage("| Liste Relances : 4                                     |");
-                EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
-		EntreesSorties.afficherMessage(" ========================================================");
+		EntreesSorties.afficherMessageCouleur("\n ========================================================", Color.GRAY);
+		EntreesSorties.afficherMessageCouleur("| Saisissez un numero correspondant :                    |", Color.GRAY);
+		EntreesSorties.afficherMessageCouleur("| Emprunter exemplaire : 1                               |", Color.GRAY);
+		EntreesSorties.afficherMessageCouleur("| Consulter emprunts lecteur : 2                         |", Color.GRAY);
+                EntreesSorties.afficherMessageCouleur("| Rendre exemplaire : 3                                  |", Color.GRAY);
+                EntreesSorties.afficherMessageCouleur("| Liste Relances : 4                                     |", Color.GRAY);
+                EntreesSorties.afficherMessageCouleur("| Retour Menu Principal : 0                              |", Color.GRAY);
+		EntreesSorties.afficherMessageCouleur(" ========================================================", Color.GRAY);
 		menuLect = EntreesSorties.lireEntier();
 			
 			switch (menuLect){

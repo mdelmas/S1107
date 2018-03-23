@@ -1,3 +1,5 @@
+package s1107.iteration1;
+
 import s1107.iteration1.EntreesSorties;
 import s1107.iteration1.Bibliotheque;
 import java.io.FileInputStream;
@@ -13,7 +15,7 @@ public class Main {
 		Bibliotheque bibliotheque = new Bibliotheque();
 		
 		String nomFich="save.ser";
-		
+                
 		/*---------------------------------------------------------------------------------------------
 		 * Récupération des serialisation précédentes dans le fichier du nom de "save.ser".
 		 * L'utilisateur est informé de la réussite ou non de la récupération des données.
@@ -29,7 +31,7 @@ public class Main {
 
 			EntreesSorties.afficherMessage(" $$$ Restauration du fichier " + nomFich + " realisee");
 		} catch (Exception e) {
-			EntreesSorties.afficherMessage(" *** Start : Pbs de Restauration / fichier " + nomFich);
+			EntreesSorties.afficherMessageCouleur(" *** Start : Pbs de Restauration / fichier " + nomFich, Color.RED);
 		}
 		//----------------------------------------------------------------------------------------------
 		
@@ -51,11 +53,11 @@ public class Main {
 			out.close();
 			f.close();
 		} catch (Exception e) {
-			EntreesSorties.afficherMessage(" *** Start :Pbs de Sauvegarde dans le fichier " + nomFich);
+			EntreesSorties.afficherMessageCouleur(" *** Start :Pbs de Sauvegarde dans le fichier " + nomFich, Color.RED);
 		}
 	}
 	
 	public static void main(String args[]){
-	new Main();
+            new Main();
 	}
 }

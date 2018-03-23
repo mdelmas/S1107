@@ -16,12 +16,31 @@ import java.util.Iterator;
  */
 public class testEmprunt {
 
-    /**
+        public static final String ANSI_RESET = "\u001B[0m";
+        public static final String ANSI_BLACK = "\u001B[30m";
+        public static final String ANSI_RED = "\u001B[31m";
+        public static final String ANSI_GREEN = "\u001B[32m";
+        public static final String ANSI_YELLOW = "\u001B[33m";
+        public static final String ANSI_BLUE = "\u001B[34m";
+        public static final String ANSI_PURPLE = "\u001B[35m";
+        public static final String ANSI_CYAN = "\u001B[36m";
+        public static final String ANSI_WHITE = "\u001B[37m";
+        public static final String ANSI_GRAY = "\u001B[1m";
+
+        /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         
-        
+        System.out.println(Color.BLACK + "Ceci est un test." + Color.RESET);        
+        System.out.println(Color.GRAY + "Ceci est un test." + Color.RESET);        
+        System.out.println(Color.RED + "Ceci est un test." + Color.RESET);        
+        System.out.println(Color.GREEN + "Ceci est un test." + Color.RESET);        
+        System.out.println(Color.YELLOW + "Ceci est un test." + Color.RESET);        
+        System.out.println(Color.BLUE + "Ceci est un test." + Color.RESET);        
+        System.out.println(Color.PURPLE + "Ceci est un test." + Color.RESET);        
+        System.out.println(Color.CYAN + "Ceci est un test." + Color.RESET);        
+        System.out.println(Color.WHITE + "Ceci est un test." + Color.RESET);        
         
       /*  GregorianCalendar dateNaiss = new GregorianCalendar(1993, 05, 07);
         Lecteur lecteur = new Lecteur("DELMAS", 1, "Morgane", dateNaiss, "Grenoble", "0612345678");
