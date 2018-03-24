@@ -32,7 +32,7 @@ public class Exemplaire implements Serializable {
     
     //Getters & setters
     
-    public void setOuvrage(Ouvrage o) {
+    private void setOuvrage(Ouvrage o) {
         ouvrage = o;
     }
     
@@ -40,13 +40,13 @@ public class Exemplaire implements Serializable {
             this.dateRecepEx = dateRecepEx;
     }
     
-    public void setEmprunt(Emprunt emprunt) {
+    private void setEmprunt(Emprunt emprunt) {
         this.emprunt = emprunt;
     }
     /**
     Affiche le numéro d'exemplaire pour la relance
     */
-    public void afficheRelance(){
+    private void afficheRelance(){
         System.out.print(", numéro exemplaire : "+ getNumEx());
     }
     
@@ -123,7 +123,7 @@ public class Exemplaire implements Serializable {
        }
     }
     
-    public void unSetEmprunt() {
+    private void unSetEmprunt() {
        emprunt = null;
     } 
     

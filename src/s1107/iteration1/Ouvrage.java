@@ -100,7 +100,7 @@ public class Ouvrage implements Serializable{
     /**
      * Incrémente le dernier numéro d'exemplaire de la Classe
      */
-    public void incDerNumEx(){
+    private void incDerNumEx(){
         derNumEx = derNumEx + 1;
     }
     
@@ -143,7 +143,7 @@ public class Ouvrage implements Serializable{
     /**
      * Rattache un exemplaire donné à l'ouvrage
      */
-    public void setExemplaire(int numEx, Exemplaire e) {
+    private void setExemplaire(int numEx, Exemplaire e) {
         exemplaires.put(numEx, e);
     }
     

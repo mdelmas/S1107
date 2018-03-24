@@ -260,7 +260,7 @@ public class Bibliotheque implements Serializable
         }
 
 
-        public boolean verifPublic(Lecteur lecteur, Ouvrage ouvrage)
+        private boolean verifPublic(Lecteur lecteur, Ouvrage ouvrage)
         {
             if (lecteur.calculAge() > ouvrage.getPublicVise().getAgeMinimum())
                 return true;
@@ -384,7 +384,7 @@ public class Bibliotheque implements Serializable
             _emprunts = emprunts;
         }
 
-        public void unSetEmprunt(Emprunt em) {
+        private void unSetEmprunt(Emprunt em) {
             _emprunts.remove(em);
         }
 
@@ -446,7 +446,7 @@ public class Bibliotheque implements Serializable
 	        return _dicoOuvrage.values().iterator();
 	    }
 
-	    public void setDerNumLecteur(int v)
+	    private void setDerNumLecteur(int v)
 		{
 	        derNumLecteur = v;
 	    }
@@ -456,7 +456,7 @@ public class Bibliotheque implements Serializable
 	        return derNumLecteur;
 	    }
 
-	    public void incDerNumLecteur()
+	    private void incDerNumLecteur()
 		{
 	        derNumLecteur++;
 	    }

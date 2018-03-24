@@ -42,7 +42,7 @@ public class Emprunt implements Serializable
         this.lecteur = lecteur;
     }
 
-    public Lecteur getLecteur() {
+    private Lecteur getLecteur() {
         return lecteur;
     }
 
@@ -50,7 +50,7 @@ public class Emprunt implements Serializable
         this.exemplaire = exemplaire;
     }
 
-    public Exemplaire getExemplaire() {
+    private Exemplaire getExemplaire() {
         return exemplaire;
     }
 
@@ -87,14 +87,14 @@ public class Emprunt implements Serializable
      * Retire le lien avec le lecteur
      */
 
-    public void unSetLecteur() {
+    private void unSetLecteur() {
        lecteur = null;
     }
 
     /**
      * Retire le lien avec l'exemplaire
      */
-    public void unSetExemplaire() {
+    private void unSetExemplaire() {
        exemplaire = null;
     }
 

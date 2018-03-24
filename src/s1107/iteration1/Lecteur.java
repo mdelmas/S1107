@@ -80,7 +80,7 @@ public class Lecteur implements Serializable
 			return _tel;
 		}
 
-        public HashSet<Emprunt> getEmprunts()
+        private HashSet<Emprunt> getEmprunts()
 		{
             return emprunts;
         }
@@ -224,7 +224,7 @@ public class Lecteur implements Serializable
 				unSetEmprunt(em);
 			}
 
-			public void unSetEmprunt(Emprunt em)
+			private void unSetEmprunt(Emprunt em)
 			{
 				emprunts.remove(em);
 			}
