@@ -15,7 +15,7 @@ public enum Public {
     ADULTE("Adulte", 16);
     
     private String nom="";
-    private Integer ageMinimum;
+    private Integer ageMinimum; 
 
     Public(String nom, Integer ageMinimum){
         this.nom = nom;
@@ -26,6 +26,9 @@ public enum Public {
         return nom;
     }
     
+    /*
+     * Retourne l'age minimum/limite du lecteur pour un public donné  
+     */
     public Integer getAgeMinimum() {
         return ageMinimum;
     }

@@ -13,118 +13,153 @@ import java.util.GregorianCalendar;
  *
  * @author valentid
  */
-public class Exemplaire implements Serializable {
+public class Exemplaire implements Serializable 
+{
     
     private static final long serialVersionUID = 290L;
     
+    // -----------------------------------------------
+    // Attributs
+    // -----------------------------------------------
+
     private boolean empruntable;
     private GregorianCalendar dateRecepEx;
     private int numEx;
     private Ouvrage ouvrage;
     private Emprunt emprunt;
     
-    Exemplaire(Ouvrage o, boolean empruntable, GregorianCalendar dateRecepEx, int numEx) {
+    
+    // -----------------------------------------------
+    // Constructeur
+    // -----------------------------------------------
+    
+    Exemplaire(Ouvrage o, boolean empruntable, GregorianCalendar dateRecepEx, int numEx) 
+    {
         this.setOuvrage(o);
         this.empruntable = empruntable;
         this.setDateRecepEx(dateRecepEx);
         this.numEx = numEx;
     }
     
-    //Getters & setters
+    // -----------------------------------------------
+    // Getters
+    // -----------------------------------------------
     
-    public void setOuvrage(Ouvrage o) {
+    public Ouvrage getOuvrage() 
+    {
+        return ouvrage;
+    }
+    
+    public int getNumEx() 
+    {
+        return numEx;
+    }
+    
+    public Emprunt getEmprunt() 
+    {
+       return emprunt;
+    }
+  
+    
+    // -----------------------------------------------
+    // Setters
+    // -----------------------------------------------
+    
+    private void setOuvrage(Ouvrage o) 
+    {
         ouvrage = o;
     }
     
-    public void setDateRecepEx(GregorianCalendar dateRecepEx){
+    private void setDateRecepEx(GregorianCalendar dateRecepEx)
+    {
             this.dateRecepEx = dateRecepEx;
     }
     
-    public void setEmprunt(Emprunt emprunt) {
+    private void setEmprunt(Emprunt emprunt) 
+    {
         this.emprunt = emprunt;
     }
-    /**
-    Affiche le numéro d'exemplaire pour la relance
-    */
-    public void afficheRelance(){
-        System.out.print(", numéro exemplaire : "+ getNumEx());
-    }
+
+    private void unSetEmprunt() 
+    {
+       emprunt = null;
+    } 
     
-    /**
-    Affiche les informations nécessaires à la relance
-    */
-    public void infosRelance(){
-        Ouvrage o = getOuvrage();
-        o.afficheOuvrageLight();
-        afficheRelance();
-    }
+
+    // -----------------------------------------------
+    // Méthodes
+    // -----------------------------------------------
     
-    /**
-     * Affiche les informations de l'exemplaire
-     */
-    public void affiche(){
-        EntreesSorties.afficherMessage("Numéro d'exemplaire : " + numEx + ", date réception : " + EntreesSorties.ecrireDate(dateRecepEx));
-        if (empruntable)
-            EntreesSorties.afficherMessage("Empruntable");
-        else
-            EntreesSorties.afficherMessage("Non empruntable");
-    }
-        
     /**
      * Vérifie si l'exemplaire est empruntable et s'il n'a pas été emprunté, 
      * retourne vrai si les 2 sont vrais, faux sinon
-     * @return 
      */
-    public boolean exemplaireDisponible() {
+    public boolean exemplaireDisponible() 
+    {
         if (empruntable == true && emprunt == null)
             return true;
         return false;
     }
     
-    public void affecterEmprunt(Emprunt emprunt) {
+    public void affecterEmprunt(Emprunt emprunt) 
+    {
         setEmprunt(emprunt);
     } 
-    
-    /**
-     * Affiche les informations de l'exemplaire, affichage réduit
-     */
-    public void afficherExemplaireLight() {
-        Ouvrage o = getOuvrage();
-        o.afficheOuvrageLight();
-        EntreesSorties.afficherMessage("   N° d'exemplaire: " + getNumEx());
-    }
-    
-    //////
-    // RAJOUT POUR L'AFFICHAGE D'EMPRUNT - PEUT ETRE PAS A GARDER
-    
-    public Ouvrage getOuvrage() {
-        return ouvrage;
-    }
-    
-    public int getNumEx() {
-        return numEx;
-    }
-    
-    public Emprunt getEmprunt() {
-       return emprunt;
-    }
     
     /**
      * Retrouve l'Emprunt associé à l'Exemplaire, lui demande de supprimer le lien avec l'emprunt
      * supprime le lien entre l'exemplaire et l'emprunt
      */
-    public void supprimerEmprunt() {
-       Emprunt em = getEmprunt();
-       if(em != null) {
+    public void supprimerEmprunt() 
+    {
+        Emprunt em = getEmprunt();
+        if (em != null) {
            em.supprimerEmprunt();
            unSetEmprunt();
-       } else {
+        } else {
            EntreesSorties.afficherMessage("Cet exemplaire n'a pas été emprunté");
-       }
+        }
     }
     
-    public void unSetEmprunt() {
-       emprunt = null;
-    } 
     
+    // Affichage
+    
+    /**
+     * Affiche les informations de l'exemplaire
+     */
+    public void affiche()
+    {
+        if (empruntable)
+            EntreesSorties.afficherMessage(" - Numéro d'exemplaire : " + numEx + ", date réception : " + EntreesSorties.ecrireDate(dateRecepEx) + ", empruntable");
+        else
+            EntreesSorties.afficherMessage(" - Numéro d'exemplaire : " + numEx + ", date réception : " + EntreesSorties.ecrireDate(dateRecepEx) + ", non empruntable");
+    }
+        
+    /**
+     * Affiche les informations de l'exemplaire, affichage réduit
+     */
+    public void afficherExemplaireLight() 
+    {
+        Ouvrage o = getOuvrage();
+        o.afficheOuvrageLight();
+        EntreesSorties.afficherMessage(", n° d'exemplaire : " + getNumEx());
+    }
+    /**
+     * Affiche les informations nécessaires à la relance
+     */
+/*    public void infosRelance()
+    {
+        Ouvrage o = getOuvrage();
+        o.afficheOuvrageLight();
+        afficheRelance();
+    }*/
+
+    /**
+     * Affiche le numéro d'exemplaire pour la relance
+     */
+/*    public void afficheRelance()
+    {
+        System.out.print(", numéro exemplaire : " + getNumEx());
+    }
+    */
 }
