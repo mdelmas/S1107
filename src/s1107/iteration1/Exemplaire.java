@@ -110,15 +110,15 @@ public class Exemplaire implements Serializable
      * Retrouve l'Emprunt associé à l'Exemplaire, lui demande de supprimer le lien avec l'emprunt
      * supprime le lien entre l'exemplaire et l'emprunt
      */
-    public void supprimerEmprunt()
+    public boolean supprimerEmprunt()
     {
         Emprunt em = getEmprunt();
         if (em != null) {
            em.supprimerEmprunt();
            unSetEmprunt();
-        } else {
-           EntreesSorties.afficherMessage("Cet exemplaire n'a pas été emprunté");
+           return true;
         }
+        return false;
     }
 
 

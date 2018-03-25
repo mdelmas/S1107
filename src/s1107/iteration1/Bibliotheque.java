@@ -15,7 +15,6 @@ import s1107.iteration1.EntreesSorties;
 
 public class Bibliotheque implements Serializable
 {
-    //
 
     private static final long serialVersionUID = 262L;
 
@@ -30,7 +29,7 @@ public class Bibliotheque implements Serializable
 
     /*
      * Le dictionnaire de lecteur permet à bibliotheque de
-     * garantir l'unicité de ces derniers, et facilitent les recherches et créations.
+     * garantir l'unicité de ces derniers, et facilite les recherches et créations.
      */
 
     // -----------------------------------------------
@@ -115,7 +114,7 @@ public class Bibliotheque implements Serializable
 	    Lecteur L = new Lecteur(nom, this.getDerNumLecteur()+1, prenom, dateNaiss, adresse, tel);
 
 	    boolean exist = false;
-	    for (Iterator<Lecteur> itr = lesLecteurs(); itr.hasNext();){
+	    for (Iterator<Lecteur> itr = getLecteurs(); itr.hasNext();){
                 if (L.equals(itr.next())) {
                     EntreesSorties.afficherMessageCouleur("Ce lecteur existe déjà.", Color.RED);
                     exist = true;
@@ -284,10 +283,13 @@ public class Bibliotheque implements Serializable
             EntreesSorties.afficherMessage("Fin de saisie.\n");
 
             if (ex != null) {
-                ex.supprimerEmprunt();
-                unSetEmprunt(em);
-                EntreesSorties.afficherMessageCouleur("L'exemplaire suivant est disponible : ", Color.BLUE);
-                ex.afficherExemplaireLight();
+                if (ex.supprimerEmprunt()) {
+                    unSetEmprunt(em);
+                    EntreesSorties.afficherMessageCouleur("L'exemplaire suivant est disponible : ", Color.BLUE);
+                    ex.afficherExemplaireLight();
+                } else {
+                    EntreesSorties.afficherMessageCouleur("Cet exemplaire n'est pas emprunté.", Color.RED);
+                }
             } else {
                 EntreesSorties.afficherMessageCouleur("Cet exemplaire n'existe pas.", Color.RED);
             }
@@ -380,7 +382,7 @@ public class Bibliotheque implements Serializable
             boolean relancesAFaire = false;
             EntreesSorties.afficherMessage("");
             EntreesSorties.afficherMessageCouleur("Relances à effectuer : \n", Color.BLUE);
-            for (Iterator<Emprunt> it = _emprunts.iterator(); it.hasNext(); ) {
+            for (Iterator<Emprunt> it = getEmprunts(); it.hasNext(); ) {
                 em = it.next();
                 if (em.relanceEmprunt(dateJour))
                     relancesAFaire = true;
@@ -506,28 +508,6 @@ public class Bibliotheque implements Serializable
             _emprunts = emprunts;
         }
 
-	// -----------------------------------------------
-	// Methodes
-	// -----------------------------------------------
-
-	/*
-         * La méthode getLecteur permet de rechercher dans la base de donnée de bibliotheque un objet
-	 * lecteur identifié par son numéro, et de renvoyer l'objet (ou la donnée null s'il n'est pas trouvé)
-	 */
-	private Lecteur getLecteur(Integer numLecteur)
-	{
-            return _dicoLecteur.get(numLecteur);
-	}
-
-	/*
-         * La méthode getOuvrage permet de rechercher dans la base de donnée de bibliotheque un objet
-	 * ouvrage identifié par son isbn, et de renvoyer l'objet (ou la donnée null s'il n'est pas trouvé)
-	 */
-	private Ouvrage getOuvrage(Long isbn)
-	{
-            return _dicoOuvrage.get(isbn);
-	}
-
         /*
 	 * La méthode setLecteur permet d'ajouter un lecteur a la base de donnée de bibliotheque.
 	 */
@@ -552,6 +532,11 @@ public class Bibliotheque implements Serializable
 	    _emprunts.add(em);
 	}
 
+        private void setDerNumLecteur(int v)
+	{
+	    derNumLecteur = v;
+	}
+
         /*
 	 * La méthode unsetEmprunt permet d'ajouter un emprunt a la base de donnée de bibliotheque.
 	 */
@@ -559,34 +544,57 @@ public class Bibliotheque implements Serializable
         {
             _emprunts.remove(em);
         }
+	
+
+        // -----------------------------------------------
+	// Methodes
+	// -----------------------------------------------
+
+	/*
+         * La méthode getLecteur permet de rechercher dans la base de donnée de bibliotheque un objet
+	 * lecteur identifié par son numéro, et de renvoyer l'objet (ou la donnée null s'il n'est pas trouvé)
+	 */
+	private Lecteur getLecteur(Integer numLecteur)
+	{
+            return _dicoLecteur.get(numLecteur);
+	}
+
+	/*
+         * La méthode getOuvrage permet de rechercher dans la base de donnée de bibliotheque un objet
+	 * ouvrage identifié par son isbn, et de renvoyer l'objet (ou la donnée null s'il n'est pas trouvé)
+	 */
+	private Ouvrage getOuvrage(Long isbn)
+	{
+            return _dicoOuvrage.get(isbn);
+	}
 
 	/*
 	 * La méthode lesLecteurs permet de créer un iterator sur les lecteurs, dans le but de les parcourir
 	 * pour eventuellement les relancer.
 	 */
-	private Iterator<Lecteur> lesLecteurs()
+	private Iterator<Lecteur> getLecteurs()
 	{
 	    return _dicoLecteur.values().iterator();
 	}
 
-	private Iterator<Ouvrage> lesOuvrages()
+	private Iterator<Ouvrage> getOuvrages()
 	{
 	    return _dicoOuvrage.values().iterator();
 	}
-
-	    private void setDerNumLecteur(int v)
-		{
-	        derNumLecteur = v;
-	    }
+        
+	private Iterator<Emprunt> getEmprunts()
+	{
+	    return _emprunts.iterator();
+	}
 
 	public int getDerNumLecteur()
 	{
 	    return derNumLecteur;
 	}
-
-	    private void incDerNumLecteur()
-		{
+        
+	private void incDerNumLecteur()
+        {
 	        derNumLecteur++;
-	    }
+	}
 
 }
