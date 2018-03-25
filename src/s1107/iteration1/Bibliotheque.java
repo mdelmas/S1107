@@ -15,6 +15,7 @@ import s1107.iteration1.EntreesSorties;
 
 public class Bibliotheque implements Serializable
 {
+    //
 
     private static final long serialVersionUID = 262L;
 

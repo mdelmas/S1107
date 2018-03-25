@@ -48,12 +48,12 @@ public class Emprunt implements Serializable
     // Getters
     // -----------------------------------------------
 
-    public Lecteur getLecteur() 
+    private Lecteur getLecteur() 
     {
         return lecteur;
     }
 
-    public Exemplaire getExemplaire() 
+    private Exemplaire getExemplaire() 
     {
         return exemplaire;
     }
