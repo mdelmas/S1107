@@ -442,8 +442,8 @@ public class Bibliotheque implements Serializable
             
             
             Lecteur l1 = new Lecteur("DELMAS", 1, "Morgane", new GregorianCalendar(1993, 07, 05), "Grenoble", "0612345678");
-            Lecteur l2 = new Lecteur("VALENTIN", 2, "Daniel", new GregorianCalendar(1986, 03, 12), "Paris", "8765432106");
-            Lecteur l3 = new Lecteur("CISSOKHO", 2, "Aissata", new GregorianCalendar(1988, 12, 03), "Lyon", "4561237891");
+            Lecteur l2 = new Lecteur("VALENTIN", 2, "Daniel", new GregorianCalendar(1986, 03, 12), "Paris", "0665432106");
+            Lecteur l3 = new Lecteur("CISSOKHO", 3, "Aissata", new GregorianCalendar(1988, 12, 03), "Lyon", "0661237891");
             
             setLecteur(l1,1);
             setLecteur(l2,2);
