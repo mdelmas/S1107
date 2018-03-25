@@ -406,50 +406,80 @@ public class Bibliotheque implements Serializable
 
         public void creationJeuDeTest()
         {
-            Ouvrage o1 = new Ouvrage(1234567891234L, "Les fiancés de l'hiver", "Gallimard", new GregorianCalendar(), "Dabos", Public.ADO);
-            Ouvrage o2 = new Ouvrage(4321987654321L, "Orgueil et préjugés", "Hachette", new GregorianCalendar(),"Jane Austen", Public.ADULTE);
-            Ouvrage o3 = new Ouvrage(4561237896543L, "Le monde s'effondre", "Hachette", new GregorianCalendar(),"Hans Christian Andersen",Public.ADULTE);
-
+            Ouvrage o1 = new Ouvrage(1234567891234L, "Les fiancés de l'hiver", "Gallimard", new GregorianCalendar(2013, 06, 06), "Dabos", Public.ADO);
+            Ouvrage o2 = new Ouvrage(4321987654321L, "Orgueil et préjugés", "Hachette", new GregorianCalendar(1813, 01, 01), "Jane Austen", Public.ADULTE);
+            Ouvrage o3 = new Ouvrage(4561237896543L, "Le monde s'effondre", "Hachette", new GregorianCalendar(1966, 01, 01), "Hans Christian Andersen",Public.ADULTE);
+            
             setOuvrage(o1,1234567891234L);
             setOuvrage(o2,4321987654321L);
             setOuvrage(o3,4561237896543L);
-
+            
+            EntreesSorties.afficherMessageCouleur("L'ouvrage n°" + o1.getIsbn() + " a bien été créé.", Color.BLUE);
+            o1.afficheOuvrageLight();
+            EntreesSorties.afficherMessageCouleur("\nL'ouvrage n°" + o2.getIsbn() + " a bien été créé.", Color.BLUE);
+            o2.afficheOuvrageLight();
+            EntreesSorties.afficherMessageCouleur("\nL'ouvrage n°" + o3.getIsbn() + " a bien été créé.", Color.BLUE);
+            o3.afficheOuvrageLight();
+            System.out.println("");
+            
+            
+            
+            EntreesSorties.afficherMessageCouleur("\nCréation de " + 7 + " exemplaires pour l'ouvrage n°" + o1.getIsbn() + " : ", Color.BLUE);
             o1.ajouterExemplairesEmpruntables(new GregorianCalendar(), 4);
             o1.ajouterExemplairesNonEmpruntables(new GregorianCalendar(), 3);
-
+            
+            EntreesSorties.afficherMessageCouleur("Création de " + 9 + " exemplaires pour l'ouvrage n°" + o2.getIsbn() + " : ", Color.BLUE);
             o2.ajouterExemplairesEmpruntables(new GregorianCalendar(), 4);
             o2.ajouterExemplairesNonEmpruntables(new GregorianCalendar(), 5);
-
+            
+            EntreesSorties.afficherMessageCouleur("Création de " + 3 + " exemplaires pour l'ouvrage n°" + o3.getIsbn() + " : ", Color.BLUE);
             o3.ajouterExemplairesEmpruntables(new GregorianCalendar(), 2);
             o3.ajouterExemplairesNonEmpruntables(new GregorianCalendar(), 1);
-
-            Lecteur l1 = new Lecteur("DELMAS", 1, "Morgane", new GregorianCalendar(), "Grenoble", "0612345678");
-            Lecteur l2 = new Lecteur("VALENTIN", 2, "Daniel", new GregorianCalendar(), "Paris", "8765432106");
-            Lecteur l3 = new Lecteur("CISSOKHO", 2, "Aissata", new GregorianCalendar(), "Lyon", "4561237891");
-
+            System.out.println("");
+            
+            
+            
+            Lecteur l1 = new Lecteur("DELMAS", 1, "Morgane", new GregorianCalendar(1993, 07, 05), "Grenoble", "0612345678");
+            Lecteur l2 = new Lecteur("VALENTIN", 2, "Daniel", new GregorianCalendar(1986, 03, 12), "Paris", "8765432106");
+            Lecteur l3 = new Lecteur("CISSOKHO", 2, "Aissata", new GregorianCalendar(1988, 12, 03), "Lyon", "4561237891");
+            
             setLecteur(l1,1);
             setLecteur(l2,2);
             setLecteur(l3,3);
+            
+	    EntreesSorties.afficherMessageCouleur("Le lecteur n°" + l1.getNumLecteur() + " a bien été créé.", Color.BLUE);
+	    l1.afficherLecteur();
+	    EntreesSorties.afficherMessageCouleur("Le lecteur n°" + l2.getNumLecteur() + " a bien été créé.", Color.BLUE);
+	    l2.afficherLecteur();
+	    EntreesSorties.afficherMessageCouleur("Le lecteur n°" + l3.getNumLecteur() + " a bien été créé.", Color.BLUE);
+	    l3.afficherLecteur();
+            
+            
 
             Exemplaire ex1 = o1.getExemplaire(1);
             Exemplaire ex2 = o1.getExemplaire(2);
             Exemplaire ex3 = o2.getExemplaire(3);
-
+            
             GregorianCalendar dateEmprunt1 = new GregorianCalendar();
             GregorianCalendar dateEmprunt2 = new GregorianCalendar();
             GregorianCalendar dateEmprunt3 = new GregorianCalendar();
-
+            
             dateEmprunt1.add(GregorianCalendar.DAY_OF_MONTH,-15 );
             dateEmprunt2.add(GregorianCalendar.DAY_OF_MONTH,-7 );
             dateEmprunt3.add(GregorianCalendar.DAY_OF_MONTH,-17 );
-
+            
             Emprunt em1 = new Emprunt(l1,ex1,dateEmprunt1);
             Emprunt em2 = new Emprunt(l1,ex3,dateEmprunt2);
             Emprunt em3 = new Emprunt(l2,ex2,dateEmprunt3);
-
+            
             setEmprunt(em1);
             setEmprunt(em2);
             setEmprunt(em3);
+           
+            EntreesSorties.afficherMessageCouleur("\nEmprunts créés :", Color.BLUE);
+            em1.afficherCreationEmprunt();
+            em2.afficherCreationEmprunt();
+            em3.afficherCreationEmprunt();
         }
 
 
