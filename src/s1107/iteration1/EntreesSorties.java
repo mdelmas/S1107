@@ -13,7 +13,8 @@ import java.util.GregorianCalendar;
  * @version 2.0
  *
  */
-public class EntreesSorties  {
+public class EntreesSorties  
+{
 
 	// ************************************************************************************************************
 	// Constantes 

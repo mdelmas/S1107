@@ -7,13 +7,13 @@ package s1107.iteration1;
 
 /**
  *
- * @author delmasmo 
+ * @author delmasmo
  */
 public enum Public {
     ENFANT("Enfant", 0),
-    ADO("Adolescent", 10), 
+    ADO("Adolescent", 10),
     ADULTE("Adulte", 16);
-    
+
     private String nom="";
     private Integer ageMinimum;
 
@@ -21,13 +21,16 @@ public enum Public {
         this.nom = nom;
         this.ageMinimum = ageMinimum;
     }
-    
+
     public String toString(){
         return nom;
     }
-    
+
+    /*
+     * Retourne l'age minimum/limite du lecteur pour un public donné
+     */
     public Integer getAgeMinimum() {
         return ageMinimum;
     }
-    
+
 }

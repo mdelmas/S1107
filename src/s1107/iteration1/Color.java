@@ -9,6 +9,9 @@ package s1107.iteration1;
  *
  * @author delmasmo
  */
+
+// Enumeration pour faciliter l'utilisation de couleurs dans l'affichage
+
 public enum Color 
 {
     RESET("\u001B[0m"),
