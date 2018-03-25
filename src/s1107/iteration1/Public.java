@@ -9,7 +9,8 @@ package s1107.iteration1;
  *
  * @author delmasmo
  */
-public enum Public {
+public enum Public 
+{
     ENFANT("Enfant", 0),
     ADO("Adolescent", 10),
     ADULTE("Adulte", 16);

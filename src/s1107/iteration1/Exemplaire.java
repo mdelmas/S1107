@@ -144,22 +144,5 @@ public class Exemplaire implements Serializable
         o.afficheOuvrageLight();
         EntreesSorties.afficherMessage(", n° d'exemplaire : " + getNumEx());
     }
-    /**
-     * Affiche les informations nécessaires à la relance
-     */
-/*    public void infosRelance()
-    {
-        Ouvrage o = getOuvrage();
-        o.afficheOuvrageLight();
-        afficheRelance();
-    }*/
 
-    /**
-     * Affiche le numéro d'exemplaire pour la relance
-     */
-/*    public void afficheRelance()
-    {
-        System.out.print(", numéro exemplaire : " + getNumEx());
-    }
-    */
 }
