@@ -118,7 +118,6 @@ public class Emprunt implements Serializable
      */
     public boolean relanceEmprunt(GregorianCalendar dateJour)
     {
-    //    boolean relancesAFaire = false;
         if (aRelancer(dateJour) == true){
             Lecteur L = getLecteur();
             Exemplaire ex = getExemplaire();
@@ -128,9 +127,6 @@ public class Emprunt implements Serializable
             return true;
         }
         return false;
-    /*    if (relancesAFaire == false){
-            EntreesSorties.afficherMessage("Aucune relance à effectuer");
-        }*/
     }
 
     /**
