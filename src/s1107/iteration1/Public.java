@@ -23,6 +23,7 @@ public enum Public
         this.ageMinimum = ageMinimum;
     }
 
+    @Override
     public String toString(){
         return nom;
     }

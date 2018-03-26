@@ -221,7 +221,7 @@ public class Ouvrage implements Serializable
         if (exemplaires.size() == 0)
             System.out.println("Aucun exemplaire.");
         else {
-            System.out.println(exemplaires.size() + " exemplaires :");
+            System.out.println(", " + exemplaires.size() + " exemplaires :");
             for (Exemplaire exemplaire: exemplaires.values()) {
                 exemplaire.affiche();
             }
