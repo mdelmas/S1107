@@ -371,6 +371,7 @@ public class Bibliotheque implements Serializable
 
 
         //
+        
 
         /*
          * Parcours la liste des emprunts en cours et affiche ceux datant d'il y a plus de 15 jours
